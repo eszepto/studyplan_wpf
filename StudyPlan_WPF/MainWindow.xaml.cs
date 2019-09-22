@@ -20,36 +20,59 @@ namespace StudyPlan_WPF
     /// </summary>
     public partial class MainWindow : Window
     {
-        
-        public ObservableCollection<TodoItem> items { get; set; }
-        public ObservableCollection<ObservableCollection<Course>> Semester;
-
+        public Bachelor CpreBachelor = new Bachelor();
         public MainWindow()
         {
-            
             InitializeComponent();
 
-            tabControl.it
+            tabControl.ItemsSource = CpreBachelor;
+            CpreBachelor.Add(new Semester());
+            CpreBachelor.Add(new Semester());
+            CpreBachelor.Add(new Semester());
+
+            CpreBachelor[0].Add(new Course() { Id = "5" });  // Sem 0
         }
 
     }
-    public class TodoItem
+    
+    public class Bachelor:ObservableCollection<Semester>
     {
-        public string Title { get; set; }
-        public int Completion { get; set; }
 
-        public override String ToString()
+    }
+    public class Semester : ObservableCollection<Course>
+    {
+        public int Credit = 0;
+        private int Number = 0;
+        public string Header
         {
-            return Title;
+            get
+            {
+                return String.Format("Semester {0}", Number);
+            }
         }
-    }
 
-    public class Course: ObservableCollection<Semester>
-    {
 
+        public Semester()
+        {
+
+        }
+        public override string ToString()
+        {
+            return String.Format("Semester {0}", Number);
+        }
+        public void Append(Course c)
+        {
+            this.Add(c);
+            Credit += int.Parse(c.Weight);
+        }
+        
     }
-    public class Semester
+    public class Course
     {
-        int number { get; set; }
+        public string Id { get; set; }
+        public string Name { get; set; }
+        public string Descript { get; set; }
+        public string Weight { get; set; }
+
     }
 }
