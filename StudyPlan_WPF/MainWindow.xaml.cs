@@ -22,44 +22,136 @@ namespace StudyPlan_WPF
     {
         public ObservableCollection<Semester> Semesters;
 
-        #region TATA        
-        public int NUM_Semesters;
-        public TabItem a;
-        #endregion
-
         public MainWindow()
         {
             InitializeComponent();
-            Semesters = new ObservableCollection<Semester>();
+            InitialSemester();
+
             tabControl.ItemsSource = Semesters;
+
 
         }
         void InitialSemester()
         {
+            Semesters = new ObservableCollection<Semester>();
             Semesters.Add(new Semester()
             {
-                Courses = new ObservableCollection<Course>()
+                Courses = new ObservableCollection<Course>()  // 1st 
                 {
                     new Course()
                     {
-
+                        Id = "010123102",
+                        Name = "Programming Fundamentals",
+                        Weight = "3"
+                    },
+                    new Course()
+                    {
+                        Id = "010123130",
+                        Name = "Introduction to Engineering",
+                        Weight = "1"
+                    },
+                    new Course()
+                    {
+                        Id = "040203111",
+                        Name = "Engineering Mathematics I",
+                        Weight = "3"
+                    },
+                    new Course()
+                    {
+                        Id = "040313005",
+                        Name = "Physics I",
+                        Weight = "3"
+                    },
+                    new Course()
+                    {
+                        Id = "040313006",
+                        Name = "Physics Laboratory I",
+                        Weight = "1"
+                    },
+                    new Course()
+                    {
+                        Id = "??????",
+                        Name = "Language Elective Course **",
+                        Weight = "3"
+                    },
+                    new Course()
+                    {
+                        Id = "??????",
+                        Name = "Physical Education Elective Course **",
+                        Weight = "3"
+                    },
+                    new Course()
+                    {
+                        Id = "??????",
+                        Name = "Social Sciences Elective Course **",
+                        Weight = "3"
                     }
                 }
             });
+            Semesters.Add(new Semester()
+            {
+                Courses = new ObservableCollection<Course>()  // 2nd
+                {
+                    new Course()
+                    {
+                        Id = "010113010",
+                        Name = "Electric Circuit Theory",
+                        Weight = "3"
+                    },
+                    new Course()
+                    {
+                        Id = "010113011",
+                        Name = "Electric Circuit Laboratory",
+                        Weight = "1"
+                    },
+                    new Course()
+                    {
+                        Id = "010123103",
+                        Name = "Algorithms and Data Structures",
+                        Weight = "3"
+                    },
+                    new Course()
+                    {
+                        Id = "010403006",
+                        Name = "Work Ethics",
+                        Weight = "1"
+                    },
+                    new Course()
+                    {
+                        Id = "040203112",
+                        Name = "Engineering Mathematics II",
+                        Weight = "3"
+                    },
+                    new Course()
+                    {
+                        Id = "040313007",
+                        Name = "Physics II",
+                        Weight = "3"
+                    },
+                    new Course()
+                    {
+                        Id = "??????",
+                        Name = "Language Elective Course **",
+                        Weight = "3"
+                    },
+                    new Course()
+                    {
+                        Id = "??????",
+                        Name = "Physical Education Elective Course",
+                        Weight = "1"
+                    }
+                }
+            });
+            Semesters.Add(new Semester());
+            Semesters.Add(new Semester());
+            Semesters.Add(new Semester());
+            Semesters.Add(new Semester());
+            Semesters.Add(new Semester());
+            Semesters.Add(new Semester());
         }
         private void Add_btn_Click(object sender, RoutedEventArgs e)
         {
-            int NUM_Semesters = Semesters.Count;
-            NUM_Semesters++;
-            Semesters.Add(new Semester()
-            {
-                Number = NUM_Semesters,
-                Courses = new ObservableCollection<Course>()
-                {
-                    new Course() {Name = "abcd", Weight = "3" },
-                    new Course() {Name = "Statistic", Weight = "3"}
-                }
-            });
+            Semesters.Add(new Semester());
         }
 
         private void DE_btn_Click(object sender, RoutedEventArgs e)
@@ -67,7 +159,6 @@ namespace StudyPlan_WPF
             ContentPresenter cp = FindVisualChild<ContentPresenter>(this.tabControl);
             ListBox lbx = cp.ContentTemplate.FindName("listBox", cp) as ListBox;
 
-            MessageBox.Show(lbx.SelectedIndex.ToString());
             Semesters.RemoveAt(this.tabControl.SelectedIndex);
         }
 
@@ -106,19 +197,22 @@ namespace StudyPlan_WPF
             return null;
 
         }
-
     }
 
     public class Semester : ObservableCollection<Course>
     {
+        private static int NextNumber = 1;
+
         public int Credit = 0;
         public int Number { get; set; }
+
         public ObservableCollection<Course> Courses { get; set; }
 
         public Semester()
         {
             Courses = new ObservableCollection<Course>();
-            this.Number = 10;
+            this.Number = NextNumber;
+            NextNumber += 1;
         }
         public void Append(Course c)
         {
