@@ -11,7 +11,8 @@
         <TabControl x:Name="tabControl" HorizontalAlignment="Left" Height="193" VerticalAlignment="Top" Width="367" Margin="33,190,0,0" ItemsSource="{Binding Semesters}" IsSynchronizedWithCurrentItem="True" >
             <TabControl.ItemContainerStyle>
                 <Style TargetType="{x:Type TabItem}">
-                    <Setter Property="Header" Value="{Binding Path=Number}" />
+                    <Setter Property="Header" Value="{Binding Number}" />
+                    <Setter Property="HeaderStringFormat" Value="Semester {0}" />
                 </Style>
             </TabControl.ItemContainerStyle>
             <TabControl.ContentTemplate>
