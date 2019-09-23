@@ -20,53 +20,113 @@ namespace StudyPlan_WPF
     /// </summary>
     public partial class MainWindow : Window
     {
-        public Bachelor CpreBachelor = new Bachelor();
+        public ObservableCollection<Semester> Semesters;
+
+        #region TATA        
+        public int NUM_Semesters;
+        public TabItem a;
+        #endregion
+
         public MainWindow()
         {
             InitializeComponent();
+            Semesters = new ObservableCollection<Semester>();
+            tabControl.ItemsSource = Semesters;
 
-            tabControl.ItemsSource = CpreBachelor;
-            CpreBachelor.Add(new Semester());
-            CpreBachelor.Add(new Semester());
-            CpreBachelor.Add(new Semester());
+        }
+        void InitialSemester()
+        {
+            Semesters.Add(new Semester()
+            {
+                Courses = new ObservableCollection<Course>()
+                {
+                    new Course()
+                    {
 
-            CpreBachelor[0].Add(new Course() { Id = "5" });  // Sem 0
+                    }
+                }
+            });
+        }
+        private void Add_btn_Click(object sender, RoutedEventArgs e)
+        {
+            int NUM_Semesters = Semesters.Count;
+            NUM_Semesters++;
+            Semesters.Add(new Semester()
+            {
+                Number = NUM_Semesters,
+                Courses = new ObservableCollection<Course>()
+                {
+                    new Course() {Name = "abcd", Weight = "3" },
+                    new Course() {Name = "Statistic", Weight = "3"}
+                }
+            });
+        }
+
+        private void DE_btn_Click(object sender, RoutedEventArgs e)
+        {
+            ContentPresenter cp = FindVisualChild<ContentPresenter>(this.tabControl);
+            ListBox lbx = cp.ContentTemplate.FindName("listBox", cp) as ListBox;
+
+            MessageBox.Show(lbx.SelectedIndex.ToString());
+            Semesters.RemoveAt(this.tabControl.SelectedIndex);
+        }
+
+
+        
+        private childItem FindVisualChild<childItem>(DependencyObject obj)
+
+            where childItem : DependencyObject
+
+        {
+
+            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(obj); i++)
+
+            {
+
+                DependencyObject child = VisualTreeHelper.GetChild(obj, i);
+
+                if (child != null && child is childItem)
+
+                    return (childItem)child;
+
+                else
+
+                {
+
+                    childItem childOfChild = FindVisualChild<childItem>(child);
+
+                    if (childOfChild != null)
+
+                        return childOfChild;
+
+                }
+
+            }
+
+            return null;
+
         }
 
     }
-    
-    public class Bachelor:ObservableCollection<Semester>
-    {
 
-    }
     public class Semester : ObservableCollection<Course>
     {
         public int Credit = 0;
-        private int Number = 0;
-        public string Header
-        {
-            get
-            {
-                return String.Format("Semester {0}", Number);
-            }
-        }
-
+        public int Number { get; set; }
+        public ObservableCollection<Course> Courses { get; set; }
 
         public Semester()
         {
-
-        }
-        public override string ToString()
-        {
-            return String.Format("Semester {0}", Number);
+            Courses = new ObservableCollection<Course>();
+            this.Number = 10;
         }
         public void Append(Course c)
         {
-            this.Add(c);
             Credit += int.Parse(c.Weight);
+            this.Courses.Add(c);
         }
-        
     }
+
     public class Course
     {
         public string Id { get; set; }
@@ -74,5 +134,13 @@ namespace StudyPlan_WPF
         public string Descript { get; set; }
         public string Weight { get; set; }
 
+        public override string ToString()
+        {
+            return Name;
+        }
     }
+
+
+    
+
 }
