@@ -36,6 +36,7 @@ namespace StudyPlan_WPF
             Semesters = new ObservableCollection<Semester>();
             Semesters.Add(new Semester()
             {
+                Credit = 19,
                 Courses = new ObservableCollection<Course>()  // 1st 
                 {
                     new Course()
@@ -43,6 +44,12 @@ namespace StudyPlan_WPF
                         Id = "010123102",
                         Name = "Programming Fundamentals",
                         Weight = "3"
+                    },
+                    new Course()
+                    {
+                        Id = "010123130",
+                        Name = "Com Exploration",
+                        Weight = "1"
                     },
                     new Course()
                     {
@@ -78,7 +85,7 @@ namespace StudyPlan_WPF
                     {
                         Id = "??????",
                         Name = "Physical Education Elective Course **",
-                        Weight = "3"
+                        Weight = "1"
                     },
                     new Course()
                     {
@@ -90,6 +97,8 @@ namespace StudyPlan_WPF
             });
             Semesters.Add(new Semester()
             {
+                GPA = 3.51F,
+                Credit = 19,
                 Courses = new ObservableCollection<Course>()  // 2nd
                 {
                     new Course()
@@ -149,6 +158,7 @@ namespace StudyPlan_WPF
             Semesters.Add(new Semester());
             Semesters.Add(new Semester());
         }
+
         private void Add_btn_Click(object sender, RoutedEventArgs e)
         {
             Semesters.Add(new Semester());
@@ -159,17 +169,45 @@ namespace StudyPlan_WPF
             ContentPresenter cp = FindVisualChild<ContentPresenter>(this.tabControl);
             ListBox lbx = cp.ContentTemplate.FindName("listBox", cp) as ListBox;
 
-            if (this.tabControl.SelectedIndex == Semesters.Count - 1)
+            if (this.tabControl.SelectedIndex == Semesters.Count - 1)  /// Any tab
             {
                 Semesters.RemoveAt(this.tabControl.SelectedIndex);
                 Semester.NextNumber -= 1;
             }
-            else
+            else  /// lastest tab
             {
                 Semesters[this.tabControl.SelectedIndex].Courses.Clear();
             }
         }
 
+
+
+        private void AddNewCourse_btn_Click(object sender, RoutedEventArgs e)
+        {
+            Add_New_Course addNewCourseWindow = new Add_New_Course();
+            addNewCourseWindow.Show();
+
+        }
+
+        private void ListBox_Empty_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            ContentPresenter cp = FindVisualChild<ContentPresenter>(this.tabControl);
+            ListBox lbx = cp.ContentTemplate.FindName("listBox", cp) as ListBox;
+
+            HitTestResult r = VisualTreeHelper.HitTest(this, e.GetPosition(this));
+            if (r.VisualHit.GetType() != typeof(ListBoxItem))
+            {
+                Add_New_Course addNewCourseWindow = new Add_New_Course();
+                addNewCourseWindow.Show();
+            }
+        }
+
+        private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Semester _Clicked_Semester = (this.tabControl.SelectedItem as Semester).Get();
+            Credit_label.Content = String.Format("Credits: {0}/22", _Clicked_Semester.Credit);
+            GPA_label.Content = String.Format("GPA: {0:0.00}", _Clicked_Semester.GPA);
+        }
 
 
         private childItem FindVisualChild<childItem>(DependencyObject obj)
@@ -205,27 +243,6 @@ namespace StudyPlan_WPF
             return null;
 
         }
-
-        private void AddNewCourse_btn_Click(object sender, RoutedEventArgs e)
-        {
-            Add_New_Course addNewCourseWindow = new Add_New_Course();
-            addNewCourseWindow.Show();
-
-
-        }
-
-        private void ListBox_Empty_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            ContentPresenter cp = FindVisualChild<ContentPresenter>(this.tabControl);
-            ListBox lbx = cp.ContentTemplate.FindName("listBox", cp) as ListBox;
-
-            HitTestResult r = VisualTreeHelper.HitTest(this, e.GetPosition(this));
-            if (r.VisualHit.GetType() != typeof(ListBoxItem))
-            {
-                Add_New_Course addNewCourseWindow = new Add_New_Course();
-                addNewCourseWindow.Show();
-            }
-        }
     }
 
     public class Semester : ObservableCollection<Course>
@@ -233,6 +250,7 @@ namespace StudyPlan_WPF
         public static int NextNumber = 1;
 
         public int Credit = 0;
+        public float GPA = 0;
         public int Number { get; set; }
 
         public ObservableCollection<Course> Courses { get; set; }
@@ -243,10 +261,15 @@ namespace StudyPlan_WPF
             this.Number = NextNumber;
             NextNumber += 1;
         }
-        public void Append(Course c)
+        public void Add(Course c)
         {
             Credit += int.Parse(c.Weight);
             this.Courses.Add(c);
+        }
+
+        public Semester Get()
+        {
+            return this;
         }
     }
 
@@ -261,9 +284,10 @@ namespace StudyPlan_WPF
         {
             return Name;
         }
+        public Course Get()
+        {
+            return this;
+        }
     }
-
-
-
 
 }

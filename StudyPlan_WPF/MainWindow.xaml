@@ -8,7 +8,7 @@
         Title="Happy Study Plan" Height="600" Width="900">
     <Grid Margin="4,0,-4.4,0">
         <ListBox x:Name="listBox1" HorizontalAlignment="Left" Height="420" VerticalAlignment="Top" Width="250" Margin="600,120,0,0" BorderBrush="#FF070708" />
-        <TabControl x:Name="tabControl"  HorizontalAlignment="Left" Height="420" VerticalAlignment="Top" Width="505" Margin="40,120,0,0" ItemsSource="{Binding Semesters}" IsSynchronizedWithCurrentItem="True"  >
+        <TabControl x:Name="tabControl"  HorizontalAlignment="Left" Height="420" VerticalAlignment="Top" Width="505" Margin="40,120,0,0" ItemsSource="{Binding Semesters}" IsSynchronizedWithCurrentItem="True" SelectionChanged="TabControl_SelectionChanged"  >
             <TabControl.ItemContainerStyle>
                 <Style TargetType="{x:Type TabItem}">
                     <Setter Property="Header" Value="{Binding Number}" />
@@ -29,9 +29,9 @@
         <Button x:Name="DE_btn" Content="Delete Semester" HorizontalAlignment="Left" Margin="160,54,0,0" VerticalAlignment="Top" Width="100" Click="DE_btn_Click" Height="50"/>
         <Button x:Name="AddNewCourse_btn" Content="Add New Course" HorizontalAlignment="Left" Margin="691,54,0,0" VerticalAlignment="Top" Width="150" Height="50" Click="AddNewCourse_btn_Click"/>
         <Button Content="" HorizontalAlignment="Left" Margin="280,54,0,0" VerticalAlignment="Top" Width="100" Height="50"/>
-        <Label Content="Credits: 19/22"  HorizontalAlignment="Left" Margin="445,18,0,0" VerticalAlignment="Top" Width="100" />
-        <Label Content="GPA: 0.00" HorizontalAlignment="Left" Margin="445,48,0,0" VerticalAlignment="Top" Width="100"/>
-        <Label Content="Status: Normal" HorizontalAlignment="Left" Margin="445,78,0,0" VerticalAlignment="Top" Width="100" RenderTransformOrigin="0.52,1.462"/>
+        <Label x:Name="Credit_label" Content="Credits: 19/22"  HorizontalAlignment="Left" Margin="445,18,0,0" VerticalAlignment="Top" Width="100" />
+        <Label x:Name="GPA_label" Content="GPA: 0.00" HorizontalAlignment="Left" Margin="445,48,0,0" VerticalAlignment="Top" Width="100"/>
+        <Label x:Name="Stat_label" Content="Status: Normal" HorizontalAlignment="Left" Margin="445,78,0,0" VerticalAlignment="Top" Width="100" RenderTransformOrigin="0.52,1.462"/>
     </Grid>
     
 </Window>
