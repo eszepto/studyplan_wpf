@@ -1,0 +1,19 @@
+C:\Users\KongpobR\studyplan_wpf\StudyPlan_WPF\bin\Debug\StudyPlan_WPF.exe.config
+C:\Users\KongpobR\studyplan_wpf\StudyPlan_WPF\bin\Debug\StudyPlan_WPF.exe
+C:\Users\KongpobR\studyplan_wpf\StudyPlan_WPF\bin\Debug\StudyPlan_WPF.pdb
+C:\Users\KongpobR\studyplan_wpf\StudyPlan_WPF\obj\Debug\StudyPlan_WPF.csprojAssemblyReference.cache
+C:\Users\KongpobR\studyplan_wpf\StudyPlan_WPF\obj\Debug\MainWindow.g.cs
+C:\Users\KongpobR\studyplan_wpf\StudyPlan_WPF\obj\Debug\App.g.cs
+C:\Users\KongpobR\studyplan_wpf\StudyPlan_WPF\obj\Debug\StudyPlan_WPF_MarkupCompile.cache
+C:\Users\KongpobR\studyplan_wpf\StudyPlan_WPF\obj\Debug\StudyPlan_WPF_MarkupCompile.lref
+C:\Users\KongpobR\studyplan_wpf\StudyPlan_WPF\obj\Debug\App.baml
+C:\Users\KongpobR\studyplan_wpf\StudyPlan_WPF\obj\Debug\MainWindow.baml
+C:\Users\KongpobR\studyplan_wpf\StudyPlan_WPF\obj\Debug\Template\MainCourseItemDesign.baml
+C:\Users\KongpobR\studyplan_wpf\StudyPlan_WPF\obj\Debug\StudyPlan_WPF.g.resources
+C:\Users\KongpobR\studyplan_wpf\StudyPlan_WPF\obj\Debug\StudyPlan_WPF.Properties.Resources.resources
+C:\Users\KongpobR\studyplan_wpf\StudyPlan_WPF\obj\Debug\StudyPlan_WPF.csproj.GenerateResource.cache
+C:\Users\KongpobR\studyplan_wpf\StudyPlan_WPF\obj\Debug\StudyPlan_WPF.csproj.CoreCompileInputs.cache
+C:\Users\KongpobR\studyplan_wpf\StudyPlan_WPF\obj\Debug\StudyPlan_WPF.exe
+C:\Users\KongpobR\studyplan_wpf\StudyPlan_WPF\obj\Debug\StudyPlan_WPF.pdb
+C:\Users\KongpobR\studyplan_wpf\StudyPlan_WPF\obj\Debug\Add New Course.g.cs
+C:\Users\KongpobR\studyplan_wpf\StudyPlan_WPF\obj\Debug\Add New Course.baml

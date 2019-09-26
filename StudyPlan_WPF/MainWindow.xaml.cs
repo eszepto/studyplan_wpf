@@ -197,6 +197,14 @@ namespace StudyPlan_WPF
             return null;
 
         }
+
+        private void AddNewCourse_btn_Click(object sender, RoutedEventArgs e)
+        {
+            Add_New_Course addNewCourseWindow = new Add_New_Course();
+            addNewCourseWindow.Show();
+
+            
+        }
     }
 
     public class Semester : ObservableCollection<Course>
