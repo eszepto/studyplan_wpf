@@ -25,14 +25,43 @@
                 </DataTemplate>
             </TabControl.ContentTemplate>
         </TabControl>
-        <Button x:Name="Add_btn" Content="Add Semester" HorizontalAlignment="Left" Margin="40,54,0,0" VerticalAlignment="Top" Width="120" Click="Add_btn_Click" Height="50" RenderTransformOrigin="0.522,-0.226"/>
-        <Button x:Name="DE_btn" Content="Delete Semester" HorizontalAlignment="Left" Margin="180,54,0,0" VerticalAlignment="Top" Width="120" Click="DE_btn_Click" Height="50"/>
+        <Button x:Name="Add_btn" Content="Add Semester" HorizontalAlignment="Left" Margin="40,54,0,0" VerticalAlignment="Top" Width="100" Click="Add_btn_Click" Height="50" RenderTransformOrigin="0.522,-0.226"/>
+        <Button x:Name="DE_btn" Content="Delete Semester" HorizontalAlignment="Left" Margin="160,54,0,0" VerticalAlignment="Top" Width="100" Click="DE_btn_Click" Height="50"/>
         <Button Content="Add New Course" HorizontalAlignment="Left" Margin="691,54,0,0" VerticalAlignment="Top" Width="150" Height="50"/>
-        <Button Content="" HorizontalAlignment="Left" Margin="320,54,0,0" VerticalAlignment="Top" Width="120" Height="50"/>
+        <Button Content="" HorizontalAlignment="Left" Margin="280,54,0,0" VerticalAlignment="Top" Width="100" Height="50"/>
         <Label Content="Credits: 19/22"  HorizontalAlignment="Left" Margin="445,18,0,0" VerticalAlignment="Top" Width="100" />
         <Label Content="GPA: 0.00" HorizontalAlignment="Left" Margin="445,48,0,0" VerticalAlignment="Top" Width="100"/>
         <Label Content="Status: Normal" HorizontalAlignment="Left" Margin="445,78,0,0" VerticalAlignment="Top" Width="100" RenderTransformOrigin="0.52,1.462"/>
-
+        <Popup Margin="0,0,0,0" Name="AddNewCourse_popup" HorizontalAlignment="Center" VerticalAlignment="Center" Width="600" Height="300" IsOpen="False">
+            <Grid Background="White">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*" />
+                    <ColumnDefinition Width="3*" />
+                    <ColumnDefinition Width="3*" />
+                    <ColumnDefinition Width="3*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="2*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="3*" />
+                    <RowDefinition Height="5*" />
+                    <RowDefinition Height="3*"/>
+                </Grid.RowDefinitions>
+                <ComboBox x:Name="courseGroup" Grid.ColumnSpan="4" HorizontalAlignment="Left" Margin="0,44,0,0" VerticalAlignment="Top" Width="405" Grid.Column="1"/>
+                <Button x:Name="addButton" Content="Add" Grid.Column="3" HorizontalAlignment="center" Margin="0,0,0,30" Grid.Row="2" VerticalAlignment="Bottom" Width="75"/>
+                <Button x:Name="cancelButton" Grid.ColumnSpan="2" Content="Cancel" Grid.Column="4" HorizontalAlignment="Center" Margin="0,0,0,30" Grid.Row="2" VerticalAlignment="Bottom" Width="75"/>
+                <DataGrid x:Name="courseTable" HorizontalAlignment="Left" Height="145" Grid.Row="1" VerticalAlignment="Top" Width="492" Grid.ColumnSpan="6" Margin="40,0,0,0">
+                    <DataGrid.Columns>
+                        <DataGridCheckBoxColumn Width="*"/>
+                        <DataGridTextColumn Header="Course Name" Width="6*"/>
+                        <DataGridTextColumn Header="Credits" Width="2*"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+        </Popup>
 
     </Grid>
+    
 </Window>
+    
+    
