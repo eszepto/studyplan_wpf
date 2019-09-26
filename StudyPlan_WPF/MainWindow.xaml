@@ -7,8 +7,8 @@
         mc:Ignorable="d"
         Title="Happy Study Plan" Height="600" Width="900">
     <Grid Margin="4,0,-4.4,0">
-        <ListBox x:Name="listBox1" HorizontalAlignment="Left" Height="420" VerticalAlignment="Top" Width="250" Margin="600,120,0,0" BorderBrush="#FF2052E8" />
-        <TabControl x:Name="tabControl"  HorizontalAlignment="Left" Height="420" VerticalAlignment="Top" Width="505" Margin="40,120,0,0" ItemsSource="{Binding Semesters}" IsSynchronizedWithCurrentItem="True" >
+        <ListBox x:Name="listBox1" HorizontalAlignment="Left" Height="420" VerticalAlignment="Top" Width="250" Margin="600,120,0,0" BorderBrush="#FF070708" />
+        <TabControl x:Name="tabControl"  HorizontalAlignment="Left" Height="420" VerticalAlignment="Top" Width="505" Margin="40,120,0,0" ItemsSource="{Binding Semesters}" IsSynchronizedWithCurrentItem="True"  >
             <TabControl.ItemContainerStyle>
                 <Style TargetType="{x:Type TabItem}">
                     <Setter Property="Header" Value="{Binding Number}" />
@@ -20,7 +20,7 @@
             <TabControl.ContentTemplate>
                 <DataTemplate>
                     <Grid>
-                        <ListBox x:Name="listBox" HorizontalAlignment="Left" Height="Auto" Width="546"  VerticalAlignment="Top" ItemsSource="{Binding Courses}" IsSynchronizedWithCurrentItem="True"  ItemTemplate="{StaticResource MainCourseStyle}"/>
+                        <ListBox x:Name="listBox" HorizontalAlignment="Left" Height="Auto" Width="505"  VerticalAlignment="Top" ItemsSource="{Binding Courses}" IsSynchronizedWithCurrentItem="True"  ItemTemplate="{StaticResource MainCourseStyle}" MouseDown="ListBox_Empty_MouseDown"/>
                     </Grid>
                 </DataTemplate>
             </TabControl.ContentTemplate>

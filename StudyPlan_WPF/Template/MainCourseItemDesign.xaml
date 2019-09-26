@@ -3,7 +3,7 @@
                     xmlns:local="clr-namespace:StudyPlan_WPF.Template">
     
     <DataTemplate x:Key="MainCourseStyle">
-        <Grid ShowGridLines="False" Width="510" Height="120" >
+        <Grid ShowGridLines="False" Width="474" Height="120" >
             
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="5*"/>
@@ -19,7 +19,7 @@
                 <RowDefinition Height="3*" />
             </Grid.RowDefinitions>
 
-            <Border BorderBrush="Black" BorderThickness="1"   Width="510" Height="120"   HorizontalAlignment="Left"  Grid.RowSpan="3" VerticalAlignment="Top"  Grid.ColumnSpan="6"/>
+            <Border BorderBrush="Black" BorderThickness="1"   Width="474" Height="120"   HorizontalAlignment="Left"  Grid.RowSpan="3" VerticalAlignment="Top"  Grid.ColumnSpan="6"/>
             
             <TextBlock Text="{Binding Id}" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,12,0,12"/>
             <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Center" Height="16" VerticalAlignment="Center" Width="18" Grid.Column="5" >
