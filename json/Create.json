@@ -1,0 +1,577 @@
+{
+    "proFun": {
+        "Type": "Main",
+        "ID": "01012302",
+        "Name_subject": "Programming Fundamentals",
+        "Semester": "1",
+        "Status": null,
+        "Description": "Profun",
+        "weight": "3",
+        "PreRequired": null
+    },
+    "comexp": {
+        "Type": "Main",
+        "ID": "010123130",
+        "Name_subject": "Computer Engineering Exploration",
+        "Semester": "1",
+        "Status": null,
+        "Description": "ComExplo",
+        "weight": "1",
+        "PreRequired": null
+    },
+    "intro": {
+        "Type": "Main",
+        "ID": "010403005",
+        "Name_subject": "Introduction to Engineering",
+        "Semester": "1",
+        "Status": null,
+        "Description": "Intro",
+        "weight": "1",
+        "PreRequired": null
+    },
+    "mathI": {
+        "Type": "Main",
+        "ID": "040203111",
+        "Name_subject": "Engineering  Mathematics I",
+        "Semester": "1",
+        "Status": null,
+        "Description": "MathI",
+        "weight": "3",
+        "PreRequired": null
+    },
+    "phyI": {
+        "Type": "Main",
+        "ID": "040313005",
+        "Name_subject": "Physics I",
+        "Semester": "1",
+        "Status": null,
+        "Description": "Phy I",
+        "weight": "3",
+        "PreRequired": null
+    },
+    "labphyI": {
+        "Type": "Main",
+        "ID": "040313006",
+        "Name_subject": "Physics Laboratory I",
+        "Semester": "1",
+        "Status": null,
+        "Description": "Lab Phy I",
+        "weight": "1",
+        "PreRequired": null
+    },
+    "tabletennis": {
+        "Type": "Elective(Main)",
+        "ID": "080303505",
+        "Name_subject": "Table Tennis",
+        "Semester": "1",
+        "Status": null,
+        "Description": "Tabletennis",
+        "weight": "1",
+        "PreRequired": null
+    },
+    "engI": {
+        "Type": "Elective(Main)",
+        "ID": "080103001",
+        "Name_subject": "English I",
+        "Semester": "1",
+        "Status": null,
+        "Description": "Eng I",
+        "weight": "3",
+        "PreRequired": null
+    },
+    "manso": {
+        "Type": "Elective(Main)",
+        "ID": "080203901",
+        "Name_subject": "Man and Social",
+        "Semester": "1",
+        "Status": null,
+        "Description": "ManSo",
+        "weight": "3",
+        "PreRequired": null
+    },
+    "circuit": {
+        "Type": "Main",
+        "ID": "010113010",
+        "Name_subject": "Electric Circuit Theory",
+        "Semester": "2",
+        "Status": null,
+        "Description": "Circuit",
+        "weight": "3",
+        "PreRequired": null
+    },
+    "lab_cir": {
+        "Type": "Main",
+        "ID": "010113011",
+        "Name_subject": "Electric Circuit Laboratory",
+        "Semester": "2",
+        "Status": null,
+        "Description": "LabCircuit",
+        "weight": "1",
+        "PreRequired": null
+    },
+    "bas": {
+        "Type": "Elective(Main)",
+        "ID": "080303501",
+        "Name_subject": "Basketball",
+        "Semester": "2",
+        "Status": null,
+        "Description": "Bas",
+        "weight": "1",
+        "PreRequired": null
+    },
+    "engII": {
+        "Type": "Elective(Main)",
+        "ID": "080103002",
+        "Name_subject": "English II",
+        "Semester": "2",
+        "Status": null,
+        "Description": "EngII",
+        "weight": "3",
+        "PreRequired": "080103001"
+    },
+    "workEt": {
+        "Type": "Main",
+        "ID": "010403006",
+        "Name_subject": "Work Ethics",
+        "Semester": "2",
+        "Status": null,
+        "Description": "Work Ethics",
+        "weight": "1",
+        "PreRequired": null
+    },
+    "mathII": {
+        "Type": "Main",
+        "ID": "040203112",
+        "Name_subject": "Engineering Mathematics II",
+        "Semester": "2",
+        "Status": null,
+        "Description": "Math II",
+        "weight": "3",
+        "PreRequired": "040203111"
+    },
+    "phyII": {
+        "Type": "Main",
+        "ID": "040313007",
+        "Name_subject": "Physics II",
+        "Semester": "2",
+        "Status": null,
+        "Description": "Phy II",
+        "weight": "3",
+        "PreRequired": "040313005"
+    },
+    "labphyII": {
+        "Type": "Main",
+        "ID": "040313008",
+        "Name_subject": "Physics Laboratory II",
+        "Semester": "2",
+        "Status": null,
+        "Description": "LabPhy II",
+        "weight": "1",
+        "PreRequired": "040313006"
+    },
+    "data": {
+        "Type": "Main",
+        "ID": "010123103",
+        "Name_subject": "Algorithms and Data Structures",
+        "Semester": "2",
+        "Status": null,
+        "Description": "data",
+        "weight": "3",
+        "PreRequired": "010123102"
+    },
+    "software": {
+        "Type": "Main",
+        "ID": "010123131",
+        "Name_subject": "Software Development Practice I",
+        "Semester": "3",
+        "Status": null,
+        "Description": "Software",
+        "weight": "3",
+        "PreRequired": "010123103"
+    },
+    "signal": {
+        "Type": "Main",
+        "ID": "010123106",
+        "Name_subject": "Introduction to Signals and Systems",
+        "Semester": "3",
+        "Status": null,
+        "Description": "Signal",
+        "weight": "3",
+        "PreRequired": "040203112"
+    },
+    "digi": {
+        "Type": "Main",
+        "ID": "01012307",
+        "Name_subject": "Logic Design of Digital Systems",
+        "Semester": "3",
+        "Status": null,
+        "Description": "Digi",
+        "weight": "3",
+        "PreRequired": null
+    },
+    "labDigi": {
+        "Type": "Main",
+        "ID": "010123108",
+        "Name_subject": "Digital System Design Laboratory",
+        "Semester": "3",
+        "Status": null,
+        "Description": "Lab digi",
+        "weight": "1",
+        "PreRequired": null
+    },
+    "discrete": {
+        "Type": "Main",
+        "ID": "010123133",
+        "Name_subject": "Discrete Mathematics",
+        "Semester": "3",
+        "Status": null,
+        "Description": "Discrete",
+        "weight": "3",
+        "PreRequired": "040203112"
+    },
+    "stat": {
+        "Type": "Main",
+        "ID": "010123105",
+        "Name_subject": "Statistics for Computer Engineers",
+        "Semester": "3",
+        "Status": null,
+        "Description": "Stat",
+        "weight": "3",
+        "PreRequired": "040203111"
+    },
+    "phylife": {
+        "Type": "Elective(Art)",
+        "ID": "040313016",
+        "Name_subject": "Physics in Daily Life",
+        "Semester": null,
+        "Status": null,
+        "Description": "Phy Life",
+        "weight": "3",
+        "PreRequired": null
+    },
+    "genMath": {
+        "Type": "Elective(Art)",
+        "ID": "040203100",
+        "Name_subject": "General Mathematics",
+        "Semester": null,
+        "Status": null,
+        "Description": "Gen math",
+        "weight": "3",
+        "PreRequired": null
+    },
+    "psychology": {
+        "Type": "Elective(Art)",
+        "ID": "080303103",
+        "Name_subject": "Psychology for Happy Life",
+        "Semester": null,
+        "Status": null,
+        "Description": "Happy Life",
+        "weight": "3",
+        "PreRequired": null
+    },
+    "engConv": {
+        "Type": "Elective(Art)",
+        "ID": "080103016",
+        "Name_subject": "English Conversation I",
+        "Semester": null,
+        "Status": null,
+        "Description": "Eng Con",
+        "weight": "3",
+        "PreRequired": null
+    },
+    "engSkill": {
+        "Type": "Elective(Art)",
+        "ID": "080103011",
+        "Name_subject": "English Study Skill",
+        "Semester": null,
+        "Status": null,
+        "Description": "Eng skill",
+        "weight": "3",
+        "PreRequired": null
+    },
+    "bio": {
+        "Type": "Elective(Art)",
+        "ID": "040413001",
+        "Name_subject": "Biology in Daily Life",
+        "Semester": null,
+        "Status": null,
+        "Description": "Bio",
+        "weight": "3",
+        "PreRequired": null
+    },
+    "voll": {
+        "Type": "Elective(Art)",
+        "ID": "080303502",
+        "Name_subject": "Volleyball",
+        "Semester": null,
+        "Status": null,
+        "Description": "Volley",
+        "weight": "1",
+        "PreRequired": null
+    },
+    "econ": {
+        "Type": "Elective(Art)",
+        "ID": "080203905",
+        "Name_subject": "Economy and Everyday Life",
+        "Semester": null,
+        "Status": null,
+        "Description": "Econ",
+        "weight": "3",
+        "PreRequired": null
+    },
+    "economics": {
+        "Type": "Elective(Art)",
+        "ID": "080203906",
+        "Name_subject": "Economics for Individual Development",
+        "Semester": null,
+        "Status": null,
+        "Description": "Economics",
+        "weight": "3",
+        "PreRequired": null
+    },
+    "nation": {
+        "Type": "Elective(Art)",
+        "ID": "080203902",
+        "Name_subject": "Nation Heritage and Civilization",
+        "Semester": null,
+        "Status": null,
+        "Description": "Nation",
+        "weight": "3",
+        "PreRequired": null
+    },
+    "business": {
+        "Type": "Elective(Art)",
+        "ID": "080203907",
+        "Name_subject": "Business and Everyday Life",
+        "Semester": null,
+        "Status": null,
+        "Description": "Business",
+        "weight": "3",
+        "PreRequired": null
+    },
+    "art": {
+        "Type": "Elective(Art)",
+        "ID": "080303301",
+        "Name_subject": "Art Appreciation",
+        "Semester": null,
+        "Status": null,
+        "Description": "Art",
+        "weight": "3",
+        "PreRequired": null
+    },
+    "anolog": {
+        "Type": "Main",
+        "ID": "010123114",
+        "Name_subject": "Analog and Digital Electronics",
+        "Semester": "4",
+        "Status": null,
+        "Description": "Analog",
+        "weight": "3",
+        "PreRequired": "040203111"
+    },
+    "comOR": {
+        "Type": "Main",
+        "ID": "010123134",
+        "Name_subject": "Computer Organization",
+        "Semester": "4",
+        "Status": null,
+        "Description": "Com OR",
+        "weight": "3",
+        "PreRequired": "010123107"
+    },
+    "softwareII": {
+        "Type": "Main",
+        "ID": "010123132",
+        "Name_subject": "Software Development Pratice II",
+        "Semester": "4",
+        "Status": null,
+        "Description": "Soft Dev II",
+        "weight": "3",
+        "PreRequired": "010123131"
+    },
+    "network": {
+        "Type": "Main",
+        "ID": "010123126",
+        "Name_subject": "Computer Networks I",
+        "Semester": "4",
+        "Status": null,
+        "Description": "Network",
+        "weight": "3",
+        "PreRequired": null
+    },
+    "Ubq": {
+        "Type": "Main",
+        "ID": "010123129",
+        "Name_subject": "Ubiquitous Computing",
+        "Semester": "4",
+        "Status": null,
+        "Description": "Ubiquitous",
+        "weight": "3",
+        "PreRequired": null
+    },
+    "softEng": {
+        "Type": "Main",
+        "ID": "010123116",
+        "Name_subject": "Software Engineering",
+        "Semester": "5",
+        "Status": null,
+        "Description": "Soft Eng",
+        "weight": "3",
+        "PreRequired": "010123132"
+    },
+    "lab_Analog": {
+        "Type": "Main",
+        "ID": "010123115",
+        "Name_subject": "Analog and Digital Electronics Laboratory",
+        "Semester": "5",
+        "Status": null,
+        "Description": "Lab Analog",
+        "weight": "1",
+        "PreRequired": "010123115"
+    },
+    "os": {
+        "Type": "Main",
+        "ID": "010123117",
+        "Name_subject": "Operating Systems",
+        "Semester": "5",
+        "Status": null,
+        "Description": "OS",
+        "weight": "3",
+        "PreRequired": "010123102"
+    },
+    "embedded": {
+        "Type": "Main",
+        "ID": "010123119",
+        "Name_subject": "Embedded System Design",
+        "Semester": "5",
+        "Status": null,
+        "Description": "Embed",
+        "weight": "3",
+        "PreRequired": "010123134"
+    },
+    "networkII": {
+        "Type": "Main",
+        "ID": "010123127",
+        "Name_subject": "Computer Networks II",
+        "Semester": "5",
+        "Status": null,
+        "Description": "Network II",
+        "weight": "3",
+        "PreRequired": "010123126"
+    },
+    "labEmb": {
+        "Type": "Main",
+        "ID": "010123120",
+        "Name_subject": "Embedded System Design Laboratory",
+        "Semester": "6",
+        "Status": null,
+        "Description": "Lab Embed",
+        "weight": "1",
+        "PreRequired": "010123119"
+    },
+    "database": {
+        "Type": "Main",
+        "ID": "010123121",
+        "Name_subject": "Database Systems",
+        "Semester": "6",
+        "Status": null,
+        "Description": "Database",
+        "weight": "3",
+        "PreRequired": [
+            "010123103",
+            "010123133"
+        ]
+    },
+    "labNetwork": {
+        "Type": "Main",
+        "ID": "010123128",
+        "Name_subject": "Computer Networks Laboratory",
+        "Semester": "6",
+        "Status": null,
+        "Description": "Lab Network",
+        "weight": "1",
+        "PreRequired": "010123127"
+    },
+    "proJ_1": {
+        "Type": "Main",
+        "ID": "010113941",
+        "Name_subject": "Project I",
+        "Semester": "7",
+        "Status": null,
+        "Description": "Project 1",
+        "weight": "3",
+        "PreRequired": null
+    },
+    "proJ_2": {
+        "Type": "Main",
+        "ID": "010113942",
+        "Name_subject": "Project II",
+        "Semester": "8",
+        "Status": null,
+        "Description": "Project 2",
+        "weight": "3",
+        "PreRequired": "010113941"
+    },
+    "com_Eng": {
+        "Type": "Main",
+        "ID": "010123124",
+        "Name_subject": "Computer Engineering Seminar",
+        "Semester": "8",
+        "Status": null,
+        "Description": "Com Eng",
+        "weight": "2",
+        "PreRequired": null
+    },
+    "numerical": {
+        "Type": "Elective(Main)",
+        "ID": "010123201",
+        "Name_subject": "Numerical Methods for Computer Engineers",
+        "Semester": [
+            "3",
+            "4"
+        ],
+        "Status": null,
+        "Description": "Num Method",
+        "weight": "3",
+        "PreRequired": null
+    },
+    "analysis_Algo": {
+        "Type": "Elective(Main)",
+        "ID": "010123203",
+        "Name_subject": "Analysis and Design of Algorithms",
+        "Semester": [
+            "3",
+            "4"
+        ],
+        "Status": null,
+        "Description": "Analysis",
+        "weight": "3",
+        "PreRequired": null
+    },
+    "introControl": {
+        "Type": "Elective(Main)",
+        "ID": "010123204",
+        "Name_subject": "Introduction to Control Engineering",
+        "Semester": [
+            "3",
+            "4"
+        ],
+        "Status": null,
+        "Description": "Intro Control",
+        "weight": "3",
+        "PreRequired": null
+    },
+    "security": {
+        "Type": "Elective(Main)",
+        "ID": "010123205",
+        "Name_subject": "Computer and Network Security",
+        "Semester": [
+            "3",
+            "4"
+        ],
+        "Status": null,
+        "Description": "Security",
+        "weight": "3",
+        "PreRequired": null
+    }
+}

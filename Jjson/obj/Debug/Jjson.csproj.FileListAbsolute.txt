@@ -1,0 +1,10 @@
+C:\Users\kitti\source\repos\Jjson\bin\Debug\Jjson.exe.config
+C:\Users\kitti\source\repos\Jjson\bin\Debug\Jjson.exe
+C:\Users\kitti\source\repos\Jjson\bin\Debug\Jjson.pdb
+C:\Users\kitti\source\repos\Jjson\bin\Debug\Newtonsoft.Json.dll
+C:\Users\kitti\source\repos\Jjson\bin\Debug\Newtonsoft.Json.xml
+C:\Users\kitti\source\repos\Jjson\obj\Debug\Jjson.csprojAssemblyReference.cache
+C:\Users\kitti\source\repos\Jjson\obj\Debug\Jjson.csproj.CoreCompileInputs.cache
+C:\Users\kitti\source\repos\Jjson\obj\Debug\Jjson.csproj.CopyComplete
+C:\Users\kitti\source\repos\Jjson\obj\Debug\Jjson.exe
+C:\Users\kitti\source\repos\Jjson\obj\Debug\Jjson.pdb
