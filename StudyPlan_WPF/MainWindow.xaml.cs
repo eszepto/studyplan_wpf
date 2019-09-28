@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Collections.ObjectModel;
+
+
 namespace StudyPlan_WPF
 {
     /// <summary>
@@ -21,16 +23,50 @@ namespace StudyPlan_WPF
     public partial class MainWindow : Window
     {
         public ObservableCollection<Semester> Semesters;
+        public ObservableCollection<Course> UnplannedCourse;
+        public childItem FindVisualChild<childItem>(DependencyObject obj)
 
+           where childItem : DependencyObject
+
+        {
+
+            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(obj); i++)
+
+            {
+
+                DependencyObject child = VisualTreeHelper.GetChild(obj, i);
+
+                if (child != null && child is childItem)
+
+                    return (childItem)child;
+
+                else
+
+                {
+
+                    childItem childOfChild = FindVisualChild<childItem>(child);
+
+                    if (childOfChild != null)
+
+                        return childOfChild;
+
+                }
+
+            }
+
+            return null;
+
+        }
         public MainWindow()
         {
             InitializeComponent();
             InitialSemester();
 
             tabControl.ItemsSource = Semesters;
-
-
+            Unplanned_lbx.ItemsSource = UnplannedCourse;
+            
         }
+        #region Initial
         void InitialSemester()
         {
             Semesters = new ObservableCollection<Semester>();
@@ -159,9 +195,17 @@ namespace StudyPlan_WPF
             Semesters.Add(new Semester());
         }
 
+        void LoadData()
+        {
+
+        }
+        #endregion
+
+        #region EventHandler
         private void Add_btn_Click(object sender, RoutedEventArgs e)
         {
             Semesters.Add(new Semester());
+            
         }
 
         private void DE_btn_Click(object sender, RoutedEventArgs e)
@@ -179,8 +223,6 @@ namespace StudyPlan_WPF
                 Semesters[this.tabControl.SelectedIndex].Courses.Clear();
             }
         }
-
-
 
         private void AddNewCourse_btn_Click(object sender, RoutedEventArgs e)
         {
@@ -208,43 +250,11 @@ namespace StudyPlan_WPF
             Credit_label.Content = String.Format("Credits: {0}/22", _Clicked_Semester.Credit);
             GPA_label.Content = String.Format("GPA: {0:0.00}", _Clicked_Semester.GPA);
         }
+        #endregion
 
-
-        private childItem FindVisualChild<childItem>(DependencyObject obj)
-
-            where childItem : DependencyObject
-
-        {
-
-            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(obj); i++)
-
-            {
-
-                DependencyObject child = VisualTreeHelper.GetChild(obj, i);
-
-                if (child != null && child is childItem)
-
-                    return (childItem)child;
-
-                else
-
-                {
-
-                    childItem childOfChild = FindVisualChild<childItem>(child);
-
-                    if (childOfChild != null)
-
-                        return childOfChild;
-
-                }
-
-            }
-
-            return null;
-
-        }
     }
 
+    #region Class definition
     public class Semester : ObservableCollection<Course>
     {
         public static int NextNumber = 1;
@@ -289,5 +299,6 @@ namespace StudyPlan_WPF
             return this;
         }
     }
+    #endregion
 
 }

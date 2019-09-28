@@ -48,4 +48,13 @@
         
         </Grid>
     </DataTemplate>
+
+
+    <DataTemplate x:Key="UnplannedCourseStyle">
+        <Grid>
+            <Button Content="1">
+                
+            </Button>
+        </Grid>
+    </DataTemplate>
 </ResourceDictionary>
