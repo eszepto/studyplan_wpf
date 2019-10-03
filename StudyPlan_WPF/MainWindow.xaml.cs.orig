@@ -1,0 +1,319 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+using System.Collections.ObjectModel;
+using Newtonsoft.Json;
+
+namespace StudyPlan_WPF
+{
+    /// <summary>
+    /// Interaction logic for MainWindow.xaml
+    /// </summary>
+    public partial class MainWindow : Window
+    {
+        public ObservableCollection<Semester> Semesters;
+        public ObservableCollection<Course> UnplannedCourse;
+        public childItem FindVisualChild<childItem>(DependencyObject obj)
+
+           where childItem : DependencyObject
+
+        {
+
+            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(obj); i++)
+
+            {
+
+                DependencyObject child = VisualTreeHelper.GetChild(obj, i);
+
+                if (child != null && child is childItem)
+
+                    return (childItem)child;
+
+                else
+
+                {
+
+                    childItem childOfChild = FindVisualChild<childItem>(child);
+
+                    if (childOfChild != null)
+
+                        return childOfChild;
+
+                }
+
+            }
+
+            return null;
+
+        }
+        public MainWindow()
+        {
+            InitializeComponent();
+            InitialSemester();
+
+            tabControl.ItemsSource = Semesters;
+            Unplanned_lbx.ItemsSource = UnplannedCourse;
+            
+        }
+        #region Initial
+        void InitialSemester()
+        {
+            Semesters = new ObservableCollection<Semester>();
+            Semesters.Add(new Semester()
+            {
+                Credit = 19,
+                Courses = new ObservableCollection<Course>()  // 1st 
+                {
+                    new Course()
+                    {
+                        Id = "010123102",
+                        Name = "Programming Fundamentals",
+                        Weight = "3"
+                    },
+                    new Course()
+                    {
+                        Id = "010123130",
+                        Name = "Com Exploration",
+                        Weight = "1"
+                    },
+                    new Course()
+                    {
+                        Id = "010123130",
+                        Name = "Introduction to Engineering",
+                        Weight = "1"
+                    },
+                    new Course()
+                    {
+                        Id = "040203111",
+                        Name = "Engineering Mathematics I",
+                        Weight = "3"
+                    },
+                    new Course()
+                    {
+                        Id = "040313005",
+                        Name = "Physics I",
+                        Weight = "3"
+                    },
+                    new Course()
+                    {
+                        Id = "040313006",
+                        Name = "Physics Laboratory I",
+                        Weight = "1"
+                    },
+                    new Course()
+                    {
+                        Id = "??????",
+                        Name = "Language Elective Course **",
+                        Weight = "3"
+                    },
+                    new Course()
+                    {
+                        Id = "??????",
+                        Name = "Physical Education Elective Course **",
+                        Weight = "1"
+                    },
+                    new Course()
+                    {
+                        Id = "??????",
+                        Name = "Social Sciences Elective Course **",
+                        Weight = "3"
+                    }
+                }
+            });
+            Semesters.Add(new Semester()
+            {
+                GPA = 3.51F,
+                Credit = 19,
+                Courses = new ObservableCollection<Course>()  // 2nd
+                {
+                    new Course()
+                    {
+                        Id = "010113010",
+                        Name = "Electric Circuit Theory",
+                        Weight = "3"
+                    },
+                    new Course()
+                    {
+                        Id = "010113011",
+                        Name = "Electric Circuit Laboratory",
+                        Weight = "1"
+                    },
+                    new Course()
+                    {
+                        Id = "010123103",
+                        Name = "Algorithms and Data Structures",
+                        Weight = "3"
+                    },
+                    new Course()
+                    {
+                        Id = "010403006",
+                        Name = "Work Ethics",
+                        Weight = "1"
+                    },
+                    new Course()
+                    {
+                        Id = "040203112",
+                        Name = "Engineering Mathematics II",
+                        Weight = "3"
+                    },
+                    new Course()
+                    {
+                        Id = "040313007",
+                        Name = "Physics II",
+                        Weight = "3"
+                    },
+                    new Course()
+                    {
+                        Id = "??????",
+                        Name = "Language Elective Course **",
+                        Weight = "3"
+                    },
+                    new Course()
+                    {
+                        Id = "??????",
+                        Name = "Physical Education Elective Course",
+                        Weight = "1"
+                    }
+                }
+            });
+            Semesters.Add(new Semester());
+            Semesters.Add(new Semester());
+            Semesters.Add(new Semester());
+            Semesters.Add(new Semester());
+            Semesters.Add(new Semester());
+            Semesters.Add(new Semester());
+
+            UnplannedCourse = new ObservableCollection<Course>();
+            UnplannedCourse.Add(new Course() { Name = "abcd" });
+        }
+
+        void LoadData()
+        {
+
+        }
+        #endregion
+
+        #region EventHandler
+        private void Add_btn_Click(object sender, RoutedEventArgs e)
+        {
+            Semesters.Add(new Semester());
+            
+        }
+
+        private void DE_btn_Click(object sender, RoutedEventArgs e)
+        {
+            ContentPresenter cp = FindVisualChild<ContentPresenter>(this.tabControl);
+            ListBox lbx = cp.ContentTemplate.FindName("listBox", cp) as ListBox;
+
+            if (this.tabControl.SelectedIndex == Semesters.Count - 1)  /// Any tab
+            {
+                Semesters.RemoveAt(this.tabControl.SelectedIndex);
+                Semester.NextNumber -= 1;
+            }
+            else  /// lastest tab
+            {
+                Semesters[this.tabControl.SelectedIndex].Courses.Clear();
+            }
+        }
+        
+        public void AddNewCourse_btn_Click(object sender, RoutedEventArgs e)
+        {
+            Add_New_Course addNewCourseWindow = new Add_New_Course();
+            addNewCourseWindow.Show();
+
+        }
+
+        private void Drop_btn_Click(object sender, RoutedEventArgs e)
+        {
+            ContentPresenter cp = FindVisualChild<ContentPresenter>(this.tabControl);
+            ListBox lbx = cp.ContentTemplate.FindName("listBox", cp) as ListBox;
+
+            Course SelectedCourse = lbx.SelectedItem as Course;
+            Console.WriteLine(SelectedCourse.Name);
+            
+        }
+
+        private void ListBox_Empty_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            ContentPresenter cp = FindVisualChild<ContentPresenter>(this.tabControl);
+            ListBox lbx = cp.ContentTemplate.FindName("listBox", cp) as ListBox;
+
+            HitTestResult r = VisualTreeHelper.HitTest(this, e.GetPosition(this));
+            if (r.VisualHit.GetType() != typeof(ListBoxItem))
+            {
+                Add_New_Course addNewCourseWindow = new Add_New_Course();
+                addNewCourseWindow.Show();
+            }
+        }
+
+        private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Semester _Clicked_Semester = (this.tabControl.SelectedItem as Semester).Get();
+            Credit_label.Content = String.Format("Credits: {0}/22", _Clicked_Semester.Credit);
+            GPA_label.Content = String.Format("GPA: {0:0.00}", _Clicked_Semester.GPA);
+        }
+        #endregion
+
+    }
+
+    #region Class definition
+    public class Semester : MainWindow
+    {
+        public static int NextNumber = 1;
+
+        public int Credit = 0;
+        public float GPA = 0;
+        public int Number { get; set; }
+
+        public ObservableCollection<Course> Courses { get; set; }
+
+        public Semester()
+        {
+            Courses = new ObservableCollection<Course>();
+            this.Number = NextNumber;
+            NextNumber += 1;
+        }
+        public void Add(Course c)
+        {
+            Credit += int.Parse(c.Weight);
+            this.Courses.Add(c);
+        }
+
+        public Semester Get()
+        {
+            return this;
+        }
+    }
+
+    public class Course:MainWindow
+    {
+        public string Id { get; set; }
+        public string Name { get; set; }
+        public string Descript { get; set; }
+        public string Weight { get; set; }
+
+        public override string ToString()
+        {
+            return Name;
+        }
+        public Course Get()
+        {
+            return this;
+        }
+
+        
+    }
+    #endregion
+
+}
