@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:StudyPlan_WPF"
+        xmlns:uc="clr-namespace:StudyPlan_WPF.Resource.UserControls"
         mc:Ignorable="d"
         Title="Happy Study Plan" Height="600" Width="900">
     <Grid Margin="4,0,-4.4,0">
@@ -20,7 +21,13 @@
             <TabControl.ContentTemplate>
                 <DataTemplate>
                     <Grid>
-                        <ListBox x:Name="listBox" HorizontalAlignment="Left" Height="Auto" Width="505"  VerticalAlignment="Top" ItemsSource="{Binding Courses}" IsSynchronizedWithCurrentItem="True"  ItemTemplate="{StaticResource MainCourseStyle}" MouseDown="ListBox_Empty_MouseDown"/>
+                        <ListBox x:Name="listBox" HorizontalAlignment="Left" Height="Auto" Width="505"  VerticalAlignment="Top" ItemsSource="{Binding Courses}" IsSynchronizedWithCurrentItem="True"  MouseDown="ListBox_Empty_MouseDown">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <uc:MainCourseItem DropClick="MainCourseItem_DropClick" />
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
                     </Grid>
                 </DataTemplate>
             </TabControl.ContentTemplate>

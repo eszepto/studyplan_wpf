@@ -60,6 +60,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Resource\UserControls\MainCourseItem.xaml.cs">
+      <DependentUpon>MainCourseItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Resource\UserControls\UnplannedItem.xaml.cs">
+      <DependentUpon>UnplannedItem.xaml</DependentUpon>
+    </Compile>
     <Page Include="Add_New_Course.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -84,6 +90,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resource\Template\CourseItemDesign.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resource\UserControls\MainCourseItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resource\UserControls\UnplannedItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

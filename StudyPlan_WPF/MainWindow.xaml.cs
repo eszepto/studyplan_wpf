@@ -17,9 +17,11 @@ using System.Collections.ObjectModel;
 
 namespace StudyPlan_WPF
 {
+    
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
+    /// 
     public partial class MainWindow : Window
     {
         public ObservableCollection<Semester> Semesters;
@@ -252,6 +254,10 @@ namespace StudyPlan_WPF
         }
         #endregion
 
+        private void MainCourseItem_DropClick(object sender, RoutedEventArgs e)
+        {
+            Console.WriteLine("abcd");
+        }
     }
 
     #region Class definition
