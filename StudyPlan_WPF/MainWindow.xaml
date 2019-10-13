@@ -24,7 +24,7 @@
                         <ListBox x:Name="listBox" HorizontalAlignment="Left" Height="Auto" Width="505"  VerticalAlignment="Top" ItemsSource="{Binding Courses}" IsSynchronizedWithCurrentItem="True"  MouseDown="ListBox_Empty_MouseDown">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
-                                    <uc:MainCourseItem DropClick="MainCourseItem_DropClick" />
+                                    <uc:MainCourseItem DropClick="MainCourseItem_DropClick" SubmitClick="MainCourseItem_SubmitClick" />
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
                         </ListBox>
@@ -33,9 +33,15 @@
             </TabControl.ContentTemplate>
         </TabControl>
 
-        <ListBox x:Name="Unplanned_lbx" HorizontalAlignment="Left" Height="420" VerticalAlignment="Top" Width="250" Margin="600,120,0,0" BorderBrush="#FF070708" IsSynchronizedWithCurrentItem="True" ItemsSource="{Binding UnplannedCourse}" ItemTemplate="{StaticResource UnplannedCourseStyle}"/>
-        
-        
+        <ListBox x:Name="Unplanned_lbx" HorizontalAlignment="Left" Height="420" VerticalAlignment="Top" Width="250" Margin="600,120,0,0" BorderBrush="#FF070708" IsSynchronizedWithCurrentItem="True" ItemsSource="{Binding UnplannedCourse}" >
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Name}" />
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+
         <Button x:Name="Add_btn" Content="Add Semester" HorizontalAlignment="Left" Margin="40,54,0,0" VerticalAlignment="Top" Width="100" Click="Add_btn_Click" Height="50" RenderTransformOrigin="0.522,-0.226"/>
         <Button x:Name="DE_btn" Content="Delete Semester" HorizontalAlignment="Left" Margin="160,54,0,0" VerticalAlignment="Top" Width="100" Click="DE_btn_Click" Height="50"/>
         <Button x:Name="AddNewCourse_btn" Content="Add New Course" HorizontalAlignment="Left" Margin="691,54,0,0" VerticalAlignment="Top" Width="150" Height="50" Click="AddNewCourse_btn_Click"/>

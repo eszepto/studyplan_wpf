@@ -24,7 +24,7 @@ namespace StudyPlan_WPF
     /// 
     public partial class MainWindow : Window
     {
-        public ObservableCollection<Semester> Semesters;
+        public static ObservableCollection<Semester> Semesters;
         public ObservableCollection<Course> UnplannedCourse;
         public childItem FindVisualChild<childItem>(DependencyObject obj)
 
@@ -71,6 +71,7 @@ namespace StudyPlan_WPF
         #region Initial
         void InitialSemester()
         {
+            UnplannedCourse = new ObservableCollection<Course>();
             Semesters = new ObservableCollection<Semester>();
             Semesters.Add(new Semester()
             {
@@ -254,9 +255,22 @@ namespace StudyPlan_WPF
         }
         #endregion
 
-        private void MainCourseItem_DropClick(object sender, RoutedEventArgs e)
+        private void MainCourseItem_DropClick(object sender, RoutedEventArgs e, string clickedId)
         {
-            Console.WriteLine("abcd");
+            Course selesctedCourse = Semesters[tabControl.SelectedIndex].GetCourse(clickedId);
+            Semesters[tabControl.SelectedIndex].Courses.Remove(selesctedCourse);
+            UnplannedCourse.Add(selesctedCourse);
+            
+        }
+        private void MainCourseItem_SubmitClick(object sender, RoutedEventArgs e, string clickedId, string grade)
+        {
+            if (grade != "")   //when not click
+            {
+                Course selesctedCourse = Semesters[tabControl.SelectedIndex].GetCourse(clickedId);
+                selesctedCourse.Grade = grade;
+                Console.WriteLine(Semesters[tabControl.SelectedIndex].GetCourse(clickedId).Grade);
+
+            }
         }
     }
 
@@ -287,6 +301,24 @@ namespace StudyPlan_WPF
         {
             return this;
         }
+
+        public Course GetCourse(string id)
+        {
+            foreach (Course i in this.Courses)
+            {
+                if (i.Id == id)
+                {
+                    return i;
+                }
+                
+            }
+            return null;
+        }
+        public Course Pop(Course e)
+        {
+            this.Remove(e);
+            return e;
+        }
     }
 
     public class Course
@@ -295,6 +327,7 @@ namespace StudyPlan_WPF
         public string Name { get; set; }
         public string Descript { get; set; }
         public string Weight { get; set; }
+        public string Grade { get; set; }
 
         public override string ToString()
         {

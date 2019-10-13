@@ -23,19 +23,29 @@ namespace StudyPlan_WPF.Resource.UserControls
         public MainCourseItem()
         {
             InitializeComponent();
-            
         }
 
-        public delegate void DropBtnHandler(object sender, RoutedEventArgs e);
+        public delegate void DropBtnHandler(object sender, RoutedEventArgs e, string clickedId);
         public event DropBtnHandler DropClick;
-
         private void DropBtn_Click_1(object sender, RoutedEventArgs e)
         {
             //Capture event from usercontrol and execute defined event
             if (DropClick != null)
             {
-                DropClick(sender, e);
+                DropClick(sender, e, this.txtId.Text);
             }
         }
+
+        public delegate void SubmitBtnHandler(object sender, RoutedEventArgs e, string clickedId, string grade);
+        public event SubmitBtnHandler SubmitClick;
+        private void SubmitBtn_Click(object sender, RoutedEventArgs e)
+        {
+            //Capture event from usercontrol and execute defined event
+            if (SubmitClick != null)
+            {
+                SubmitClick(sender, e, this.txtId.Text, gradeCB.Text);
+            }
+        }
+
     }
 }
