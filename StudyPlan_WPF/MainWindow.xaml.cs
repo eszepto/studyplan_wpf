@@ -272,6 +272,13 @@ namespace StudyPlan_WPF
 
             }
         }
+
+        private void CourseMoveBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Course selesctedCourse = UnplannedCourse[Unplanned_lbx.SelectedIndex].Get();
+            UnplannedCourse.Remove(selesctedCourse);
+            Semesters[tabControl.SelectedIndex].Courses.Add(selesctedCourse);
+        }
     }
 
     #region Class definition
