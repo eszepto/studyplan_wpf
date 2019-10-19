@@ -29,6 +29,7 @@ namespace StudyPlan_WPF
         public static ObservableCollection<Semester> Semesters;
         public ObservableCollection<Course> UnplannedCourse;
         public ObservableCollection<Course> AllCourse;
+        public Dictionary<string, string> CourseMap = new Dictionary<string, string>();
         public childItem FindVisualChild<childItem>(DependencyObject obj)
 
            where childItem : DependencyObject
@@ -228,6 +229,8 @@ namespace StudyPlan_WPF
                         Semesters[_term - 1].Credit += int.Parse(c.Weight);
                     }
                 }
+                CourseMap.Add(c.Id, c.Name);
+                
             }
         }
         void ReloadGPA()
@@ -301,7 +304,7 @@ namespace StudyPlan_WPF
                 Course selesctedCourse = Semesters[tabControl.SelectedIndex].GetCourse(clickedId);
                 selesctedCourse.Grade = grade;
                 Console.WriteLine(Semesters[tabControl.SelectedIndex].GetCourse(clickedId).Grade);
-
+          
             }
         }
 
@@ -330,7 +333,15 @@ namespace StudyPlan_WPF
             }
             else
             {
-                string text = string.Format("{0} require {1}", selectedCourse.Name, string.Join(",", pr));
+                string requireC = "";
+                foreach (string c in pr)
+                {
+                    if (c != null)
+                    {
+                        requireC += CourseMap[c];
+                    }
+                }
+                string text = string.Format("{0} require {1}", selectedCourse.Name, requireC);
                 ErrorText.Text = text;
             }
 
