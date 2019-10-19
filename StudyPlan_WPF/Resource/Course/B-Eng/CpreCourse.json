@@ -7,7 +7,7 @@
         "Status": null,
         "Description": "Profun",
         "Weight": "3",
-        "PreRequired": [ null ]    },
+        "PreRequired": [  ]    },
     "comexp": {
         "Type": "Main",
         "Id": "010123130",
@@ -16,7 +16,7 @@
         "Status": null,
         "Description": "ComExplo",
         "Weight": "1",
-        "PreRequired": [ null ]    },
+        "PreRequired": [  ]    },
     "intro": {
         "Type": "Main",
         "Id": "010403005",
@@ -25,7 +25,7 @@
         "Status": null,
         "Description": "Intro",
         "Weight": "1",
-      "PreRequired": [ null ]    
+      "PreRequired": [  ]    
     },
     "mathI": {
         "Type": "Main",
@@ -35,7 +35,7 @@
         "Status": null,
         "Description": "MathI",
         "Weight": "3",
-      "PreRequired": [ null ]   
+      "PreRequired": [  ]   
 
     },
     "phyI": {
@@ -46,7 +46,7 @@
         "Status": null,
         "Description": "Phy I",
         "Weight": "3",
-        "PreRequired": [ null
+        "PreRequired": [ 
 ]    },
     "labphyI": {
         "Type": "Main",
@@ -56,7 +56,7 @@
         "Status": null,
         "Description": "Lab Phy I",
         "Weight": "1",
-        "PreRequired": [ null
+        "PreRequired": [ 
 ]    },
     "tabletennis": {
         "Type": "Elective(Main)",
@@ -66,7 +66,7 @@
         "Status": null,
         "Description": "Tabletennis",
         "Weight": "1",
-        "PreRequired": [ null
+        "PreRequired": [ 
 ]    },
     "engI": {
         "Type": "Elective(Main)",
@@ -76,7 +76,7 @@
         "Status": null,
         "Description": "Eng I",
         "Weight": "3",
-        "PreRequired": [ null
+        "PreRequired": [ 
 ]    },
     "manso": {
         "Type": "Elective(Main)",
@@ -86,7 +86,7 @@
         "Status": null,
         "Description": "ManSo",
         "Weight": "3",
-        "PreRequired": [ null
+        "PreRequired": [ 
 ]    },
     "circuit": {
         "Type": "Main",
@@ -96,7 +96,7 @@
         "Status": null,
         "Description": "Circuit",
         "Weight": "3",
-        "PreRequired": [ null
+        "PreRequired": [ 
 ]    },
     "lab_cir": {
         "Type": "Main",
@@ -106,7 +106,7 @@
         "Status": null,
         "Description": "LabCircuit",
         "Weight": "1",
-        "PreRequired": [ null
+        "PreRequired": [ 
 ]    },
     "bas": {
         "Type": "Elective(Main)",
@@ -116,7 +116,7 @@
         "Status": null,
         "Description": "Bas",
         "Weight": "1",
-        "PreRequired": [ null
+        "PreRequired": [ 
 ]    },
     "engII": {
         "Type": "Elective(Main)",
@@ -136,7 +136,7 @@
         "Status": null,
         "Description": "Work Ethics",
         "Weight": "1",
-        "PreRequired": [ null
+        "PreRequired": [ 
 ]    },
     "mathII": {
         "Type": "Main",
@@ -206,7 +206,7 @@
         "Status": null,
         "Description": "Digi",
         "Weight": "3",
-        "PreRequired": [ null
+        "PreRequired": [ 
 ]    },
     "labDigi": {
         "Type": "Main",
@@ -216,7 +216,7 @@
         "Status": null,
         "Description": "Lab digi",
         "Weight": "1",
-        "PreRequired": [ null
+        "PreRequired": [ 
 ]    },
     "discrete": {
         "Type": "Main",
@@ -246,7 +246,7 @@
         "Status": null,
         "Description": "Phy Life",
         "Weight": "3",
-        "PreRequired": [ null
+        "PreRequired": [ 
 ]    },
     "genMath": {
         "Type": "Elective(Art)",
@@ -256,7 +256,7 @@
         "Status": null,
         "Description": "Gen math",
         "Weight": "3",
-        "PreRequired": [ null
+        "PreRequired": [ 
 ]    },
     "psychology": {
         "Type": "Elective(Art)",
@@ -266,7 +266,7 @@
         "Status": null,
         "Description": "Happy Life",
         "Weight": "3",
-        "PreRequired": [ null
+        "PreRequired": [ 
 ]    },
     "engConv": {
         "Type": "Elective(Art)",
@@ -276,7 +276,7 @@
         "Status": null,
         "Description": "Eng Con",
         "Weight": "3",
-        "PreRequired": [ null
+        "PreRequired": [ 
 ]    },
     "engSkill": {
         "Type": "Elective(Art)",
@@ -286,7 +286,7 @@
         "Status": null,
         "Description": "Eng skill",
         "Weight": "3",
-        "PreRequired": [ null
+        "PreRequired": [ 
 ]    },
     "bio": {
         "Type": "Elective(Art)",
@@ -296,7 +296,7 @@
         "Status": null,
         "Description": "Bio",
         "Weight": "3",
-        "PreRequired": [ null
+        "PreRequired": [ 
 ]    },
     "voll": {
         "Type": "Elective(Art)",
@@ -306,7 +306,7 @@
         "Status": null,
         "Description": "Volley",
         "Weight": "1",
-        "PreRequired": [ null
+        "PreRequired": [ 
 ]    },
     "econ": {
         "Type": "Elective(Art)",
@@ -316,7 +316,7 @@
         "Status": null,
         "Description": "Econ",
         "Weight": "3",
-        "PreRequired": [ null
+        "PreRequired": [ 
 ]    },
     "economics": {
         "Type": "Elective(Art)",
@@ -326,7 +326,7 @@
         "Status": null,
         "Description": "Economics",
         "Weight": "3",
-        "PreRequired": [ null
+        "PreRequired": [ 
 ]    },
     "nation": {
         "Type": "Elective(Art)",
@@ -336,7 +336,7 @@
         "Status": null,
         "Description": "Nation",
         "Weight": "3",
-        "PreRequired": [ null
+        "PreRequired": [ 
 ]    },
     "business": {
         "Type": "Elective(Art)",
@@ -346,7 +346,7 @@
         "Status": null,
         "Description": "Business",
         "Weight": "3",
-        "PreRequired": [ null
+        "PreRequired": [ 
 ]    },
     "art": {
         "Type": "Elective(Art)",
@@ -356,7 +356,7 @@
         "Status": null,
         "Description": "Art",
         "Weight": "3",
-        "PreRequired": [ null
+        "PreRequired": [ 
 ]    },
     "anolog": {
         "Type": "Main",
@@ -396,7 +396,7 @@
         "Status": null,
         "Description": "Network",
         "Weight": "3",
-        "PreRequired": [ null
+        "PreRequired": [ 
 ]    },
     "Ubq": {
         "Type": "Main",
@@ -406,7 +406,7 @@
         "Status": null,
         "Description": "Ubiquitous",
         "Weight": "3",
-        "PreRequired": [ null
+        "PreRequired": [ 
 ]    },
     "softEng": {
         "Type": "Main",
@@ -499,7 +499,7 @@
         "Status": null,
         "Description": "Project 1",
         "Weight": "3",
-        "PreRequired": [ null
+        "PreRequired": [ 
 ]    },
     "proJ_2": {
         "Type": "Main",
@@ -519,7 +519,7 @@
         "Status": null,
         "Description": "Com Eng",
         "Weight": "2",
-        "PreRequired": [ null
+        "PreRequired": [ 
 ]    },
     "numerical": {
         "Type": "Elective(Main)",
@@ -531,7 +531,7 @@
         "Status": null,
         "Description": "Num Method",
         "Weight": "3",
-        "PreRequired": [ null
+        "PreRequired": [ 
 ]    },
     "analysis_Algo": {
         "Type": "Elective(Main)",
@@ -543,7 +543,7 @@
         "Status": null,
         "Description": "Analysis",
         "Weight": "3",
-        "PreRequired": [ null
+        "PreRequired": [ 
 ]    },
     "introControl": {
         "Type": "Elective(Main)",
@@ -555,7 +555,7 @@
         "Status": null,
         "Description": "Intro Control",
         "Weight": "3",
-        "PreRequired": [ null
+        "PreRequired": [ 
 ]    },
     "security": {
         "Type": "Elective(Main)",
@@ -566,6 +566,6 @@
         "Description": "Security",
         "Weight": "3",
       "PreRequired": [
-        null
+        
       ]    }
 }

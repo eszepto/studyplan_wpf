@@ -307,9 +307,33 @@ namespace StudyPlan_WPF
 
         private void CourseMoveBtn_Click(object sender, RoutedEventArgs e)
         {
-            Course selesctedCourse = UnplannedCourse[Unplanned_lbx.SelectedIndex].Get();
-            UnplannedCourse.Remove(selesctedCourse);
-            Semesters[tabControl.SelectedIndex].Courses.Add(selesctedCourse);
+            Course selectedCourse = UnplannedCourse[Unplanned_lbx.SelectedIndex].Get();
+            List<string> pr = selectedCourse.PreRequired;
+
+            for (int semesterIndex = 0; semesterIndex < tabControl.SelectedIndex; semesterIndex++)
+            {
+                foreach (Course c in Semesters[semesterIndex])
+                {
+                    if (pr.Contains(c.Id))
+                    {
+                        pr.Remove(c.Id);
+                    }
+                }
+            }
+
+
+            if (pr.Count == 0)
+            {
+                UnplannedCourse.Remove(selectedCourse);
+                Semesters[tabControl.SelectedIndex].Courses.Add(selectedCourse);
+                ErrorText.Text = "";
+            }
+            else
+            {
+                string text = string.Format("{0} require {1}", selectedCourse.Name, string.Join(",", pr));
+                ErrorText.Text = text;
+            }
+
         }
     }
 
