@@ -22,17 +22,41 @@ namespace StudyPlan_WPF
     {
         private MainWindow MainWin;
 
-        public ObservableCollection<Course> previewCourse = new ObservableCollection<Course>();  
-        
-        public Add_New_Course(MainWindow m)
+        public ObservableCollection<Course> previewCourse = new ObservableCollection<Course>();
+        public ObservableCollection<Course> electiveArt;
+        public ObservableCollection<Course> electiveMain;
+        #region init
+        public Add_New_Course(MainWindow m, Dictionary<string, ObservableCollection<Course>> selectCourse)
         {
             InitializeComponent();
+
             this.MainWin = m;
+            this.electiveArt = selectCourse["Elective(Art)"];
+            this.electiveMain = selectCourse["Elective(Main)"];
+
+
+
         }
 
+        #endregion
+
+
+
+        #region EventHandler
         private void CourseGroup_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            courseGroup.SelectedItem.ToString();
+            string selected =((ComboBoxItem)courseGroup.SelectedItem).Content.ToString();
+            Console.WriteLine(selected == "Elective Main Course");
+            if (selected == "Elective Main Course")
+            {
+                courseTable.ItemsSource = null;
+                courseTable.ItemsSource = electiveMain;
+            }
+            if (selected == "Elective Art Course")
+            {
+                courseTable.ItemsSource = null;
+                courseTable.ItemsSource = electiveArt;
+            }
             
         }
 
@@ -43,11 +67,14 @@ namespace StudyPlan_WPF
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
-            if (courseGroup.SelectedItem != null)
+            if (courseTable.SelectedItem != null)
             {
-                MainWin.UnplannedCourse.Add(previewCourse[courseGroup.SelectedIndex]);
+                MainWin.UnplannedCourse.Add(previewCourse[courseTable.SelectedIndex]);
                 this.Close();
             }
         }
+
+
+        #endregion
     }
 }

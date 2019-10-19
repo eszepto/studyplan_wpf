@@ -25,11 +25,12 @@ namespace StudyPlan_WPF
     /// 
     public partial class MainWindow : Window
     {
-
+        public Dictionary<string, ObservableCollection<Course>> selectableCourse = new Dictionary<string, ObservableCollection<Course>>();
         public static ObservableCollection<Semester> Semesters;
         public ObservableCollection<Course> UnplannedCourse;
         public ObservableCollection<Course> AllCourse;
         public Dictionary<string, string> CourseMap = new Dictionary<string, string>();
+        
         public childItem FindVisualChild<childItem>(DependencyObject obj)
 
            where childItem : DependencyObject
@@ -218,6 +219,9 @@ namespace StudyPlan_WPF
         }
         void InitialData()
         {
+            selectableCourse.Add("Elective(Main)", new ObservableCollection<Course>());
+            selectableCourse.Add("Elective(Art)", new ObservableCollection<Course>());
+
             foreach (Course c in AllCourse)  // add Course
             {
                 if (c.Semester != null)
@@ -228,6 +232,15 @@ namespace StudyPlan_WPF
                         Semesters[_term - 1].Courses.Add(c);
                         Semesters[_term - 1].Credit += int.Parse(c.Weight);
                     }
+                    else
+                    {
+                        selectableCourse[c.Type].Add(c);
+                        Console.WriteLine(selectableCourse["Elective(Main)"]);
+                    }
+                }
+                else
+                {
+                    selectableCourse[c.Type].Add(c);
                 }
                 CourseMap.Add(c.Id, c.Name);
                 
@@ -264,7 +277,7 @@ namespace StudyPlan_WPF
 
         private void AddNewCourse_btn_Click(object sender, RoutedEventArgs e)
         {
-            Add_New_Course addNewCourseWindow = new Add_New_Course(this);
+            Add_New_Course addNewCourseWindow = new Add_New_Course(this, selectableCourse);
             addNewCourseWindow.Show();
 
         }
@@ -277,7 +290,7 @@ namespace StudyPlan_WPF
             HitTestResult r = VisualTreeHelper.HitTest(this, e.GetPosition(this));
             if (r.VisualHit.GetType() != typeof(ListBoxItem))
             {
-                Add_New_Course addNewCourseWindow = new Add_New_Course(this);
+                Add_New_Course addNewCourseWindow = new Add_New_Course(this, selectableCourse);
                 addNewCourseWindow.Show();
             }
         }
