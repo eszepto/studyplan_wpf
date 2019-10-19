@@ -35,5 +35,19 @@ namespace StudyPlan_WPF
             courseGroup.SelectedItem.ToString();
             
         }
+
+        private void CancelButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void AddButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (courseGroup.SelectedItem != null)
+            {
+                MainWin.UnplannedCourse.Add(previewCourse[courseGroup.SelectedIndex]);
+                this.Close();
+            }
+        }
     }
 }
