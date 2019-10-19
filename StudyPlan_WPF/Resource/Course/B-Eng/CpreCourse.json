@@ -7,8 +7,7 @@
         "Status": null,
         "Description": "Profun",
         "Weight": "3",
-        "PreRequired": null
-    },
+        "PreRequired": [ null ]    },
     "comexp": {
         "Type": "Main",
         "Id": "010123130",
@@ -17,8 +16,7 @@
         "Status": null,
         "Description": "ComExplo",
         "Weight": "1",
-        "PreRequired": null
-    },
+        "PreRequired": [ null ]    },
     "intro": {
         "Type": "Main",
         "Id": "010403005",
@@ -27,7 +25,7 @@
         "Status": null,
         "Description": "Intro",
         "Weight": "1",
-        "PreRequired": null
+      "PreRequired": [ null ]    
     },
     "mathI": {
         "Type": "Main",
@@ -37,7 +35,8 @@
         "Status": null,
         "Description": "MathI",
         "Weight": "3",
-        "PreRequired": null
+      "PreRequired": [ null ]   
+
     },
     "phyI": {
         "Type": "Main",
@@ -47,8 +46,8 @@
         "Status": null,
         "Description": "Phy I",
         "Weight": "3",
-        "PreRequired": null
-    },
+        "PreRequired": [ null
+]    },
     "labphyI": {
         "Type": "Main",
         "Id": "040313006",
@@ -57,8 +56,8 @@
         "Status": null,
         "Description": "Lab Phy I",
         "Weight": "1",
-        "PreRequired": null
-    },
+        "PreRequired": [ null
+]    },
     "tabletennis": {
         "Type": "Elective(Main)",
         "Id": "080303505",
@@ -67,8 +66,8 @@
         "Status": null,
         "Description": "Tabletennis",
         "Weight": "1",
-        "PreRequired": null
-    },
+        "PreRequired": [ null
+]    },
     "engI": {
         "Type": "Elective(Main)",
         "Id": "080103001",
@@ -77,8 +76,8 @@
         "Status": null,
         "Description": "Eng I",
         "Weight": "3",
-        "PreRequired": null
-    },
+        "PreRequired": [ null
+]    },
     "manso": {
         "Type": "Elective(Main)",
         "Id": "080203901",
@@ -87,8 +86,8 @@
         "Status": null,
         "Description": "ManSo",
         "Weight": "3",
-        "PreRequired": null
-    },
+        "PreRequired": [ null
+]    },
     "circuit": {
         "Type": "Main",
         "Id": "010113010",
@@ -97,8 +96,8 @@
         "Status": null,
         "Description": "Circuit",
         "Weight": "3",
-        "PreRequired": null
-    },
+        "PreRequired": [ null
+]    },
     "lab_cir": {
         "Type": "Main",
         "Id": "010113011",
@@ -107,8 +106,8 @@
         "Status": null,
         "Description": "LabCircuit",
         "Weight": "1",
-        "PreRequired": null
-    },
+        "PreRequired": [ null
+]    },
     "bas": {
         "Type": "Elective(Main)",
         "Id": "080303501",
@@ -117,8 +116,8 @@
         "Status": null,
         "Description": "Bas",
         "Weight": "1",
-        "PreRequired": null
-    },
+        "PreRequired": [ null
+]    },
     "engII": {
         "Type": "Elective(Main)",
         "Id": "080103002",
@@ -127,8 +126,8 @@
         "Status": null,
         "Description": "EngII",
         "Weight": "3",
-        "PreRequired": "080103001"
-    },
+        "PreRequired": [ "080103001"
+]    },
     "workEt": {
         "Type": "Main",
         "Id": "010403006",
@@ -137,8 +136,8 @@
         "Status": null,
         "Description": "Work Ethics",
         "Weight": "1",
-        "PreRequired": null
-    },
+        "PreRequired": [ null
+]    },
     "mathII": {
         "Type": "Main",
         "Id": "040203112",
@@ -147,8 +146,8 @@
         "Status": null,
         "Description": "Math II",
         "Weight": "3",
-        "PreRequired": "040203111"
-    },
+        "PreRequired": [ "040203111"
+]    },
     "phyII": {
         "Type": "Main",
         "Id": "040313007",
@@ -157,8 +156,8 @@
         "Status": null,
         "Description": "Phy II",
         "Weight": "3",
-        "PreRequired": "040313005"
-    },
+        "PreRequired": [ "040313005"
+]    },
     "labphyII": {
         "Type": "Main",
         "Id": "040313008",
@@ -167,8 +166,8 @@
         "Status": null,
         "Description": "LabPhy II",
         "Weight": "1",
-        "PreRequired": "040313006"
-    },
+        "PreRequired": [ "040313006"
+]    },
     "data": {
         "Type": "Main",
         "Id": "010123103",
@@ -177,8 +176,8 @@
         "Status": null,
         "Description": "data",
         "Weight": "3",
-        "PreRequired": "010123102"
-    },
+        "PreRequired": [ "010123102"
+]    },
     "software": {
         "Type": "Main",
         "Id": "010123131",
@@ -187,8 +186,8 @@
         "Status": null,
         "Description": "Software",
         "Weight": "3",
-        "PreRequired": "010123103"
-    },
+        "PreRequired": [ "010123103"
+]    },
     "signal": {
         "Type": "Main",
         "Id": "010123106",
@@ -197,8 +196,8 @@
         "Status": null,
         "Description": "Signal",
         "Weight": "3",
-        "PreRequired": "040203112"
-    },
+        "PreRequired": [ "040203112"
+]    },
     "digi": {
         "Type": "Main",
         "Id": "01012307",
@@ -207,8 +206,8 @@
         "Status": null,
         "Description": "Digi",
         "Weight": "3",
-        "PreRequired": null
-    },
+        "PreRequired": [ null
+]    },
     "labDigi": {
         "Type": "Main",
         "Id": "010123108",
@@ -217,8 +216,8 @@
         "Status": null,
         "Description": "Lab digi",
         "Weight": "1",
-        "PreRequired": null
-    },
+        "PreRequired": [ null
+]    },
     "discrete": {
         "Type": "Main",
         "Id": "010123133",
@@ -227,8 +226,8 @@
         "Status": null,
         "Description": "Discrete",
         "Weight": "3",
-        "PreRequired": "040203112"
-    },
+        "PreRequired": [ "040203112"
+]    },
     "stat": {
         "Type": "Main",
         "Id": "010123105",
@@ -237,8 +236,8 @@
         "Status": null,
         "Description": "Stat",
         "Weight": "3",
-        "PreRequired": "040203111"
-    },
+        "PreRequired": [ "040203111"
+]    },
     "phylife": {
         "Type": "Elective(Art)",
         "Id": "040313016",
@@ -247,8 +246,8 @@
         "Status": null,
         "Description": "Phy Life",
         "Weight": "3",
-        "PreRequired": null
-    },
+        "PreRequired": [ null
+]    },
     "genMath": {
         "Type": "Elective(Art)",
         "Id": "040203100",
@@ -257,8 +256,8 @@
         "Status": null,
         "Description": "Gen math",
         "Weight": "3",
-        "PreRequired": null
-    },
+        "PreRequired": [ null
+]    },
     "psychology": {
         "Type": "Elective(Art)",
         "Id": "080303103",
@@ -267,8 +266,8 @@
         "Status": null,
         "Description": "Happy Life",
         "Weight": "3",
-        "PreRequired": null
-    },
+        "PreRequired": [ null
+]    },
     "engConv": {
         "Type": "Elective(Art)",
         "Id": "080103016",
@@ -277,8 +276,8 @@
         "Status": null,
         "Description": "Eng Con",
         "Weight": "3",
-        "PreRequired": null
-    },
+        "PreRequired": [ null
+]    },
     "engSkill": {
         "Type": "Elective(Art)",
         "Id": "080103011",
@@ -287,8 +286,8 @@
         "Status": null,
         "Description": "Eng skill",
         "Weight": "3",
-        "PreRequired": null
-    },
+        "PreRequired": [ null
+]    },
     "bio": {
         "Type": "Elective(Art)",
         "Id": "040413001",
@@ -297,8 +296,8 @@
         "Status": null,
         "Description": "Bio",
         "Weight": "3",
-        "PreRequired": null
-    },
+        "PreRequired": [ null
+]    },
     "voll": {
         "Type": "Elective(Art)",
         "Id": "080303502",
@@ -307,8 +306,8 @@
         "Status": null,
         "Description": "Volley",
         "Weight": "1",
-        "PreRequired": null
-    },
+        "PreRequired": [ null
+]    },
     "econ": {
         "Type": "Elective(Art)",
         "Id": "080203905",
@@ -317,8 +316,8 @@
         "Status": null,
         "Description": "Econ",
         "Weight": "3",
-        "PreRequired": null
-    },
+        "PreRequired": [ null
+]    },
     "economics": {
         "Type": "Elective(Art)",
         "Id": "080203906",
@@ -327,8 +326,8 @@
         "Status": null,
         "Description": "Economics",
         "Weight": "3",
-        "PreRequired": null
-    },
+        "PreRequired": [ null
+]    },
     "nation": {
         "Type": "Elective(Art)",
         "Id": "080203902",
@@ -337,8 +336,8 @@
         "Status": null,
         "Description": "Nation",
         "Weight": "3",
-        "PreRequired": null
-    },
+        "PreRequired": [ null
+]    },
     "business": {
         "Type": "Elective(Art)",
         "Id": "080203907",
@@ -347,8 +346,8 @@
         "Status": null,
         "Description": "Business",
         "Weight": "3",
-        "PreRequired": null
-    },
+        "PreRequired": [ null
+]    },
     "art": {
         "Type": "Elective(Art)",
         "Id": "080303301",
@@ -357,8 +356,8 @@
         "Status": null,
         "Description": "Art",
         "Weight": "3",
-        "PreRequired": null
-    },
+        "PreRequired": [ null
+]    },
     "anolog": {
         "Type": "Main",
         "Id": "010123114",
@@ -367,8 +366,8 @@
         "Status": null,
         "Description": "Analog",
         "Weight": "3",
-        "PreRequired": "040203111"
-    },
+        "PreRequired": [ "040203111"
+]    },
     "comOR": {
         "Type": "Main",
         "Id": "010123134",
@@ -377,8 +376,8 @@
         "Status": null,
         "Description": "Com OR",
         "Weight": "3",
-        "PreRequired": "010123107"
-    },
+        "PreRequired": [ "010123107"
+]    },
     "softwareII": {
         "Type": "Main",
         "Id": "010123132",
@@ -387,8 +386,8 @@
         "Status": null,
         "Description": "Soft Dev II",
         "Weight": "3",
-        "PreRequired": "010123131"
-    },
+        "PreRequired": [ "010123131"
+]    },
     "network": {
         "Type": "Main",
         "Id": "010123126",
@@ -397,8 +396,8 @@
         "Status": null,
         "Description": "Network",
         "Weight": "3",
-        "PreRequired": null
-    },
+        "PreRequired": [ null
+]    },
     "Ubq": {
         "Type": "Main",
         "Id": "010123129",
@@ -407,8 +406,8 @@
         "Status": null,
         "Description": "Ubiquitous",
         "Weight": "3",
-        "PreRequired": null
-    },
+        "PreRequired": [ null
+]    },
     "softEng": {
         "Type": "Main",
         "Id": "010123116",
@@ -417,8 +416,8 @@
         "Status": null,
         "Description": "Soft Eng",
         "Weight": "3",
-        "PreRequired": "010123132"
-    },
+        "PreRequired": [ "010123132"
+]    },
     "lab_Analog": {
         "Type": "Main",
         "Id": "010123115",
@@ -427,8 +426,8 @@
         "Status": null,
         "Description": "Lab Analog",
         "Weight": "1",
-        "PreRequired": "010123115"
-    },
+        "PreRequired": [ "010123115"
+]    },
     "os": {
         "Type": "Main",
         "Id": "010123117",
@@ -437,8 +436,8 @@
         "Status": null,
         "Description": "OS",
         "Weight": "3",
-        "PreRequired": "010123102"
-    },
+        "PreRequired": [ "010123102"
+]    },
     "embedded": {
         "Type": "Main",
         "Id": "010123119",
@@ -447,8 +446,8 @@
         "Status": null,
         "Description": "Embed",
         "Weight": "3",
-        "PreRequired": "010123134"
-    },
+        "PreRequired": [ "010123134"
+]    },
     "networkII": {
         "Type": "Main",
         "Id": "010123127",
@@ -457,8 +456,8 @@
         "Status": null,
         "Description": "Network II",
         "Weight": "3",
-        "PreRequired": "010123126"
-    },
+        "PreRequired": [ "010123126"
+]    },
     "labEmb": {
         "Type": "Main",
         "Id": "010123120",
@@ -467,8 +466,8 @@
         "Status": null,
         "Description": "Lab Embed",
         "Weight": "1",
-        "PreRequired": "010123119"
-    },
+        "PreRequired": [ "010123119"
+]    },
     "database": {
         "Type": "Main",
         "Id": "010123121",
@@ -480,8 +479,8 @@
         "PreRequired": [
             "010123103",
             "010123133"
-        ]
-    },
+        
+]    },
     "labNetwork": {
         "Type": "Main",
         "Id": "010123128",
@@ -490,8 +489,8 @@
         "Status": null,
         "Description": "Lab Network",
         "Weight": "1",
-        "PreRequired": "010123127"
-    },
+        "PreRequired": [ "010123127"
+]    },
     "proJ_1": {
         "Type": "Main",
         "Id": "010113941",
@@ -500,8 +499,8 @@
         "Status": null,
         "Description": "Project 1",
         "Weight": "3",
-        "PreRequired": null
-    },
+        "PreRequired": [ null
+]    },
     "proJ_2": {
         "Type": "Main",
         "Id": "010113942",
@@ -510,8 +509,8 @@
         "Status": null,
         "Description": "Project 2",
         "Weight": "3",
-        "PreRequired": "010113941"
-    },
+        "PreRequired": [ "010113941"
+]    },
     "com_Eng": {
         "Type": "Main",
         "Id": "010123124",
@@ -520,58 +519,53 @@
         "Status": null,
         "Description": "Com Eng",
         "Weight": "2",
-        "PreRequired": null
-    },
+        "PreRequired": [ null
+]    },
     "numerical": {
         "Type": "Elective(Main)",
         "Id": "010123201",
         "Name": "Numerical Methods for Computer Engineers",
-        "Semester": [
-            "3",
-            "4"
-        ],
+        "Semester": 
+            "3,4"
+        ,
         "Status": null,
         "Description": "Num Method",
         "Weight": "3",
-        "PreRequired": null
-    },
+        "PreRequired": [ null
+]    },
     "analysis_Algo": {
         "Type": "Elective(Main)",
         "Id": "010123203",
         "Name": "Analysis and Design of Algorithms",
-        "Semester": [
-            "3",
-            "4"
-        ],
+        "Semester": 
+            "3,4"
+        ,
         "Status": null,
         "Description": "Analysis",
         "Weight": "3",
-        "PreRequired": null
-    },
+        "PreRequired": [ null
+]    },
     "introControl": {
         "Type": "Elective(Main)",
         "Id": "010123204",
         "Name": "Introduction to Control Engineering",
-        "Semester": [
-            "3",
-            "4"
-        ],
+        "Semester": 
+            "3,4"
+        ,
         "Status": null,
         "Description": "Intro Control",
         "Weight": "3",
-        "PreRequired": null
-    },
+        "PreRequired": [ null
+]    },
     "security": {
         "Type": "Elective(Main)",
         "Id": "010123205",
         "Name": "Computer and Network Security",
-        "Semester": [
-            "3",
-            "4"
-        ],
+        "Semester": "3,4",
         "Status": null,
         "Description": "Security",
         "Weight": "3",
-        "PreRequired": null
-    }
+      "PreRequired": [
+        null
+      ]    }
 }

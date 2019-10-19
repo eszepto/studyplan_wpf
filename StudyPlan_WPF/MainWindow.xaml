@@ -49,7 +49,7 @@
         <Label x:Name="Credit_label" Content="Credits: 19/22"  HorizontalAlignment="Left" Margin="445,18,0,0" VerticalAlignment="Top" Width="100" />
         <Label x:Name="GPA_label" Content="GPA: 0.00" HorizontalAlignment="Left" Margin="445,48,0,0" VerticalAlignment="Top" Width="100"/>
         <Label x:Name="Stat_label" Content="Status: Normal" HorizontalAlignment="Left" Margin="445,78,0,0" VerticalAlignment="Top" Width="100" RenderTransformOrigin="0.52,1.462"/>
-        <Button x:Name="courseMoveBtn" Content="&lt;&lt;&lt;" HorizontalAlignment="Left" Margin="545,314,0,0" VerticalAlignment="Top" Width="50" Height="36" FontSize="18" Click="CourseMoveBtn_Click"/>
+        <Button x:Name="courseMoveBtn" Content="&lt;&lt;&lt;" HorizontalAlignment="Left" Margin="545,214,0,0" VerticalAlignment="Top" Width="50" Height="36" FontSize="18" Click="CourseMoveBtn_Click"/>
     </Grid>
     
 </Window>

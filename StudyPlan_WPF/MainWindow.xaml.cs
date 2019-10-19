@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,7 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Collections.ObjectModel;
-
+using Newtonsoft.Json;
 
 namespace StudyPlan_WPF
 {
@@ -24,8 +25,10 @@ namespace StudyPlan_WPF
     /// 
     public partial class MainWindow : Window
     {
+
         public static ObservableCollection<Semester> Semesters;
         public ObservableCollection<Course> UnplannedCourse;
+        public ObservableCollection<Course> AllCourse;
         public childItem FindVisualChild<childItem>(DependencyObject obj)
 
            where childItem : DependencyObject
@@ -64,6 +67,9 @@ namespace StudyPlan_WPF
             InitializeComponent();
             InitialSemester();
 
+            LoadData();
+            InitialData();
+
             tabControl.ItemsSource = Semesters;
             Unplanned_lbx.ItemsSource = UnplannedCourse;
             
@@ -75,70 +81,70 @@ namespace StudyPlan_WPF
             Semesters = new ObservableCollection<Semester>();
             Semesters.Add(new Semester()
             {
-                Credit = 19,
-                Courses = new ObservableCollection<Course>()  // 1st 
-                {
-                    new Course()
-                    {
-                        Id = "010123102",
-                        Name = "Programming Fundamentals",
-                        Weight = "3"
-                    },
-                    new Course()
-                    {
-                        Id = "010123130",
-                        Name = "Com Exploration",
-                        Weight = "1"
-                    },
-                    new Course()
-                    {
-                        Id = "010123130",
-                        Name = "Introduction to Engineering",
-                        Weight = "1"
-                    },
-                    new Course()
-                    {
-                        Id = "040203111",
-                        Name = "Engineering Mathematics I",
-                        Weight = "3"
-                    },
-                    new Course()
-                    {
-                        Id = "040313005",
-                        Name = "Physics I",
-                        Weight = "3"
-                    },
-                    new Course()
-                    {
-                        Id = "040313006",
-                        Name = "Physics Laboratory I",
-                        Weight = "1"
-                    },
-                    new Course()
-                    {
-                        Id = "??????",
-                        Name = "Language Elective Course **",
-                        Weight = "3"
-                    },
-                    new Course()
-                    {
-                        Id = "??????",
-                        Name = "Physical Education Elective Course **",
-                        Weight = "1"
-                    },
-                    new Course()
-                    {
-                        Id = "??????",
-                        Name = "Social Sciences Elective Course **",
-                        Weight = "3"
-                    }
-                }
+               // Credit = 19,
+                /* Courses = new ObservableCollection<Course>()  // 1st 
+                 {
+                     new Course()
+                     {
+                         Id = "010123102",
+                         Name = "Programming Fundamentals",
+                         Weight = "3"
+                     },
+                     new Course()
+                     {
+                         Id = "010123130",
+                         Name = "Com Exploration",
+                         Weight = "1"
+                     },
+                     new Course()
+                     {
+                         Id = "010123130",
+                         Name = "Introduction to Engineering",
+                         Weight = "1"
+                     },
+                     new Course()
+                     {
+                         Id = "040203111",
+                         Name = "Engineering Mathematics I",
+                         Weight = "3"
+                     },
+                     new Course()
+                     {
+                         Id = "040313005",
+                         Name = "Physics I",
+                         Weight = "3"
+                     },
+                     new Course()
+                     {
+                         Id = "040313006",
+                         Name = "Physics Laboratory I",
+                         Weight = "1"
+                     },
+                     new Course()
+                     {
+                         Id = "??????",
+                         Name = "Language Elective Course **",
+                         Weight = "3"
+                     },
+                     new Course()
+                     {
+                         Id = "??????",
+                         Name = "Physical Education Elective Course **",
+                         Weight = "1"
+                     },
+                     new Course()
+                     {
+                         Id = "??????",
+                         Name = "Social Sciences Elective Course **",
+                         Weight = "3"
+                     }
+                 } */
             });
             Semesters.Add(new Semester()
             {
-                GPA = 3.51F,
-                Credit = 19,
-                Courses = new ObservableCollection<Course>()  // 2nd
+               // GPA = 3.51F,
+              //  Credit = 19,
+          /*      Courses = new ObservableCollection<Course>()  // 2nd
                 {
                     new Course()
                     {
@@ -188,7 +194,7 @@ namespace StudyPlan_WPF
                         Name = "Physical Education Elective Course",
                         Weight = "1"
                     }
-                }
+                }*/
             });
             Semesters.Add(new Semester());
             Semesters.Add(new Semester());
@@ -199,6 +205,32 @@ namespace StudyPlan_WPF
         }
 
         void LoadData()
+        {
+            using (StreamReader r = new StreamReader("../../Resource/Course/B-Eng/CpreCourse.json"))
+            {
+                string json = r.ReadToEnd();
+                Dictionary<string, Course> d = JsonConvert.DeserializeObject<Dictionary<string, Course>>(json);
+                AllCourse = new ObservableCollection<Course>(d.Values);
+                Console.WriteLine(AllCourse[0]);
+            }
+
+        }
+        void InitialData()
+        {
+            foreach (Course c in AllCourse)  // add Course
+            {
+                if (c.Semester != null)
+                {
+                    if (c.Semester.All(char.IsNumber))
+                    {
+                        int _term = int.Parse(c.Semester);
+                        Semesters[_term - 1].Courses.Add(c);
+                        Semesters[_term - 1].Credit += int.Parse(c.Weight);
+                    }
+                }
+            }
+        }
+        void ReloadGPA()
         {
 
         }
@@ -229,7 +261,7 @@ namespace StudyPlan_WPF
 
         private void AddNewCourse_btn_Click(object sender, RoutedEventArgs e)
         {
-            Add_New_Course addNewCourseWindow = new Add_New_Course();
+            Add_New_Course addNewCourseWindow = new Add_New_Course(this);
             addNewCourseWindow.Show();
 
         }
@@ -242,7 +274,7 @@ namespace StudyPlan_WPF
             HitTestResult r = VisualTreeHelper.HitTest(this, e.GetPosition(this));
             if (r.VisualHit.GetType() != typeof(ListBoxItem))
             {
-                Add_New_Course addNewCourseWindow = new Add_New_Course();
+                Add_New_Course addNewCourseWindow = new Add_New_Course(this);
                 addNewCourseWindow.Show();
             }
         }
@@ -330,11 +362,15 @@ namespace StudyPlan_WPF
 
     public class Course
     {
+        public string Type { get; set; }
         public string Id { get; set; }
         public string Name { get; set; }
         public string Descript { get; set; }
         public string Weight { get; set; }
         public string Grade { get; set; }
+        public string Semester { get; set; }
+        public string Status { get; set; }
+        public List<string> PreRequired { get; set; }
 
         public override string ToString()
         {

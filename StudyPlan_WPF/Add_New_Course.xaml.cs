@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Collections.ObjectModel;
 
 namespace StudyPlan_WPF
 {
@@ -19,9 +20,20 @@ namespace StudyPlan_WPF
     /// </summary>
     public partial class Add_New_Course : Window
     {
-        public Add_New_Course()
+        private MainWindow MainWin;
+
+        public ObservableCollection<Course> previewCourse = new ObservableCollection<Course>();  
+        
+        public Add_New_Course(MainWindow m)
         {
             InitializeComponent();
+            this.MainWin = m;
+        }
+
+        private void CourseGroup_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            courseGroup.SelectedItem.ToString();
+            
         }
     }
 }
