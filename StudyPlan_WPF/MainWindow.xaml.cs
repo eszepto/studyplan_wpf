@@ -255,8 +255,14 @@ namespace StudyPlan_WPF
         #region EventHandler
         private void Add_btn_Click(object sender, RoutedEventArgs e)
         {
-            Semesters.Add(new Semester());
-            
+            if (Semester.NextNumber != 17)
+            {
+                Semesters.Add(new Semester());
+            }
+            else
+            {
+                return;
+            }
         }
 
         private void DE_btn_Click(object sender, RoutedEventArgs e)
@@ -373,12 +379,14 @@ namespace StudyPlan_WPF
             else
             {
                 string requireC = "";
+                
                 foreach (string c in pr)
                 {
-                    if (c != null)
-                    {
-                        requireC += CourseMap[c];
-                    }
+                        requireC += CourseMap[c] + ",";
+                }
+                if(requireC[requireC.Length -1] == ',')
+                {
+                    requireC = requireC.Substring(0, requireC.Length - 2);
                 }
                 string text = string.Format("{0} require {1}", selectedCourse.Name, requireC);
                 ErrorText.Text = text;
