@@ -25,6 +25,7 @@ namespace StudyPlan_WPF
         public ObservableCollection<Course> previewCourse = new ObservableCollection<Course>();
         public ObservableCollection<Course> electiveArt;
         public ObservableCollection<Course> electiveMain;
+        
         #region init
         public Add_New_Course(MainWindow m, Dictionary<string, ObservableCollection<Course>> selectCourse)
         {
@@ -51,13 +52,21 @@ namespace StudyPlan_WPF
             {
                 courseTable.ItemsSource = null;
                 courseTable.ItemsSource = electiveMain;
+                previewCourse = electiveMain;
             }
-            if (selected == "Elective Art Course")
+            else if (selected == "Elective Art Course")
             {
                 courseTable.ItemsSource = null;
                 courseTable.ItemsSource = electiveArt;
+                previewCourse = electiveArt;
             }
-            
+            else if (selected == "Deleted Course")
+            {
+                courseTable.ItemsSource = null;
+                courseTable.ItemsSource = electiveArt;
+                previewCourse = electiveArt;
+            }
+
         }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)

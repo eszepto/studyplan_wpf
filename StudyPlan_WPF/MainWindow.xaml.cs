@@ -263,16 +263,30 @@ namespace StudyPlan_WPF
         {
             ContentPresenter cp = FindVisualChild<ContentPresenter>(this.tabControl);
             ListBox lbx = cp.ContentTemplate.FindName("listBox", cp) as ListBox;
-
-            if (this.tabControl.SelectedIndex == Semesters.Count - 1)  /// Any tab
+            
+            if(Semesters.Count == 1 &&
+                Semesters[this.tabControl.SelectedIndex].Courses.Count == 0) // only 1 tab left
             {
-                Semesters.RemoveAt(this.tabControl.SelectedIndex);
-                Semester.NextNumber -= 1;
+                return;
             }
-            else  /// lastest tab
+            
+
+            if (this.tabControl.SelectedIndex == tabControl.Items.Count - 1 && 
+                Semesters[this.tabControl.SelectedIndex].Courses.Count == 0)  /// lastest tab
             {
+                Semester.NextNumber -= 1;
+                Semesters.RemoveAt(this.tabControl.SelectedIndex);
+
+            }
+            else  /// any tab
+            {
+                foreach (Course c in Semesters[this.tabControl.SelectedIndex].Courses)
+                {
+                    UnplannedCourse.Add(c);
+                }
                 Semesters[this.tabControl.SelectedIndex].Courses.Clear();
             }
+            
         }
 
         private void AddNewCourse_btn_Click(object sender, RoutedEventArgs e)
@@ -284,6 +298,7 @@ namespace StudyPlan_WPF
 
         private void ListBox_Empty_MouseDown(object sender, MouseButtonEventArgs e)
         {
+            /*
             ContentPresenter cp = FindVisualChild<ContentPresenter>(this.tabControl);
             ListBox lbx = cp.ContentTemplate.FindName("listBox", cp) as ListBox;
 
@@ -293,13 +308,21 @@ namespace StudyPlan_WPF
                 Add_New_Course addNewCourseWindow = new Add_New_Course(this, selectableCourse);
                 addNewCourseWindow.Show();
             }
+            */
         }
 
         private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Semester _Clicked_Semester = (this.tabControl.SelectedItem as Semester).Get();
-            Credit_label.Content = String.Format("Credits: {0}/22", _Clicked_Semester.Credit);
+            Console.WriteLine(e.Source);
+            if (tabControl.SelectedIndex == -1)
+            {
+                tabControl.SelectedIndex = Semesters.Count - 1;
+            }
+            
+            Semester _Clicked_Semester = Semesters[tabControl.SelectedIndex];
+            Credit_label.Content = String.Format("Credits: {0}/{1}", _Clicked_Semester.Credit, _Clicked_Semester.MaxCredit);
             GPA_label.Content = String.Format("GPA: {0:0.00}", _Clicked_Semester.GPA);
+
         }
         #endregion
 
@@ -343,6 +366,9 @@ namespace StudyPlan_WPF
                 UnplannedCourse.Remove(selectedCourse);
                 Semesters[tabControl.SelectedIndex].Courses.Add(selectedCourse);
                 ErrorText.Text = "";
+                ContentPresenter cp = FindVisualChild<ContentPresenter>(this.tabControl);
+                ListBox lbx = cp.ContentTemplate.FindName("listBox", cp) as ListBox;
+                lbx.UpdateLayout();
             }
             else
             {
@@ -367,6 +393,7 @@ namespace StudyPlan_WPF
         public static int NextNumber = 1;
 
         public int Credit = 0;
+        public int MaxCredit = 22;
         public float GPA = 0;
         public int Number { get; set; }
 
