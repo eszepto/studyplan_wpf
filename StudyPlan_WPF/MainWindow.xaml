@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:StudyPlan_WPF"
         xmlns:uc="clr-namespace:StudyPlan_WPF.Resource.UserControls"
         mc:Ignorable="d"
-        Title="Happy Study Plan" Height="600" Width="900">
+        Title="Happy Study Plan" Height="600" Width="900" Closing="Window_Closing">
     <Grid Margin="4,0,-4.4,0" ShowGridLines="True">
         
         <TabControl x:Name="tabControl"  HorizontalAlignment="Left" Height="420" VerticalAlignment="Top" Width="505" Margin="40,120,0,0" ItemsSource="{Binding Semesters}" IsSynchronizedWithCurrentItem="True" SelectionChanged="TabControl_SelectionChanged"  >

@@ -23,6 +23,7 @@ namespace StudyPlan_WPF.Resource.UserControls
         public MainCourseItem()
         {
             InitializeComponent();
+            Console.WriteLine("Be Created!!!!");
         }
 
         public delegate void DropBtnHandler(object sender, RoutedEventArgs e, string clickedId);
@@ -43,9 +44,29 @@ namespace StudyPlan_WPF.Resource.UserControls
             //Capture event from usercontrol and execute defined event
             if (SubmitClick != null)
             {
+                
                 SubmitClick(sender, e, this.txtId.Text, gradeCB.Text);
             }
         }
 
+       
+        /*
+        public delegate void GradeCBHandler(object sender, SelectionChangedEventArgs e);
+        public event GradeCBHandler GradeCBChanged;
+        private void GradeCB_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            string selected = ((ComboBoxItem)gradeCB.SelectedItem).Content.ToString();
+            
+            if (selected = "")
+            {
+                border.BorderBrush = Brushes.LightGreen;
+            }
+            else
+            {
+                border.BorderBrush = Brushes.Black;
+            }
+            //GradeCBChanged(sender, e);
+        }
+        */
     }
 }

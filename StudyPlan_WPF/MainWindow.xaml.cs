@@ -15,10 +15,11 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Collections.ObjectModel;
 using Newtonsoft.Json;
+using System.ComponentModel;
 
 namespace StudyPlan_WPF
 {
-    
+
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
@@ -27,11 +28,15 @@ namespace StudyPlan_WPF
     {
         public Dictionary<string, ObservableCollection<Course>> selectableCourse = new Dictionary<string, ObservableCollection<Course>>();
         public static ObservableCollection<Semester> Semesters;
+
         public ObservableCollection<Course> UnplannedCourse = new ObservableCollection<Course>();
         public ObservableCollection<Course> DeletedCourse = new ObservableCollection<Course>();
         public ObservableCollection<Course> AllCourse;
+
         public Dictionary<string, string> CourseMap = new Dictionary<string, string>();
-        
+
+        public ObservableCollection<string> GradeList = new ObservableCollection<string>() {"A","B"};
+
         public childItem FindVisualChild<childItem>(DependencyObject obj)
 
            where childItem : DependencyObject
@@ -72,134 +77,18 @@ namespace StudyPlan_WPF
 
             LoadData();
             InitialData();
-
+            
             tabControl.ItemsSource = Semesters;
             Unplanned_lbx.ItemsSource = UnplannedCourse;
-            Console.WriteLine(Unplanned_lbx.SelectedIndex);
-            Console.WriteLine("AAAA");
+            
         }
         #region Initial
         void InitialSemester()
         {
             UnplannedCourse = new ObservableCollection<Course>();
             Semesters = new ObservableCollection<Semester>();
-            Semesters.Add(new Semester()
-            {
-               // Credit = 19,
-                /* Courses = new ObservableCollection<Course>()  // 1st 
-                 {
-                     new Course()
-                     {
-                         Id = "010123102",
-                         Name = "Programming Fundamentals",
-                         Weight = "3"
-                     },
-                     new Course()
-                     {
-                         Id = "010123130",
-                         Name = "Com Exploration",
-                         Weight = "1"
-                     },
-                     new Course()
-                     {
-                         Id = "010123130",
-                         Name = "Introduction to Engineering",
-                         Weight = "1"
-                     },
-                     new Course()
-                     {
-                         Id = "040203111",
-                         Name = "Engineering Mathematics I",
-                         Weight = "3"
-                     },
-                     new Course()
-                     {
-                         Id = "040313005",
-                         Name = "Physics I",
-                         Weight = "3"
-                     },
-                     new Course()
-                     {
-                         Id = "040313006",
-                         Name = "Physics Laboratory I",
-                         Weight = "1"
-                     },
-                     new Course()
-                     {
-                         Id = "??????",
-                         Name = "Language Elective Course **",
-                         Weight = "3"
-                     },
-                     new Course()
-                     {
-                         Id = "??????",
-                         Name = "Physical Education Elective Course **",
-                         Weight = "1"
-                     },
-                     new Course()
-                     {
-                         Id = "??????",
-                         Name = "Social Sciences Elective Course **",
-                         Weight = "3"
-                     }
-                 } */
-            });
-            Semesters.Add(new Semester()
-            {
-               // GPA = 3.51F,
-              //  Credit = 19,
-          /*      Courses = new ObservableCollection<Course>()  // 2nd
-                {
-                    new Course()
-                    {
-                        Id = "010113010",
-                        Name = "Electric Circuit Theory",
-                        Weight = "3"
-                    },
-                    new Course()
-                    {
-                        Id = "010113011",
-                        Name = "Electric Circuit Laboratory",
-                        Weight = "1"
-                    },
-                    new Course()
-                    {
-                        Id = "010123103",
-                        Name = "Algorithms and Data Structures",
-                        Weight = "3"
-                    },
-                    new Course()
-                    {
-                        Id = "010403006",
-                        Name = "Work Ethics",
-                        Weight = "1"
-                    },
-                    new Course()
-                    {
-                        Id = "040203112",
-                        Name = "Engineering Mathematics II",
-                        Weight = "3"
-                    },
-                    new Course()
-                    {
-                        Id = "040313007",
-                        Name = "Physics II",
-                        Weight = "3"
-                    },
-                    new Course()
-                    {
-                        Id = "??????",
-                        Name = "Language Elective Course **",
-                        Weight = "3"
-                    },
-                    new Course()
-                    {
-                        Id = "??????",
-                        Name = "Physical Education Elective Course",
-                        Weight = "1"
-                    }
-                }*/
-            });
+            Semesters.Add(new Semester());
+            Semesters.Add(new Semester());
             Semesters.Add(new Semester());
             Semesters.Add(new Semester());
             Semesters.Add(new Semester());
@@ -215,7 +104,7 @@ namespace StudyPlan_WPF
                 string json = r.ReadToEnd();
                 Dictionary<string, Course> d = JsonConvert.DeserializeObject<Dictionary<string, Course>>(json);
                 AllCourse = new ObservableCollection<Course>(d.Values);
-                Console.WriteLine(AllCourse[0]);
+                Console.WriteLine(AllCourse[3]);
             }
 
         }
@@ -321,7 +210,7 @@ namespace StudyPlan_WPF
 
         private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Console.WriteLine(e.Source);
+            
             if (tabControl.SelectedIndex == -1)
             {
                 tabControl.SelectedIndex = Semesters.Count - 1;
@@ -343,57 +232,57 @@ namespace StudyPlan_WPF
         }
         private void MainCourseItem_SubmitClick(object sender, RoutedEventArgs e, string clickedId, string grade)
         {
-            if (grade != "")   //when not click
-            {
-                Course selesctedCourse = Semesters[tabControl.SelectedIndex].GetCourse(clickedId);
-                selesctedCourse.Grade = grade;
+
+                Course selesctedCourse = Semesters[tabControl.SelectedIndex].GetCourse(clickedId).Get();
+                selesctedCourse.Grade = "A";
                 Console.WriteLine(Semesters[tabControl.SelectedIndex].GetCourse(clickedId).Grade);
-          
-            }
+            
         }
 
         private void CourseMoveBtn_Click(object sender, RoutedEventArgs e)
         {
-            Course selectedCourse = UnplannedCourse[Unplanned_lbx.SelectedIndex].Get();
-            List<string> pr = selectedCourse.PreRequired;
-
-            for (int semesterIndex = 0; semesterIndex < tabControl.SelectedIndex; semesterIndex++)
+            if (Unplanned_lbx.SelectedIndex != -1)
             {
-                foreach (Course c in Semesters[semesterIndex])
+                Course selectedCourse = UnplannedCourse[Unplanned_lbx.SelectedIndex].Get();
+                List<string> pr = selectedCourse.PreRequired;
+                
+                for (int semesterIndex = 0; semesterIndex < tabControl.SelectedIndex; semesterIndex++)
                 {
-                    if (pr.Contains(c.Id))
+                    foreach (Course c in Semesters[semesterIndex].Courses)
                     {
-                        pr.Remove(c.Id);
+                        if (pr.Contains(c.Id))
+                        {
+                            pr.Remove(c.Id);
+                        }
                     }
                 }
-            }
 
-
-            if (pr.Count == 0)
-            {
-                UnplannedCourse.Remove(selectedCourse);
-                Semesters[tabControl.SelectedIndex].Courses.Add(selectedCourse);
-                ErrorText.Text = "";
-                ContentPresenter cp = FindVisualChild<ContentPresenter>(this.tabControl);
-                ListBox lbx = cp.ContentTemplate.FindName("listBox", cp) as ListBox;
-                lbx.UpdateLayout();
-            }
-            else
-            {
-                string requireC = "";
-                
-                foreach (string c in pr)
+                if (pr.Count == 0)
                 {
+                    UnplannedCourse.Remove(selectedCourse);
+                    Semesters[tabControl.SelectedIndex].Courses.Add(selectedCourse);
+                    ErrorText.Text = "";
+                    ContentPresenter cp = FindVisualChild<ContentPresenter>(this.tabControl);
+                    ListBox lbx = cp.ContentTemplate.FindName("listBox", cp) as ListBox;
+                    
+                    lbx.UpdateLayout();
+                }
+                else
+                {
+                    string requireC = "";
+
+                    foreach (string c in pr)
+                    {
                         requireC += CourseMap[c] + ",";
+                    }
+                    if (requireC[requireC.Length - 1] == ',')
+                    {
+                        requireC = requireC.Substring(0, requireC.Length - 2);
+                    }
+                    string text = string.Format("{0} require {1}", selectedCourse.Name, requireC);
+                    ErrorText.Text = text;
                 }
-                if(requireC[requireC.Length -1] == ',')
-                {
-                    requireC = requireC.Substring(0, requireC.Length - 2);
-                }
-                string text = string.Format("{0} require {1}", selectedCourse.Name, requireC);
-                ErrorText.Text = text;
             }
-
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -404,6 +293,32 @@ namespace StudyPlan_WPF
                 UnplannedCourse.RemoveAt(Unplanned_lbx.SelectedIndex);
                 DeletedCourse.Add(_selectedCourse);
             }
+        }
+
+        private void Window_Closing(object sender, CancelEventArgs e)
+        {/*
+            if (MessageBox.Show("Close Application ?", "Question", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+            {
+                MessageBoxResult SaveDialog = MessageBox.Show("Do you want to save ?", "Question", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
+                if (SaveDialog == MessageBoxResult.Yes)
+                {
+
+                   
+                }
+                else if (SaveDialog == MessageBoxResult.No)
+                {
+                    
+                }
+                else
+                {
+                    e.Cancel = true; // still on window
+                }
+
+            }
+            else
+            {
+                e.Cancel = true; // still on window  
+            }*/
         }
     }
 
