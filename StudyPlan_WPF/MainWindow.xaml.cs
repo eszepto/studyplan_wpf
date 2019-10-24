@@ -70,6 +70,19 @@ namespace StudyPlan_WPF
             return null;
 
         }
+
+        private Dictionary<string, double> GradeToNum = new Dictionary<string, double>()
+        {
+            {"", -1 },
+            {"A", 4 },
+            {"B+", 3.5 },
+            {"B", 3 },
+            {"C+", 2.5 },
+            {"C", 2 },
+            {"D+", 1.5 },
+            {"D", 1 },
+            {"F", 0 }
+        };
         public MainWindow()
         {
             InitializeComponent();
@@ -138,6 +151,29 @@ namespace StudyPlan_WPF
             }
         }
         void ReloadGPA()
+        {
+            double totalGrade = 0;
+            double Credit = 0;
+            
+            foreach (Course c in Semesters[tabControl.SelectedIndex].Courses)
+            {
+                double GradeNum = GradeToNum[c.Grade];
+                double cWeight = double.Parse(c.Weight);
+                Console.WriteLine(GradeNum);
+                if ( GradeNum != -1)
+                {
+                    totalGrade += GradeNum * cWeight;
+                    Credit += cWeight;
+                }
+            }
+            if (Credit == 0) Credit = 1;
+
+            double gpa = totalGrade / Credit ;
+            
+            Semesters[tabControl.SelectedIndex].GPA = gpa;
+            GPA_label.Content = gpa.ToString("N2");
+        }
+        void ReloadStatus()
         {
 
         }
@@ -232,11 +268,15 @@ namespace StudyPlan_WPF
         }
         private void MainCourseItem_SubmitClick(object sender, RoutedEventArgs e, string clickedId, string grade)
         {
-
-                Course selesctedCourse = Semesters[tabControl.SelectedIndex].GetCourse(clickedId).Get();
-                selesctedCourse.Grade = "A";
-                Console.WriteLine(Semesters[tabControl.SelectedIndex].GetCourse(clickedId).Grade);
+            Console.WriteLine(Semesters[tabControl.SelectedIndex].GetCourse(clickedId).Grade);
             
+            
+        }
+        private void MainCourseItem_GradeCBChanged(object sender, SelectionChangedEventArgs e,string clickedId)
+        {
+           
+            ReloadGPA();
+            ReloadStatus();
         }
 
         private void CourseMoveBtn_Click(object sender, RoutedEventArgs e)
@@ -285,7 +325,7 @@ namespace StudyPlan_WPF
             }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void DelButton_Click(object sender, RoutedEventArgs e)
         {
             if (Unplanned_lbx.SelectedIndex != -1)
             {
@@ -320,6 +360,8 @@ namespace StudyPlan_WPF
                 e.Cancel = true; // still on window  
             }*/
         }
+
+        
     }
 
     #region Class definition
@@ -329,7 +371,7 @@ namespace StudyPlan_WPF
 
         public int Credit = 0;
         public int MaxCredit = 22;
-        public float GPA = 0;
+        public Double GPA { get; set; } = 0;
         public int Number { get; set; }
 
         public ObservableCollection<Course> Courses { get; set; }
@@ -377,7 +419,7 @@ namespace StudyPlan_WPF
         public string Name { get; set; }
         public string Descript { get; set; }
         public string Weight { get; set; }
-        public string Grade { get; set; }
+        public string Grade { get; set; } = "";
         public string Semester { get; set; }
         public string Status { get; set; }
         public List<string> PreRequired { get; set; }

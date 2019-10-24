@@ -24,7 +24,7 @@
                         <ListBox x:Name="listBox" HorizontalAlignment="Left" Height="Auto" Width="505"  VerticalAlignment="Top" ItemsSource="{Binding Courses}" IsSynchronizedWithCurrentItem="True"  MouseDown="ListBox_Empty_MouseDown">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
-                                    <uc:MainCourseItem DropClick="MainCourseItem_DropClick" SubmitClick="MainCourseItem_SubmitClick" />
+                                    <uc:MainCourseItem DropClick="MainCourseItem_DropClick"  GradeCBChanged="MainCourseItem_GradeCBChanged"/>
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
                         </ListBox>
@@ -45,13 +45,13 @@
         <Button x:Name="Add_btn" Content="Add Semester" HorizontalAlignment="Left" Margin="40,54,0,0" VerticalAlignment="Top" Width="100" Click="Add_btn_Click" Height="50" RenderTransformOrigin="0.522,-0.226"/>
         <Button x:Name="DE_btn" Content="Delete Semester" HorizontalAlignment="Left" Margin="160,54,0,0" VerticalAlignment="Top" Width="100" Click="DE_btn_Click" Height="50"/>
         <Button x:Name="AddNewCourse_btn" Content="Add New Course" HorizontalAlignment="Left" Margin="613,54,0,0" VerticalAlignment="Top" Width="150" Height="50" Click="AddNewCourse_btn_Click"/>
-        <Button Content="" HorizontalAlignment="Left" Margin="325,54,0,0" VerticalAlignment="Top" Width="100" Height="50"/>
+        <Button Content="" HorizontalAlignment="Left" Margin="325,54,0,0" VerticalAlignment="Top" Width="100" Height="50" />
         <Label x:Name="Credit_label" Content="Credits: 19/22"  HorizontalAlignment="Left" Margin="445,18,0,0" VerticalAlignment="Top" Width="100" />
         <Label x:Name="GPA_label" Content="GPA: 0.00" HorizontalAlignment="Left" Margin="445,48,0,0" VerticalAlignment="Top" Width="100"/>
         <Label x:Name="Stat_label" Content="Status: Normal" HorizontalAlignment="Left" Margin="445,78,0,0" VerticalAlignment="Top" Width="100" RenderTransformOrigin="0.52,1.462"/>
         <Button x:Name="courseMoveBtn" Content="&lt;&lt;&lt;" HorizontalAlignment="Left" Margin="545,214,0,0" VerticalAlignment="Top" Width="50" Height="36" FontSize="18" Click="CourseMoveBtn_Click"/>
         <TextBlock x:Name="ErrorText" HorizontalAlignment="Left" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Margin="40,104,0,0" Width="842" Foreground="#FFF12727"/>
-        <Button x:Name="button" Content="DEL" HorizontalAlignment="Left" VerticalAlignment="Top" Width="58" Margin="792,54,0,0" Height="50" Click="Button_Click"/>
+        <Button x:Name="button" Content="DEL" HorizontalAlignment="Left" VerticalAlignment="Top" Width="58" Margin="792,54,0,0" Height="50" Click="DelButton_Click"/>
     </Grid>
     
 </Window>
