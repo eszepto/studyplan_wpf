@@ -25,7 +25,7 @@ namespace StudyPlan_WPF
         public ObservableCollection<Course> previewCourse = new ObservableCollection<Course>();
         public ObservableCollection<Course> electiveArt;
         public ObservableCollection<Course> electiveMain;
-        
+        public ObservableCollection<Course> DeletedCourse;
         #region init
         public Add_New_Course(MainWindow m, Dictionary<string, ObservableCollection<Course>> selectCourse)
         {
@@ -34,9 +34,8 @@ namespace StudyPlan_WPF
             this.MainWin = m;
             this.electiveArt = selectCourse["Elective(Art)"];
             this.electiveMain = selectCourse["Elective(Main)"];
-
-
-
+            this.DeletedCourse = m.DeletedCourse;
+            Console.WriteLine(DeletedCourse.Count);
         }
 
         #endregion
@@ -47,7 +46,7 @@ namespace StudyPlan_WPF
         private void CourseGroup_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             string selected =((ComboBoxItem)courseGroup.SelectedItem).Content.ToString();
-            Console.WriteLine(selected == "Elective Main Course");
+            Console.WriteLine(selected);
             if (selected == "Elective Main Course")
             {
                 courseTable.ItemsSource = null;
@@ -63,8 +62,8 @@ namespace StudyPlan_WPF
             else if (selected == "Deleted Course")
             {
                 courseTable.ItemsSource = null;
-                courseTable.ItemsSource = electiveArt;
-                previewCourse = electiveArt;
+                courseTable.ItemsSource = DeletedCourse;
+                previewCourse = DeletedCourse;
             }
 
         }
@@ -76,9 +75,15 @@ namespace StudyPlan_WPF
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
+            string selected = ((ComboBoxItem)courseGroup.SelectedItem).Content.ToString();
+
             if (courseTable.SelectedItem != null)
             {
                 MainWin.UnplannedCourse.Add(previewCourse[courseTable.SelectedIndex]);
+                if (selected == "Deleted Course")
+                {
+                    DeletedCourse.RemoveAt(courseTable.SelectedIndex);
+                }
                 this.Close();
             }
         }

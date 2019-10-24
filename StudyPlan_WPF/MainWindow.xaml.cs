@@ -27,7 +27,8 @@ namespace StudyPlan_WPF
     {
         public Dictionary<string, ObservableCollection<Course>> selectableCourse = new Dictionary<string, ObservableCollection<Course>>();
         public static ObservableCollection<Semester> Semesters;
-        public ObservableCollection<Course> UnplannedCourse;
+        public ObservableCollection<Course> UnplannedCourse = new ObservableCollection<Course>();
+        public ObservableCollection<Course> DeletedCourse = new ObservableCollection<Course>();
         public ObservableCollection<Course> AllCourse;
         public Dictionary<string, string> CourseMap = new Dictionary<string, string>();
         
@@ -74,7 +75,8 @@ namespace StudyPlan_WPF
 
             tabControl.ItemsSource = Semesters;
             Unplanned_lbx.ItemsSource = UnplannedCourse;
-            
+            Console.WriteLine(Unplanned_lbx.SelectedIndex);
+            Console.WriteLine("AAAA");
         }
         #region Initial
         void InitialSemester()
@@ -392,6 +394,16 @@ namespace StudyPlan_WPF
                 ErrorText.Text = text;
             }
 
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (Unplanned_lbx.SelectedIndex != -1)
+            {
+                Course _selectedCourse = UnplannedCourse[Unplanned_lbx.SelectedIndex];
+                UnplannedCourse.RemoveAt(Unplanned_lbx.SelectedIndex);
+                DeletedCourse.Add(_selectedCourse);
+            }
         }
     }
 

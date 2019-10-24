@@ -51,7 +51,7 @@
         <Label x:Name="Stat_label" Content="Status: Normal" HorizontalAlignment="Left" Margin="445,78,0,0" VerticalAlignment="Top" Width="100" RenderTransformOrigin="0.52,1.462"/>
         <Button x:Name="courseMoveBtn" Content="&lt;&lt;&lt;" HorizontalAlignment="Left" Margin="545,214,0,0" VerticalAlignment="Top" Width="50" Height="36" FontSize="18" Click="CourseMoveBtn_Click"/>
         <TextBlock x:Name="ErrorText" HorizontalAlignment="Left" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Margin="40,104,0,0" Width="842" Foreground="#FFF12727"/>
-        <Button x:Name="button" Content="DEL" HorizontalAlignment="Left" VerticalAlignment="Top" Width="58" Margin="792,54,0,0" Height="50"/>
+        <Button x:Name="button" Content="DEL" HorizontalAlignment="Left" VerticalAlignment="Top" Width="58" Margin="792,54,0,0" Height="50" Click="Button_Click"/>
     </Grid>
     
 </Window>
