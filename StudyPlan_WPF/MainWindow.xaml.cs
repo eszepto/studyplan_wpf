@@ -125,7 +125,7 @@ namespace StudyPlan_WPF
         }
         void InitialData()
         {
-            if (File.Exists("./UserCourse.db")) 
+            if (!File.Exists("./UserCourse.db")) 
             {
                 selectableCourse.Add("Elective(Main)", new ObservableCollection<Course>());
                 selectableCourse.Add("Elective(Art)", new ObservableCollection<Course>());
@@ -355,7 +355,11 @@ namespace StudyPlan_WPF
         {
 
             //Save DataHere
-
+            if (File.Exists("./UserCourse.db"))
+            {
+                File.Delete("./UserCourse.db");
+            }
+            
 
             #region 
             /*---------------------------------------------------
@@ -470,14 +474,27 @@ namespace StudyPlan_WPF
         public UserCourseDB()
         {
             sql_con = new SQLiteConnection("Data Source=UserCourse.db");
-            sql_con.Open();
-            sql_con.Close();
+            
         }
 
         public void CreateTable()
-        {
+        {   
 
         }
+
+        public void Query(string command)
+        {
+            using (SQLiteConnection sql_con = new SQLiteConnection("Data Source=order_temp.db"))
+            {
+                using (SQLiteCommand sql_cmd = new SQLiteCommand(command, sql_con))
+                {
+                    sql_con.Open();
+                    sql_cmd.ExecuteNonQuery();
+                    sql_con.Close();
+                }
+            }
+        }
+
 
     }
 }
