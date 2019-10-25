@@ -155,11 +155,35 @@ namespace StudyPlan_WPF
                     NumtoCourse.Add(c.Id, c);
 
                 }
-            }
+            } //if run first time
             else
             {
-                //Load Data Here
-                string command = @"SELECT * FROM `courses`";
+                #region Load Semester Count here
+                string command = @"SELECT count FROM `semesters`";
+
+                using (SQLiteConnection sql_con = new SQLiteConnection("Data Source=UserCourse.db"))
+                {
+                    using (SQLiteCommand sql_cmd = new SQLiteCommand(command, sql_con))
+                    {
+                        sql_con.Open();
+                        sql_cmd.CommandType = System.Data.CommandType.Text;
+                        SQLiteDataReader sql_datareader = sql_cmd.ExecuteReader();
+                        int semesterCount = 8;
+                        while (sql_datareader.Read())
+                        {
+                            semesterCount = Convert.ToInt32(sql_datareader["count"]);
+                        }
+
+                        for (int i = 8; i < semesterCount; i++)
+                        {
+                            Semesters.Add(new Semester());
+                        }
+
+                    }
+                }
+                #endregion
+                #region Load Data Here
+                command = @"SELECT * FROM `courses`";
 
                 using (SQLiteConnection sql_con = new SQLiteConnection("Data Source=UserCourse.db"))
                 {
@@ -224,6 +248,7 @@ namespace StudyPlan_WPF
                     CourseMap.Add(c.Id, c.Name);
                     NumtoCourse.Add(c.Id, c);
                 }
+                #endregion
             }
         }
         void ReloadGPA()
@@ -433,7 +458,13 @@ namespace StudyPlan_WPF
             }
             
             UserCoursedb.CreateTable();
-
+            UserCoursedb.Exec(String.Format(@"
+                                INSERT INTO `semesters`
+                                (`count`) 
+                                VALUES 
+                                ('{0}')",
+                                 Semesters.Count)
+                        );
             foreach (Semester sem in Semesters)
             {
                 foreach(Course c in sem.Courses)
@@ -594,6 +625,17 @@ namespace StudyPlan_WPF
 	                            `prerequired`	TEXT,
 	                            PRIMARY KEY(`id`)
                             )";
+            using (SQLiteConnection sql_con = new SQLiteConnection("Data Source=UserCourse.db"))
+            {
+                using (SQLiteCommand sql_cmd = new SQLiteCommand(command, sql_con))
+                {
+                    sql_con.Open();
+                    sql_cmd.ExecuteNonQuery();
+                    sql_con.Close();
+                }
+            }
+
+            command = @" CREATE TABLE IF NOT EXISTS `semesters` ( `count`	TEXT)";
             using (SQLiteConnection sql_con = new SQLiteConnection("Data Source=UserCourse.db"))
             {
                 using (SQLiteCommand sql_cmd = new SQLiteCommand(command, sql_con))
