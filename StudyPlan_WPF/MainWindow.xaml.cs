@@ -15,6 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Collections.ObjectModel;
 using Newtonsoft.Json;
+using System.Data.SQLite;
 using System.ComponentModel;
 
 namespace StudyPlan_WPF
@@ -89,6 +90,7 @@ namespace StudyPlan_WPF
             InitialSemester();
 
             LoadData();
+            UserCourseDB courseDB = new UserCourseDB();
             InitialData();
             
             tabControl.ItemsSource = Semesters;
@@ -123,31 +125,38 @@ namespace StudyPlan_WPF
         }
         void InitialData()
         {
-            selectableCourse.Add("Elective(Main)", new ObservableCollection<Course>());
-            selectableCourse.Add("Elective(Art)", new ObservableCollection<Course>());
-
-            foreach (Course c in AllCourse)  // add Course
+            if (File.Exists("./UserCourse.db")) 
             {
-                if (c.Semester != null)
+                selectableCourse.Add("Elective(Main)", new ObservableCollection<Course>());
+                selectableCourse.Add("Elective(Art)", new ObservableCollection<Course>());
+
+                foreach (Course c in AllCourse)  // add Course
                 {
-                    if (c.Semester.All(char.IsNumber))
+                    if (c.Semester != null)
                     {
-                        int _term = int.Parse(c.Semester);
-                        Semesters[_term - 1].Courses.Add(c);
-                        Semesters[_term - 1].Credit += int.Parse(c.Weight);
+                        if (c.Semester.All(char.IsNumber))
+                        {
+                            int _term = int.Parse(c.Semester);
+                            Semesters[_term - 1].Courses.Add(c);
+                            Semesters[_term - 1].Credit += int.Parse(c.Weight);
+                        }
+                        else
+                        {
+                            selectableCourse[c.Type].Add(c);
+                            Console.WriteLine(selectableCourse["Elective(Main)"]);
+                        }
                     }
                     else
                     {
                         selectableCourse[c.Type].Add(c);
-                        Console.WriteLine(selectableCourse["Elective(Main)"]);
                     }
+                    CourseMap.Add(c.Id, c.Name);
+
                 }
-                else
-                {
-                    selectableCourse[c.Type].Add(c);
-                }
-                CourseMap.Add(c.Id, c.Name);
-                
+            }
+            else
+            {
+                //Load Data Here
             }
         }
         void ReloadGPA()
@@ -171,11 +180,18 @@ namespace StudyPlan_WPF
             double gpa = totalGrade / Credit ;
             
             Semesters[tabControl.SelectedIndex].GPA = gpa;
-            GPA_label.Content = gpa.ToString("N2");
+            GPA_label.Content = String.Format("GPA: {0:0.00}", gpa);
+
         }
         void ReloadStatus()
         {
-
+            Semester _Clicked_Semester = Semesters[tabControl.SelectedIndex];
+            Stat_label.Content = String.Format("Status: {0}", _Clicked_Semester.Status);
+        }
+        void ReloadMaxCredit()
+        {
+            Semester _Clicked_Semester = Semesters[tabControl.SelectedIndex];
+            Stat_label.Content = String.Format("Status: {0}", _Clicked_Semester.Status);
         }
         #endregion
 
@@ -255,26 +271,26 @@ namespace StudyPlan_WPF
             Semester _Clicked_Semester = Semesters[tabControl.SelectedIndex];
             Credit_label.Content = String.Format("Credits: {0}/{1}", _Clicked_Semester.Credit, _Clicked_Semester.MaxCredit);
             GPA_label.Content = String.Format("GPA: {0:0.00}", _Clicked_Semester.GPA);
+            Stat_label.Content = String.Format("Status: {0}", _Clicked_Semester.Status);
 
         }
         #endregion
 
         private void MainCourseItem_DropClick(object sender, RoutedEventArgs e, string clickedId)
         {
-            Course selesctedCourse = Semesters[tabControl.SelectedIndex].GetCourse(clickedId);
-            Semesters[tabControl.SelectedIndex].Courses.Remove(selesctedCourse);
-            UnplannedCourse.Add(selesctedCourse);
+            Course selectedCourse = Semesters[tabControl.SelectedIndex].GetCourse(clickedId);
+            selectedCourse.Grade = "";
+            Semesters[tabControl.SelectedIndex].Courses.Remove(selectedCourse);
+            UnplannedCourse.Add(selectedCourse);
             
         }
         private void MainCourseItem_SubmitClick(object sender, RoutedEventArgs e, string clickedId, string grade)
         {
             Console.WriteLine(Semesters[tabControl.SelectedIndex].GetCourse(clickedId).Grade);
             
-            
         }
         private void MainCourseItem_GradeCBChanged(object sender, SelectionChangedEventArgs e,string clickedId)
         {
-           
             ReloadGPA();
             ReloadStatus();
         }
@@ -336,7 +352,13 @@ namespace StudyPlan_WPF
         }
 
         private void Window_Closing(object sender, CancelEventArgs e)
-        {/*
+        {
+
+            //Save DataHere
+
+
+            #region 
+            /*---------------------------------------------------
             if (MessageBox.Show("Close Application ?", "Question", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
             {
                 MessageBoxResult SaveDialog = MessageBox.Show("Do you want to save ?", "Question", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
@@ -358,10 +380,12 @@ namespace StudyPlan_WPF
             else
             {
                 e.Cancel = true; // still on window  
-            }*/
+            }
+            */
+        #endregion
         }
 
-        
+
     }
 
     #region Class definition
@@ -372,6 +396,7 @@ namespace StudyPlan_WPF
         public int Credit = 0;
         public int MaxCredit = 22;
         public Double GPA { get; set; } = 0;
+        public string Status { get; set; } = "Normal";
         public int Number { get; set; }
 
         public ObservableCollection<Course> Courses { get; set; }
@@ -434,5 +459,25 @@ namespace StudyPlan_WPF
         }
     }
     #endregion
+    public class UserCourseDB
+    {
+        private SQLiteConnection sql_con;
+        private SQLiteCommand sql_cmd;
 
+        
+        private SQLiteDataReader sql_datareader;
+
+        public UserCourseDB()
+        {
+            sql_con = new SQLiteConnection("Data Source=UserCourse.db");
+            sql_con.Open();
+            sql_con.Close();
+        }
+
+        public void CreateTable()
+        {
+
+        }
+
+    }
 }

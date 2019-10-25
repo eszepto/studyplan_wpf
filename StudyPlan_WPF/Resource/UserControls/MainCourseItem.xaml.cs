@@ -50,7 +50,14 @@ namespace StudyPlan_WPF.Resource.UserControls
                 GradeCBChanged(sender, e,this.txtId.Text);
             }
         }
-
-        
+        public delegate void SubmitBtnHandler(object sender, RoutedEventArgs e, string clickedId, string grade);
+        public event SubmitBtnHandler SubmitClicked;
+        private void SubmitButton_Click(object sender, RoutedEventArgs e)
+        {
+            if(SubmitClicked != null)
+            {
+                SubmitClicked(sender, e, this.txtId.Text, ((ComboBoxItem)gradeCB.SelectedItem).Content.ToString());
+            }
+        }
     }
 }
