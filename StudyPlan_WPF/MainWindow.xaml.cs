@@ -35,7 +35,7 @@ namespace StudyPlan_WPF
         public ObservableCollection<Course> AllCourse;
 
         public Dictionary<string, string> CourseMap = new Dictionary<string, string>();
-
+        public Dictionary<string, Course> NumtoCourse = new Dictionary<string, Course>();
         public ObservableCollection<string> GradeList = new ObservableCollection<string>() {"A","B"};
 
         public childItem FindVisualChild<childItem>(DependencyObject obj)
@@ -84,13 +84,14 @@ namespace StudyPlan_WPF
             {"D", 1 },
             {"F", 0 }
         };
+        private UserCourseDB UserCoursedb;
         public MainWindow()
         {
             InitializeComponent();
             InitialSemester();
 
             LoadData();
-            UserCourseDB courseDB = new UserCourseDB();
+            UserCoursedb = new UserCourseDB();
             InitialData();
             
             tabControl.ItemsSource = Semesters;
@@ -125,7 +126,7 @@ namespace StudyPlan_WPF
         }
         void InitialData()
         {
-            if (!File.Exists("./UserCourse.db")) 
+            if (!File.Exists("./UserCourse.db"))
             {
                 selectableCourse.Add("Elective(Main)", new ObservableCollection<Course>());
                 selectableCourse.Add("Elective(Art)", new ObservableCollection<Course>());
@@ -151,12 +152,59 @@ namespace StudyPlan_WPF
                         selectableCourse[c.Type].Add(c);
                     }
                     CourseMap.Add(c.Id, c.Name);
+                    NumtoCourse.Add(c.Id, c);
 
                 }
             }
             else
             {
                 //Load Data Here
+                string command = @"SELECT * FROM `courses`";
+
+                using (SQLiteConnection sql_con = new SQLiteConnection("Data Source=UserCourse.db"))
+                {
+                    using (SQLiteCommand sql_cmd = new SQLiteCommand(command, sql_con))
+                    {
+                        sql_con.Open();
+                        sql_cmd.CommandType = System.Data.CommandType.Text;
+                        SQLiteDataReader sql_datareader = sql_cmd.ExecuteReader();
+
+                        while (sql_datareader.Read())
+                        {
+                            int _term = int.Parse(Convert.ToString(sql_datareader["semester"]));
+                            Course _course = new Course();
+                            _course.Name = Convert.ToString(sql_datareader["name"]);
+                            _course.Id = Convert.ToString(sql_datareader["id"]);
+                            _course.PreRequired = Convert.ToString(sql_datareader["id"]).Split(',').ToList();
+                            _course.Grade = Convert.ToString(sql_datareader["grade"]);
+                            _course.Semester = Convert.ToString(sql_datareader["semester"]);
+                            _course.Status = null;
+                            _course.Weight = Convert.ToString(sql_datareader["weight"]);
+
+
+                            if (Convert.ToString(sql_datareader["semester"]) == "d")
+                            {
+                                DeletedCourse.Add(_course);
+                            }
+                            else if (Convert.ToString(sql_datareader["semester"]) == "u")
+                            {
+                                UnplannedCourse.Add(_course);
+                            }
+                            else
+                            {
+                                Semesters[_term - 1].Courses.Add(_course);
+                            }
+
+                        }
+                        sql_con.Close();
+                    }
+                }
+
+                foreach (Course c in AllCourse)  // add Course
+                {
+                    CourseMap.Add(c.Id, c.Name);
+                    NumtoCourse.Add(c.Id, c);
+                }
             }
         }
         void ReloadGPA()
@@ -175,6 +223,7 @@ namespace StudyPlan_WPF
                     Credit += cWeight;
                 }
             }
+            
             if (Credit == 0) Credit = 1;
 
             double gpa = totalGrade / Credit ;
@@ -191,7 +240,8 @@ namespace StudyPlan_WPF
         void ReloadMaxCredit()
         {
             Semester _Clicked_Semester = Semesters[tabControl.SelectedIndex];
-            Stat_label.Content = String.Format("Status: {0}", _Clicked_Semester.Status);
+         
+            Credit_label.Content = String.Format("Credit: {0}/{1}", _Clicked_Semester.Credit, _Clicked_Semester.MaxCredit);
         }
         #endregion
 
@@ -269,9 +319,12 @@ namespace StudyPlan_WPF
             }
             
             Semester _Clicked_Semester = Semesters[tabControl.SelectedIndex];
+            
             Credit_label.Content = String.Format("Credits: {0}/{1}", _Clicked_Semester.Credit, _Clicked_Semester.MaxCredit);
             GPA_label.Content = String.Format("GPA: {0:0.00}", _Clicked_Semester.GPA);
             Stat_label.Content = String.Format("Status: {0}", _Clicked_Semester.Status);
+            
+            
 
         }
         #endregion
@@ -352,44 +405,77 @@ namespace StudyPlan_WPF
         }
 
         private void Window_Closing(object sender, CancelEventArgs e)
-        {
+        {//Save DataHere
 
-            //Save DataHere
             if (File.Exists("./UserCourse.db"))
             {
+                Console.WriteLine("Delete file!");
                 File.Delete("./UserCourse.db");
             }
             
+            UserCoursedb.CreateTable();
 
-            #region 
-            /*---------------------------------------------------
-            if (MessageBox.Show("Close Application ?", "Question", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+            foreach (Semester sem in Semesters)
             {
-                MessageBoxResult SaveDialog = MessageBox.Show("Do you want to save ?", "Question", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
-                if (SaveDialog == MessageBoxResult.Yes)
+                foreach(Course c in sem.Courses)
                 {
+                    Console.WriteLine(c.Name);
 
-                   
-                }
-                else if (SaveDialog == MessageBoxResult.No)
-                {
-                    
-                }
-                else
-                {
-                    e.Cancel = true; // still on window
-                }
+                    UserCoursedb.Exec(String.Format(@"
+                                INSERT INTO `courses`
+                                (`name`,`id`,`semester`,`type`,`grade`,`weight`,`prerequired`) 
+                                VALUES 
+                                ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}')",
+                                c.Name,
+                                c.Id,
+                                sem.Number.ToString(),
+                                c.Type,
+                                c.Grade,
+                                c.Weight,
+                                string.Join("," , c.PreRequired))
+                        );
 
+
+                }
             }
-            else
+            foreach (Course c in UnplannedCourse)
             {
-                e.Cancel = true; // still on window  
+                UserCoursedb.Exec(String.Format(@"
+                                INSERT INTO `courses`
+                                (`name`,`id`,`semester`,`type`,`grade`,`weight`,`prerequired`) 
+                                VALUES 
+                                ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}')",
+                                c.Name,
+                                c.Id,
+                                "u",
+                                c.Type,
+                                c.Grade,
+                                c.Weight,
+                                string.Join(",", c.PreRequired))
+                        );
             }
-            */
-        #endregion
+            foreach (Course c in DeletedCourse)
+            {
+                UserCoursedb.Exec(String.Format(@"
+                                INSERT INTO `courses`
+                                (`name`,`id`,`semester`,`type`,`grade`,`weight`,`prerequired`) 
+                                VALUES 
+                                ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}')",
+                                c.Name,
+                                c.Id,
+                                "d",
+                                c.Type,
+                                c.Grade,
+                                c.Weight,
+                                string.Join(",", c.PreRequired))
+                        );
+            }
         }
 
-
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            UserCoursedb.GetAll();
+        }
     }
 
     #region Class definition
@@ -398,7 +484,7 @@ namespace StudyPlan_WPF
         public static int NextNumber = 1;
 
         public int Credit = 0;
-        public int MaxCredit = 22;
+        public int MaxCredit { get; set; } = 22;
         public Double GPA { get; set; } = 0;
         public string Status { get; set; } = "Normal";
         public int Number { get; set; }
@@ -474,17 +560,22 @@ namespace StudyPlan_WPF
         public UserCourseDB()
         {
             sql_con = new SQLiteConnection("Data Source=UserCourse.db");
-            
         }
 
         public void CreateTable()
-        {   
-
-        }
-
-        public void Query(string command)
         {
-            using (SQLiteConnection sql_con = new SQLiteConnection("Data Source=order_temp.db"))
+            string command = @"
+                            CREATE TABLE IF NOT EXISTS `courses` (
+	                            `name`	TEXT,
+	                            `id`	TEXT,
+	                            `semester`	TEXT,
+	                            `type`	TEXT,
+	                            `grade`	TEXT,
+	                            `weight`	TEXT,
+	                            `prerequired`	TEXT,
+	                            PRIMARY KEY(`id`)
+                            )";
+            using (SQLiteConnection sql_con = new SQLiteConnection("Data Source=UserCourse.db"))
             {
                 using (SQLiteCommand sql_cmd = new SQLiteCommand(command, sql_con))
                 {
@@ -493,6 +584,38 @@ namespace StudyPlan_WPF
                     sql_con.Close();
                 }
             }
+        }
+        public void Exec(string command)
+        {
+            using (SQLiteConnection sql_con = new SQLiteConnection("Data Source=UserCourse.db"))
+            {
+                using (SQLiteCommand sql_cmd = new SQLiteCommand(command, sql_con))
+                {
+                    sql_con.Open();
+                    sql_cmd.ExecuteNonQuery();
+                    sql_con.Close();
+                }
+            }
+        }
+        public void GetAll()
+        {
+            string command = @"SELECT * FROM `courses`";
+            
+            using (SQLiteConnection sql_con = new SQLiteConnection("Data Source=UserCourse.db"))
+            {
+                using (SQLiteCommand sql_cmd = new SQLiteCommand(command, sql_con))
+                {
+                    sql_con.Open();
+                    sql_cmd.CommandType = System.Data.CommandType.Text;
+                    SQLiteDataReader sql_datareader = sql_cmd.ExecuteReader();
+                    while(sql_datareader.Read())
+                    {
+                        Console.WriteLine(sql_datareader);
+                    }
+                    sql_con.Close();
+                }
+            }
+
         }
 
 
