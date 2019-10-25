@@ -171,7 +171,7 @@ namespace StudyPlan_WPF
 
                         while (sql_datareader.Read())
                         {
-                            int _term = int.Parse(Convert.ToString(sql_datareader["semester"]));
+                            
                             Course _course = new Course();
                             _course.Name = Convert.ToString(sql_datareader["name"]);
                             _course.Id = Convert.ToString(sql_datareader["id"]);
@@ -180,8 +180,9 @@ namespace StudyPlan_WPF
                             _course.Semester = Convert.ToString(sql_datareader["semester"]);
                             _course.Status = null;
                             _course.Weight = Convert.ToString(sql_datareader["weight"]);
+                            _course.Type = Convert.ToString(sql_datareader["type"]);
 
-
+                            
                             if (Convert.ToString(sql_datareader["semester"]) == "d")
                             {
                                 DeletedCourse.Add(_course);
@@ -192,6 +193,7 @@ namespace StudyPlan_WPF
                             }
                             else
                             {
+                                int _term = int.Parse(Convert.ToString(sql_datareader["semester"]));
                                 Semesters[_term - 1].Courses.Add(_course);
                             }
 
@@ -200,8 +202,25 @@ namespace StudyPlan_WPF
                     }
                 }
 
+                selectableCourse.Add("Elective(Main)", new ObservableCollection<Course>());
+                selectableCourse.Add("Elective(Art)", new ObservableCollection<Course>());
                 foreach (Course c in AllCourse)  // add Course
                 {
+                    if (c.Semester != null)
+                    {
+                        if (c.Semester.All(char.IsNumber))
+                        {
+                        }
+                        else
+                        {
+                            selectableCourse[c.Type].Add(c);
+                            Console.WriteLine(selectableCourse["Elective(Main)"]);
+                        }
+                    }
+                    else
+                    {
+                        selectableCourse[c.Type].Add(c);
+                    }
                     CourseMap.Add(c.Id, c.Name);
                     NumtoCourse.Add(c.Id, c);
                 }
