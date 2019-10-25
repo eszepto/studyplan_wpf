@@ -201,7 +201,7 @@ namespace StudyPlan_WPF
                             Course _course = new Course();
                             _course.Name = Convert.ToString(sql_datareader["name"]);
                             _course.Id = Convert.ToString(sql_datareader["id"]);
-                            _course.PreRequired = Convert.ToString(sql_datareader["id"]).Split(',').ToList();
+                            _course.PreRequired = Convert.ToString(sql_datareader["prerequired"]).Split(',').ToList();
                             _course.Grade = Convert.ToString(sql_datareader["grade"]);
                             _course.Semester = Convert.ToString(sql_datareader["semester"]);
                             _course.Status = null;
@@ -399,6 +399,7 @@ namespace StudyPlan_WPF
         {
             if (Unplanned_lbx.SelectedIndex != -1)
             {
+                
                 Course selectedCourse = UnplannedCourse[Unplanned_lbx.SelectedIndex].Get();
                 List<string> pr = selectedCourse.PreRequired;
                 
@@ -406,14 +407,15 @@ namespace StudyPlan_WPF
                 {
                     foreach (Course c in Semesters[semesterIndex].Courses)
                     {
+
                         if (pr.Contains(c.Id))
                         {
                             pr.Remove(c.Id);
                         }
                     }
                 }
-
-                if (pr.Count == 0)
+                
+                if (pr.Count == 0 || pr[0] == "")
                 {
                     UnplannedCourse.Remove(selectedCourse);
                     Semesters[tabControl.SelectedIndex].Courses.Add(selectedCourse);
@@ -429,6 +431,7 @@ namespace StudyPlan_WPF
 
                     foreach (string c in pr)
                     {
+                        Console.WriteLine(c);
                         requireC += CourseMap[c] + ",";
                     }
                     if (requireC[requireC.Length - 1] == ',')
