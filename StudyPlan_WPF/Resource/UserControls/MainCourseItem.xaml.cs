@@ -24,6 +24,7 @@ namespace StudyPlan_WPF.Resource.UserControls
         {
             InitializeComponent();
             
+            
         }
 
         public delegate void DropBtnHandler(object sender, RoutedEventArgs e, string clickedId);
@@ -47,6 +48,16 @@ namespace StudyPlan_WPF.Resource.UserControls
         {
             if (GradeCBChanged != null)
             {
+                string thisGrade = ((ComboBoxItem)gradeCB.SelectedItem).Content.ToString();
+                if (thisGrade != "")
+                {
+                    this.border.BorderBrush = Brushes.LightGreen;
+                    this.border.BorderThickness = new Thickness(1.5, 1.5, 1.5, 1.5);
+                }
+                else
+                {
+                    this.border.BorderBrush = Brushes.Black;
+                }
                 GradeCBChanged(sender, e,this.txtId.Text);
             }
         }

@@ -85,6 +85,8 @@ namespace StudyPlan_WPF
             {"F", 0 }
         };
         private UserCourseDB UserCoursedb;
+
+
         public MainWindow()
         {
             InitializeComponent();
@@ -120,7 +122,7 @@ namespace StudyPlan_WPF
                 string json = r.ReadToEnd();
                 Dictionary<string, Course> d = JsonConvert.DeserializeObject<Dictionary<string, Course>>(json);
                 AllCourse = new ObservableCollection<Course>(d.Values);
-                Console.WriteLine(AllCourse[3]);
+               
             }
 
         }
@@ -144,7 +146,7 @@ namespace StudyPlan_WPF
                         else
                         {
                             selectableCourse[c.Type].Add(c);
-                            Console.WriteLine(selectableCourse["Elective(Main)"]);
+                            
                         }
                     }
                     else
@@ -238,7 +240,7 @@ namespace StudyPlan_WPF
                         else
                         {
                             selectableCourse[c.Type].Add(c);
-                            Console.WriteLine(selectableCourse["Elective(Main)"]);
+                           
                         }
                     }
                     else
@@ -251,6 +253,7 @@ namespace StudyPlan_WPF
                 #endregion
             }
         }
+        #endregion
         void ReloadGPA()
         {
             double totalGrade = 0;
@@ -260,7 +263,7 @@ namespace StudyPlan_WPF
             {
                 double GradeNum = GradeToNum[c.Grade];
                 double cWeight = double.Parse(c.Weight);
-                Console.WriteLine(GradeNum);
+                
                 if ( GradeNum != -1)
                 {
                     totalGrade += GradeNum * cWeight;
@@ -287,7 +290,7 @@ namespace StudyPlan_WPF
          
             Credit_label.Content = String.Format("Credit: {0}/{1}", _Clicked_Semester.Credit, _Clicked_Semester.MaxCredit);
         }
-        #endregion
+        
 
         #region EventHandler
         private void Add_btn_Click(object sender, RoutedEventArgs e)
@@ -371,7 +374,7 @@ namespace StudyPlan_WPF
             
 
         }
-        #endregion
+        
 
         private void MainCourseItem_DropClick(object sender, RoutedEventArgs e, string clickedId)
         {
@@ -524,8 +527,9 @@ namespace StudyPlan_WPF
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            UserCoursedb.GetAll();
+            
         }
+        #endregion
     }
 
     #region Class definition
@@ -598,7 +602,7 @@ namespace StudyPlan_WPF
             return this;
         }
     }
-    #endregion
+    
     public class UserCourseDB
     {
         private SQLiteConnection sql_con;
@@ -658,27 +662,9 @@ namespace StudyPlan_WPF
                 }
             }
         }
-        public void GetAll()
-        {
-            string command = @"SELECT * FROM `courses`";
-            
-            using (SQLiteConnection sql_con = new SQLiteConnection("Data Source=UserCourse.db"))
-            {
-                using (SQLiteCommand sql_cmd = new SQLiteCommand(command, sql_con))
-                {
-                    sql_con.Open();
-                    sql_cmd.CommandType = System.Data.CommandType.Text;
-                    SQLiteDataReader sql_datareader = sql_cmd.ExecuteReader();
-                    while(sql_datareader.Read())
-                    {
-                        Console.WriteLine(sql_datareader);
-                    }
-                    sql_con.Close();
-                }
-            }
-
-        }
+       
 
 
     }
+    #endregion
 }
