@@ -49,14 +49,21 @@ namespace StudyPlan_WPF.Resource.UserControls
             if (GradeCBChanged != null)
             {
                 string thisGrade = ((ComboBoxItem)gradeCB.SelectedItem).Content.ToString();
-                if (thisGrade != "")
+                if (thisGrade == "")
                 {
-                    this.border.BorderBrush = Brushes.LightGreen;
+                    this.border.BorderBrush = Brushes.Black;
+                    this.border.BorderThickness = new Thickness(1, 1, 1, 1);
+                   
+                }
+                else if (thisGrade == "F")
+                {
+                    this.border.BorderBrush = Brushes.Red;
                     this.border.BorderThickness = new Thickness(1.5, 1.5, 1.5, 1.5);
                 }
                 else
                 {
-                    this.border.BorderBrush = Brushes.Black;
+                    this.border.BorderBrush = Brushes.LightGreen;
+                    this.border.BorderThickness = new Thickness(1.5, 1.5, 1.5, 1.5);
                 }
                 GradeCBChanged(sender, e,this.txtId.Text);
             }

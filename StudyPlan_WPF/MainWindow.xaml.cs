@@ -528,9 +528,17 @@ namespace StudyPlan_WPF
             }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void GraphButton_Click(object sender, RoutedEventArgs e)
         {
-            
+
+            int presentSemester;
+            double GpaSum = 0;
+            int n;
+            foreach (Semester sem in Semesters)
+            {
+                sem.GPA
+                if ()
+            }
         }
         #endregion
     }
