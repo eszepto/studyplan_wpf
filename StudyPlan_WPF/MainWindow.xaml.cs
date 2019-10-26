@@ -17,6 +17,8 @@ using System.Collections.ObjectModel;
 using Newtonsoft.Json;
 using System.Data.SQLite;
 using System.ComponentModel;
+using LiveCharts;
+using LiveCharts.Wpf;
 
 namespace StudyPlan_WPF
 {
@@ -128,7 +130,7 @@ namespace StudyPlan_WPF
         }
         void InitialData()
         {
-            if (!File.Exists("./UserCourse.db"))
+            if (!File.Exists("./UserCourse.db")) //if run first time
             {
                 selectableCourse.Add("Elective(Main)", new ObservableCollection<Course>());
                 selectableCourse.Add("Elective(Art)", new ObservableCollection<Course>());
@@ -157,7 +159,7 @@ namespace StudyPlan_WPF
                     NumtoCourse.Add(c.Id, c);
 
                 }
-            } //if run first time
+            } 
             else
             {
                 #region Load Semester Count here
@@ -171,9 +173,11 @@ namespace StudyPlan_WPF
                         sql_cmd.CommandType = System.Data.CommandType.Text;
                         SQLiteDataReader sql_datareader = sql_cmd.ExecuteReader();
                         int semesterCount = 8;
+                        
                         while (sql_datareader.Read())
                         {
                             semesterCount = Convert.ToInt32(sql_datareader["count"]);
+
                         }
 
                         for (int i = 8; i < semesterCount; i++)
@@ -249,6 +253,30 @@ namespace StudyPlan_WPF
                     }
                     CourseMap.Add(c.Id, c.Name);
                     NumtoCourse.Add(c.Id, c);
+                }
+
+                foreach(Semester sem in Semesters) //reload GPA for all semesters
+                {
+                    double totalGrade = 0;
+                    double Credit = 0;
+
+                    foreach (Course c in sem.Courses)
+                    {
+                        double GradeNum = GradeToNum[c.Grade];
+                        double cWeight = double.Parse(c.Weight);
+
+                        if (GradeNum != -1)
+                        {
+                            totalGrade += GradeNum * cWeight;
+                            Credit += cWeight;
+                        }
+                    }
+
+                    if (Credit == 0) Credit = 1;
+
+                    double gpa = totalGrade / Credit;
+
+                    sem.GPA = gpa;
                 }
                 #endregion
             }
@@ -373,8 +401,6 @@ namespace StudyPlan_WPF
             GPA_label.Content = String.Format("GPA: {0:0.00}", _Clicked_Semester.GPA);
             Stat_label.Content = String.Format("Status: {0}", _Clicked_Semester.Status);
             
-            
-
         }
         
 
@@ -536,7 +562,46 @@ namespace StudyPlan_WPF
 
         private void GraphButton_Click(object sender, RoutedEventArgs e)
         {
-            GraphWindow GraphWin = new GraphWindow();
+            ChartValues<double> gpaValues = new ChartValues<double>();
+            gpaValues.Add(double.NaN);
+            int presentSem = 0;
+
+            double gpaSum = 0;
+            double semCount = 0;
+            double overallGpa = 0;
+
+            foreach (Semester sem in Semesters) // in each semester, if that
+            {
+                bool isAllEmpty = true;
+                gpaSum += sem.GPA;
+                foreach (Course c in sem.Courses)
+                {
+                    if(c.Grade != "")
+                    {
+                        isAllEmpty = false;
+                        presentSem = sem.Number;
+                        semCount += 1;
+                        break;
+                    }
+                }
+
+                if(!isAllEmpty)
+                {
+                    gpaValues.Add(sem.GPA);
+                }
+                else
+                {
+                    gpaValues.Add(double.NaN);
+                }
+
+
+                Console.WriteLine(presentSem.ToString() + "A" + sem.GPA);
+            }
+            
+
+
+
+            GraphWindow GraphWin = new GraphWindow(gpaValues);
             GraphWin.Show();
             
         }
