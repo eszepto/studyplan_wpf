@@ -86,7 +86,7 @@ namespace StudyPlan_WPF
         };
         private UserCourseDB UserCoursedb;
 
-
+        private bool isReset = false;
         public MainWindow()
         {
             InitializeComponent();
@@ -272,7 +272,7 @@ namespace StudyPlan_WPF
             }
             
             if (Credit == 0) Credit = 1;
-
+            
             double gpa = totalGrade / Credit ;
             
             Semesters[tabControl.SelectedIndex].GPA = gpa;
@@ -332,7 +332,8 @@ namespace StudyPlan_WPF
                 }
                 Semesters[this.tabControl.SelectedIndex].Courses.Clear();
             }
-            
+            ReloadGPA();
+
         }
 
         private void AddNewCourse_btn_Click(object sender, RoutedEventArgs e)
@@ -366,7 +367,8 @@ namespace StudyPlan_WPF
             }
             
             Semester _Clicked_Semester = Semesters[tabControl.SelectedIndex];
-            
+
+            ReloadGPA();
             Credit_label.Content = String.Format("Credits: {0}/{1}", _Clicked_Semester.Credit, _Clicked_Semester.MaxCredit);
             GPA_label.Content = String.Format("GPA: {0:0.00}", _Clicked_Semester.GPA);
             Stat_label.Content = String.Format("Status: {0}", _Clicked_Semester.Status);
@@ -451,6 +453,8 @@ namespace StudyPlan_WPF
                 Course _selectedCourse = UnplannedCourse[Unplanned_lbx.SelectedIndex];
                 UnplannedCourse.RemoveAt(Unplanned_lbx.SelectedIndex);
                 DeletedCourse.Add(_selectedCourse);
+                
+
             }
         }
 
@@ -462,7 +466,9 @@ namespace StudyPlan_WPF
                 Console.WriteLine("Delete file!");
                 File.Delete("./UserCourse.db");
             }
-            
+
+            if (isReset) return;
+
             UserCoursedb.CreateTable();
             UserCoursedb.Exec(String.Format(@"
                                 INSERT INTO `semesters`
@@ -530,17 +536,24 @@ namespace StudyPlan_WPF
 
         private void GraphButton_Click(object sender, RoutedEventArgs e)
         {
-
-            int presentSemester;
-            double GpaSum = 0;
-            int n;
-            foreach (Semester sem in Semesters)
-            {
-                sem.GPA
-                if ()
-            }
+            GraphWindow GraphWin = new GraphWindow();
+            GraphWin.Show();
+            
         }
         #endregion
+
+        private void Reset_btn_Click(object sender, RoutedEventArgs e)
+        {
+            if (File.Exists("./UserCourse.db"))
+            {
+                Console.WriteLine("Delete file!");
+                File.Delete("./UserCourse.db");
+            }
+            isReset = true;
+            System.Windows.Forms.Application.Restart();
+
+            System.Windows.Application.Current.Shutdown();
+        }
     }
 
     #region Class definition
