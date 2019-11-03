@@ -4,16 +4,16 @@
 winexe
 C#
 .cs
-D:\Work\Y-2\Software Development Practice I\studyplan_wpf\StudyPlan_WPF\obj\Debug\
+D:\studyplan_wpf\StudyPlan_WPF\obj\Debug\
 StudyPlan_WPF
 none
 false
 DEBUG;TRACE
-D:\Work\Y-2\Software Development Practice I\studyplan_wpf\StudyPlan_WPF\App.xaml
+D:\studyplan_wpf\StudyPlan_WPF\App.xaml
 7-1632325745
 
 10-2026741097
-24418267047
+241366431186
 Add_New_Course.xaml;MainWindow.xaml;Page1.xaml;Resource\Template\CourseItemDesign.xaml;Resource\UserControls\MainCourseItem.xaml;Resource\UserControls\UnplannedItem.xaml;GraphWindow.xaml;
 
 False

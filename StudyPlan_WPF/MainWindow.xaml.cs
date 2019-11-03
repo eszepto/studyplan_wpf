@@ -14,7 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Collections.ObjectModel;
-using Newtonsoft.Json;
+//using Newtonsoft.Json;
 using System.Data.SQLite;
 using System.ComponentModel;
 using LiveCharts;
@@ -119,6 +119,7 @@ namespace StudyPlan_WPF
 
         void LoadData()
         {
+            /*
             using (StreamReader r = new StreamReader("../../Resource/Course/B-Eng/CpreCourse.json"))
             {
                 string json = r.ReadToEnd();
@@ -126,6 +127,26 @@ namespace StudyPlan_WPF
                 AllCourse = new ObservableCollection<Course>(d.Values);
                
             }
+            */
+            
+            /*using (System.Data.SQLite.SQLiteConnection connection = new System.Data.SQLite.SQLiteConnection("Data Source=Courselist.db"))
+            {
+                using (System.Data.SQLite.SQLiteCommand comm = new System.Data.SQLite.SQLiteCommand(connection))
+                {
+                    connection.Open();
+                    comm.CommandText = "SELECT * FROM Courselist";
+                    using (System.Data.SQLite.SQLiteDataReader reader = comm.ExecuteReader())
+                    { 
+                        while (reader.Read())
+                        {
+                            
+                        }
+                        
+                    }
+                    connection.Close();
+                }
+            }*/
+
 
         }
         void InitialData()
@@ -384,9 +405,9 @@ namespace StudyPlan_WPF
                 addNewCourseWindow.Show();
             }
             */
-        }
+                }
 
-        private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
+                private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             
             if (tabControl.SelectedIndex == -1)
