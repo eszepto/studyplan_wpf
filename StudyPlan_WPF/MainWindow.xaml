@@ -40,7 +40,7 @@
                         <ListBox x:Name="listBox" HorizontalAlignment="Left" Height="Auto" Width="505"  VerticalAlignment="Top" ItemsSource="{Binding Courses}" IsSynchronizedWithCurrentItem="True"  MouseDown="ListBox_Empty_MouseDown">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
-                                    <uc:MainCourseItem DropClick="MainCourseItem_DropClick"  GradeCBChanged="MainCourseItem_GradeCBChanged" SubmitClicked="MainCourseItem_SubmitClick"/>
+                                    <uc:MainCourseItem DropClick="MainCourseItem_DropClick"  GradeCBChanged="MainCourseItem_GradeCBChanged"/> <!-- SubmitClicked="MainCourseItem_SubmitClick"/-->
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
                         </ListBox>

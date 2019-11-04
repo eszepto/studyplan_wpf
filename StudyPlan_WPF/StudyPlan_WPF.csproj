@@ -155,7 +155,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="Courselist.db" />
+    <None Include="Resource\Course\B-Eng\Courselist.db" />
     <None Include="packages.config" />
     <None Include="Resource\Course\B-Eng\CpreCourse.json" />
     <None Include="Properties\Settings.settings">
