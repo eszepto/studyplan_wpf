@@ -63,7 +63,7 @@
         <Button x:Name="AddNewCourse_btn" Content="Add New Course" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Width="120" Height="75" Click="AddNewCourse_btn_Click" Grid.Column="5" Grid.Row="1" Grid.RowSpan="2"/>
         <Button x:Name="Graph_btn" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Width="80" Height="60" Click="GraphButton_Click" Grid.Column="2" Grid.Row="1">
             <StackPanel>
-                <Image Source="D:\Work\Y-2\Software Development Practice I\studyplan_wpf\StudyPlan_WPF\SummaryButton_Pic.png" Height="50"/>
+                <Image Source="/Resource/SummaryButton_Pic.png" Height="50"/>
             </StackPanel>
         </Button>
         <Label x:Name="Credit_label" Content="Credits: 19/22"  HorizontalAlignment="Left" Margin="10,20,0,0" VerticalAlignment="Top" Width="100" Grid.Column="3" Grid.Row="1"/>

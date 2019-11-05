@@ -119,7 +119,25 @@ namespace StudyPlan_WPF
 
         void LoadData()
         {
-            
+            selectableCourse.Add("FREE-GEN", new ObservableCollection<Course>());
+            selectableCourse.Add("FREE-HUMAN", new ObservableCollection<Course>());
+            selectableCourse.Add("FREE-LANG", new ObservableCollection<Course>());
+            selectableCourse.Add("FREE-PE", new ObservableCollection<Course>());
+            selectableCourse.Add("FREE-SCIMATH", new ObservableCollection<Course>());
+            selectableCourse.Add("FREE-SOC", new ObservableCollection<Course>());
+
+            selectableCourse.Add("GEN-HUMAN", new ObservableCollection<Course>());
+            selectableCourse.Add("GEN-LANG", new ObservableCollection<Course>());
+            selectableCourse.Add("GEN-PE", new ObservableCollection<Course>());
+            selectableCourse.Add("GEN-SCIMATH", new ObservableCollection<Course>());
+            selectableCourse.Add("GEN-SOC", new ObservableCollection<Course>());
+
+            selectableCourse.Add("SPEC-ELEC", new ObservableCollection<Course>());
+            selectableCourse.Add("SPEC-REQ", new ObservableCollection<Course>());
+            selectableCourse.Add("SPEC-SPEC", new ObservableCollection<Course>());
+
+
+
             using (StreamReader r = new StreamReader("../../Resource/Course/B-Eng/CpreCourse.json"))
             {
                 string json = r.ReadToEnd();
@@ -127,26 +145,9 @@ namespace StudyPlan_WPF
                 AllCourse = new ObservableCollection<Course>(d.Values);
                
             }
-            
-            
-            /*using (System.Data.SQLite.SQLiteConnection connection = new System.Data.SQLite.SQLiteConnection("Data Source=../../Courselist.db"))
-            {
-                using (System.Data.SQLite.SQLiteCommand comm = new System.Data.SQLite.SQLiteCommand(connection))
-                {
-                    connection.Open();
-                    comm.CommandText = "SELECT * FROM Courselist";
-                    using (System.Data.SQLite.SQLiteDataReader reader = comm.ExecuteReader())
-                    { 
-                        while (reader.Read())
-                        {
-                            
-                        }
-                        
-                    }
-                    connection.Close();
-                }
-            }*/
 
+
+            
 
         }
         void InitialData()
@@ -155,30 +156,65 @@ namespace StudyPlan_WPF
             {
                 selectableCourse.Add("Elective(Main)", new ObservableCollection<Course>());
                 selectableCourse.Add("Elective(Art)", new ObservableCollection<Course>());
+                string command = @"SELECT  * FROM `Courselist`";
 
-                foreach (Course c in AllCourse)  // add Course
+                using (SQLiteConnection sql_con = new SQLiteConnection("Data Source=../../Resource/Course/B-Eng/Courselist.db"))
                 {
-                    if (c.Semester != null)
+                    using (SQLiteCommand sql_cmd = new SQLiteCommand(command, sql_con))
                     {
-                        if (c.Semester.All(char.IsNumber))
-                        {
-                            int _term = int.Parse(c.Semester);
-                            Semesters[_term - 1].Courses.Add(c);
-                            Semesters[_term - 1].Credit += int.Parse(c.Weight);
-                        }
-                        else
-                        {
-                            selectableCourse[c.Type].Add(c);
-                            
-                        }
-                    }
-                    else
-                    {
-                        selectableCourse[c.Type].Add(c);
-                    }
-                    CourseMap.Add(c.Id, c.Name);
-                    NumtoCourse.Add(c.Id, c);
+                        sql_con.Open();
+                        sql_cmd.CommandType = System.Data.CommandType.Text;
+                        SQLiteDataReader sql_datareader = sql_cmd.ExecuteReader();
 
+
+                        while (sql_datareader.Read())
+                        {
+
+                            string _semester = Convert.ToString(sql_datareader["semester"]);
+
+
+                            if (_semester != "")
+                            {
+                                if (_semester.All(char.IsNumber))
+                                {
+                                    Course c = new Course()
+                                    {
+                                        Name = Convert.ToString(sql_datareader["name"]),
+                                        Id = Convert.ToString(sql_datareader["course_id"]),
+                                        Weight = Convert.ToString(sql_datareader["credit"]),
+                                        PreRequired = Convert.ToString(sql_datareader["prerequisite"]).Split(',').ToList<string>(),
+                                        Semester = _semester,
+                                        Type = Convert.ToString(sql_datareader["category"])
+                                    };
+
+                                    int _term = int.Parse(_semester);
+
+                                    Semesters[_term - 1].Courses.Add(c);
+
+                                    CourseMap.Add(c.Id, c.Name);
+                                    NumtoCourse.Add(c.Id, c);
+                                }
+                            }
+                            else
+                            {
+                                Course c = new Course()
+                                {
+                                    Name = Convert.ToString(sql_datareader["name"]),
+                                    Id = Convert.ToString(sql_datareader["course_id"]),
+                                    Weight = Convert.ToString(sql_datareader["credit"]),
+                                    PreRequired = Convert.ToString(sql_datareader["prerequisite"]).Split(',').ToList<string>(),
+                                    //Semester = _semester,
+                                    Type = Convert.ToString(sql_datareader["category"])
+                                };
+                                Console.WriteLine(c.Name);
+                                selectableCourse[c.Type].Add(c);
+                                CourseMap.Add(c.Id, c.Name);
+                                NumtoCourse.Add(c.Id, c);
+                            }
+
+                        }
+
+                    }
                 }
             } 
             else
@@ -272,8 +308,7 @@ namespace StudyPlan_WPF
                     {
                         selectableCourse[c.Type].Add(c);
                     }
-                    CourseMap.Add(c.Id, c.Name);
-                    NumtoCourse.Add(c.Id, c);
+                    
                 }
 
                 foreach(Semester sem in Semesters) //reload GPA for all semesters
@@ -696,11 +731,11 @@ namespace StudyPlan_WPF
         public string Type { get; set; }
         public string Id { get; set; }
         public string Name { get; set; }
-        public string Descript { get; set; }
+        public string Descript { get; set; } = null;
         public string Weight { get; set; }
         public string Grade { get; set; } = "";
-        public string Semester { get; set; }
-        public string Status { get; set; }
+        public string Semester { get; set; } = null;
+        public string Status { get; set; } = null;
         public List<string> PreRequired { get; set; }
 
         public override string ToString()

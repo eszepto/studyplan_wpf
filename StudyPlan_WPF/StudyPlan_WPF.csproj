@@ -170,7 +170,7 @@
     <Folder Include="Data\" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="SummaryButton_Pic.png" />
+    <Resource Include="Resource\SummaryButton_Pic.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
