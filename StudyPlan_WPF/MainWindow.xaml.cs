@@ -147,7 +147,7 @@ namespace StudyPlan_WPF
             }
 
 
-            
+                               
 
         }
         void InitialData()
@@ -171,7 +171,7 @@ namespace StudyPlan_WPF
                         {
 
                             string _semester = Convert.ToString(sql_datareader["semester"]);
-
+                            Console.WriteLine(_semester);
 
                             if (_semester != "")
                             {
@@ -221,7 +221,6 @@ namespace StudyPlan_WPF
             {
                 #region Load Semester Count here
                 string command = @"SELECT count FROM `semesters`";
-
                 using (SQLiteConnection sql_con = new SQLiteConnection("Data Source=UserCourse.db"))
                 {
                     using (SQLiteCommand sql_cmd = new SQLiteCommand(command, sql_con))
@@ -247,7 +246,6 @@ namespace StudyPlan_WPF
                 #endregion
                 #region Load Data Here
                 command = @"SELECT * FROM `courses`";
-
                 using (SQLiteConnection sql_con = new SQLiteConnection("Data Source=UserCourse.db"))
                 {
                     using (SQLiteCommand sql_cmd = new SQLiteCommand(command, sql_con))
@@ -311,7 +309,51 @@ namespace StudyPlan_WPF
                     
                 }
 
-                foreach(Semester sem in Semesters) //reload GPA for all semesters
+                //LOAD ELECTIVE COURSE
+                command = @"SELECT  * FROM `Courselist`";
+                using (SQLiteConnection sql_con = new SQLiteConnection("Data Source=../../Resource/Course/B-Eng/Courselist.db"))
+                {
+                    using (SQLiteCommand sql_cmd = new SQLiteCommand(command, sql_con))
+                    {
+                        sql_con.Open();
+                        sql_cmd.CommandType = System.Data.CommandType.Text;
+                        SQLiteDataReader sql_datareader = sql_cmd.ExecuteReader();
+
+                        while (sql_datareader.Read())
+                        {
+                            string _semester = Convert.ToString(sql_datareader["semester"]);
+                            Console.WriteLine(_semester);
+
+                            if (_semester != "")
+                            {
+                                if (_semester.All(char.IsNumber))
+                                {
+                                    
+                                }
+                            }
+                            else
+                            {
+                                Course c = new Course()
+                                {
+                                    Name = Convert.ToString(sql_datareader["name"]),
+                                    Id = Convert.ToString(sql_datareader["course_id"]),
+                                    Weight = Convert.ToString(sql_datareader["credit"]),
+                                    PreRequired = Convert.ToString(sql_datareader["prerequisite"]).Split(',').ToList<string>(),
+                                    //Semester = _semester,
+                                    Type = Convert.ToString(sql_datareader["category"])
+                                };
+                                Console.WriteLine(c.Name);
+                                selectableCourse[c.Type].Add(c);
+                                CourseMap.Add(c.Id, c.Name);
+                                NumtoCourse.Add(c.Id, c);
+                            }
+
+                        }
+
+                    }
+                }
+
+                foreach (Semester sem in Semesters) //reload GPA for all semesters
                 {
                     double totalGrade = 0;
                     double Credit = 0;
