@@ -569,9 +569,20 @@ namespace StudyPlan_WPF
         private void MainCourseItem_DeleteClick(object sender, RoutedEventArgs e, string clickedId)
         {
             Course selectedCourse = Semesters[tabControl.SelectedIndex].GetCourse(clickedId);
-            selectedCourse.Grade = "";
-            Semesters[tabControl.SelectedIndex].Courses.Remove(selectedCourse);
-            DeletedCourse.Add(selectedCourse);
+
+            string sMessageBoxText = "Do you want to delete this subject?";
+            string sCaption = selectedCourse.Name;
+
+            MessageBoxButton btnMessageBox = MessageBoxButton.YesNo;
+            MessageBoxImage icnMessageBox = MessageBoxImage.Warning;
+            MessageBoxResult rsltMessageBox = MessageBox.Show(sMessageBoxText, sCaption, btnMessageBox, icnMessageBox);
+
+            if (rsltMessageBox == MessageBoxResult.Yes)
+            {
+                selectedCourse.Grade = "";
+                Semesters[tabControl.SelectedIndex].Courses.Remove(selectedCourse);
+                DeletedCourse.Add(selectedCourse);
+            }
 
         }
         private void MainCourseItem_GradeCBChanged(object sender, SelectionChangedEventArgs e,string clickedId)
