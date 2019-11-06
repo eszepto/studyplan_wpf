@@ -24,8 +24,8 @@
             <ComboBox x:Name="courseGroup" IsEditable="True" IsReadOnly="True" Text="-- Select Elective Course Type --" HorizontalContentAlignment="Center" Grid.ColumnSpan="5" HorizontalAlignment="Left" Margin="0,44,0,0" VerticalAlignment="Top" Width="425" Grid.Column="1" SelectionChanged="CourseGroup_SelectionChanged" >
                 <ComboBoxItem Content="Deleted Course" HorizontalContentAlignment="Left"/>
                 
-                <ComboBoxItem Content="Elective Main Course" HorizontalContentAlignment="Left"/>
-                <ComboBoxItem Content="Elective Art Course" HorizontalContentAlignment="Left"/>
+                <!--ComboBoxItem Content="Elective Main Course" HorizontalContentAlignment="Left"/>
+                <ComboBoxItem Content="Elective Art Course" HorizontalContentAlignment="Left"/-->
 
                 <ComboBoxItem Content="General Language Course" HorizontalContentAlignment="Left"/>
                 <ComboBoxItem Content="General Humanity Course" HorizontalContentAlignment="Left"/>

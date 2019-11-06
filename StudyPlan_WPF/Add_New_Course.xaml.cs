@@ -51,8 +51,10 @@ namespace StudyPlan_WPF
             InitializeComponent();
 
             this.MainWin = m;
-            this.electiveArt = selectionCourse["Elective(Art)"];
-            this.electiveMain = selectionCourse["Elective(Main)"];
+
+            //this.electiveArt = selectionCourse["Elective(Art)"];
+            //this.electiveMain = selectionCourse["Elective(Main)"];
+
             this.electiveFreeLang = selectionCourse["FREE-LANG"];
             this.electiveFreeSocial = selectionCourse["FREE-SOC"];
             this.electiveFreeHuman = selectionCourse["FREE-HUMAN"];
@@ -82,6 +84,7 @@ namespace StudyPlan_WPF
         {
             string selected =((ComboBoxItem)courseGroup.SelectedItem).Content.ToString();
             Console.WriteLine(selected);
+            /*
             if (selected == "Elective Main Course")
             {
                 courseTable.ItemsSource = null;
@@ -94,7 +97,8 @@ namespace StudyPlan_WPF
                 courseTable.ItemsSource = electiveArt;
                 previewCourse = electiveArt;
             }
-            else if (selected == "Deleted Course")
+            */
+            if (selected == "Deleted Course")
             {
                 courseTable.ItemsSource = null;
                 courseTable.ItemsSource = DeletedCourse;

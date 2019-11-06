@@ -136,7 +136,7 @@ namespace StudyPlan_WPF
             selectableCourse.Add("SPEC-REQ", new ObservableCollection<Course>());
             selectableCourse.Add("SPEC-SPEC", new ObservableCollection<Course>());
 
-
+            /*
 
             using (StreamReader r = new StreamReader("../../Resource/Course/B-Eng/CpreCourse.json"))
             {
@@ -145,7 +145,7 @@ namespace StudyPlan_WPF
                 AllCourse = new ObservableCollection<Course>(d.Values);
                
             }
-
+            */
 
                                
 
@@ -171,7 +171,7 @@ namespace StudyPlan_WPF
                         {
 
                             string _semester = Convert.ToString(sql_datareader["semester"]);
-                            Console.WriteLine(_semester);
+                           
 
                             if (_semester != "")
                             {
@@ -206,7 +206,7 @@ namespace StudyPlan_WPF
                                     //Semester = _semester,
                                     Type = Convert.ToString(sql_datareader["category"])
                                 };
-                                Console.WriteLine(c.Name);
+                                
                                 selectableCourse[c.Type].Add(c);
                                 CourseMap.Add(c.Id, c.Name);
                                 NumtoCourse.Add(c.Id, c);
@@ -286,7 +286,7 @@ namespace StudyPlan_WPF
                         sql_con.Close();
                     }
                 }
-
+                /*
                 selectableCourse.Add("Elective(Main)", new ObservableCollection<Course>());
                 selectableCourse.Add("Elective(Art)", new ObservableCollection<Course>());
                 foreach (Course c in AllCourse)  // add Course
@@ -308,7 +308,7 @@ namespace StudyPlan_WPF
                     }
                     
                 }
-
+                */
                 //LOAD ELECTIVE COURSE
                 command = @"SELECT  * FROM `Courselist`";
                 using (SQLiteConnection sql_con = new SQLiteConnection("Data Source=../../Resource/Course/B-Eng/Courselist.db"))
@@ -322,7 +322,7 @@ namespace StudyPlan_WPF
                         while (sql_datareader.Read())
                         {
                             string _semester = Convert.ToString(sql_datareader["semester"]);
-                            Console.WriteLine(_semester);
+                            
 
                             if (_semester != "")
                             {
@@ -342,7 +342,7 @@ namespace StudyPlan_WPF
                                     //Semester = _semester,
                                     Type = Convert.ToString(sql_datareader["category"])
                                 };
-                                Console.WriteLine(c.Name);
+                                
                                 selectableCourse[c.Type].Add(c);
                                 CourseMap.Add(c.Id, c.Name);
                                 NumtoCourse.Add(c.Id, c);
@@ -510,11 +510,7 @@ namespace StudyPlan_WPF
             UnplannedCourse.Add(selectedCourse);
             
         }
-        private void MainCourseItem_SubmitClick(object sender, RoutedEventArgs e, string clickedId, string grade)
-        {
-            Console.WriteLine(Semesters[tabControl.SelectedIndex].GetCourse(clickedId).Grade);
-            
-        }
+        
         private void MainCourseItem_GradeCBChanged(object sender, SelectionChangedEventArgs e,string clickedId)
         {
             ReloadGPA();
@@ -557,7 +553,7 @@ namespace StudyPlan_WPF
 
                     foreach (string c in pr)
                     {
-                        Console.WriteLine(c);
+                        
                         requireC += CourseMap[c] + ",";
                     }
                     if (requireC[requireC.Length - 1] == ',')
@@ -605,7 +601,7 @@ namespace StudyPlan_WPF
             {
                 foreach(Course c in sem.Courses)
                 {
-                    Console.WriteLine(c.Name);
+                    
 
                     UserCoursedb.Exec(String.Format(@"
                                 INSERT INTO `courses`
@@ -693,7 +689,7 @@ namespace StudyPlan_WPF
                 }
 
 
-                Console.WriteLine(presentSem.ToString() + "A" + sem.GPA);
+                
             }
             
 
