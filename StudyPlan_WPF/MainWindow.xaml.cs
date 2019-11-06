@@ -14,7 +14,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Collections.ObjectModel;
-using Newtonsoft.Json;
 using System.Data.SQLite;
 using System.ComponentModel;
 using LiveCharts;
@@ -510,7 +509,14 @@ namespace StudyPlan_WPF
             UnplannedCourse.Add(selectedCourse);
             
         }
-        
+        private void MainCourseItem_DeleteClick(object sender, RoutedEventArgs e, string clickedId)
+        {
+            Course selectedCourse = Semesters[tabControl.SelectedIndex].GetCourse(clickedId);
+            selectedCourse.Grade = "";
+            Semesters[tabControl.SelectedIndex].Courses.Remove(selectedCourse);
+            DeletedCourse.Add(selectedCourse);
+
+        }
         private void MainCourseItem_GradeCBChanged(object sender, SelectionChangedEventArgs e,string clickedId)
         {
             ReloadGPA();

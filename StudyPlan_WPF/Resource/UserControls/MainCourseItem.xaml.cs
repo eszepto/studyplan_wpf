@@ -37,11 +37,19 @@ namespace StudyPlan_WPF.Resource.UserControls
                 DropClick(sender, e, this.txtId.Text);
             }
         }
+        public delegate void DeleteBtnHandler(object sender, RoutedEventArgs e, string clickedId);
+        public event DeleteBtnHandler DeleteClick;
+        private void DelBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (DeleteClick != null)
+            {
+                DeleteClick(sender, e, this.txtId.Text);
+            }
+        }
 
-        
 
-       
-        
+
+
         public delegate void GradeCBHandler(object sender, SelectionChangedEventArgs e, string clickedId);
         public event GradeCBHandler GradeCBChanged;
         private void GradeCB_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -68,16 +76,18 @@ namespace StudyPlan_WPF.Resource.UserControls
                 GradeCBChanged(sender, e,this.txtId.Text);
             }
         }
+
+        
         /*
-        public delegate void SubmitBtnHandler(object sender, RoutedEventArgs e, string clickedId, string grade);
-        public event SubmitBtnHandler SubmitClicked;
-        private void SubmitButton_Click(object sender, RoutedEventArgs e)
-        {
-            if(SubmitClicked != null)
-            {
-                SubmitClicked(sender, e, this.txtId.Text, ((ComboBoxItem)gradeCB.SelectedItem).Content.ToString());
-            }
-        }
-        */
+public delegate void SubmitBtnHandler(object sender, RoutedEventArgs e, string clickedId, string grade);
+public event SubmitBtnHandler SubmitClicked;
+private void SubmitButton_Click(object sender, RoutedEventArgs e)
+{
+   if(SubmitClicked != null)
+   {
+       SubmitClicked(sender, e, this.txtId.Text, ((ComboBoxItem)gradeCB.SelectedItem).Content.ToString());
+   }
+}
+*/
     }
 }
