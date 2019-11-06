@@ -412,7 +412,6 @@ namespace StudyPlan_WPF
         void ReloadMaxCredit()
         {
             Semester _Clicked_Semester = Semesters[tabControl.SelectedIndex];
-         
             Credit_label.Content = String.Format("Credit: {0}/{1}", _Clicked_Semester.Credit, _Clicked_Semester.MaxCredit);
         }
         
@@ -664,12 +663,39 @@ namespace StudyPlan_WPF
         {
             ChartValues<double> gpaValues = new ChartValues<double>();
             gpaValues.Add(double.NaN);
-            int presentSem = 0;
 
             double gpaSum = 0;
-            double semCount = 0;
-            double overallGpa = 0;
+            int presentSem = 1;
+            int semCount = 0;
+            List<double> gpaList = new List<double>();
+            
+            
 
+            int currentTerm = 1;
+            List<int> gradeAddedTerm = new List<int>();
+            foreach (Semester sem in Semesters)
+            {
+                foreach (Course c in sem.Courses)
+                {
+                    if (c.Grade != "")
+                    {
+                        currentTerm = sem.Number;
+
+                    }
+                }
+                gradeAddedTerm.Add(currentTerm);
+            }
+
+            for (int i=0;i<=currentTerm-1;i++)
+            {
+                if (gradeAddedTerm.Contains(i+1))
+                {
+                    gpaList.Add(Semesters[i].GPA);
+                }
+                
+            }
+            double overallGPA = (gpaList.Sum() / gpaList.Count);
+            
             foreach (Semester sem in Semesters) // in each semester, if that
             {
                 bool isAllEmpty = true;
@@ -693,15 +719,12 @@ namespace StudyPlan_WPF
                 {
                     gpaValues.Add(double.NaN);
                 }
-
-
-                
             }
+            
             
 
 
-
-            GraphWindow GraphWin = new GraphWindow(gpaValues);
+            GraphWindow GraphWin = new GraphWindow(gpaValues,overallGPA,currentTerm);
             GraphWin.Show();
             
         }

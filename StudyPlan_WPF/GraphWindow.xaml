@@ -23,7 +23,12 @@
         </lvc:CartesianChart>
         <TextBlock Margin="280,440,272,34" TextWrapping="Wrap" FontSize="24">
                 <TextBlock Text="Overall : "> </TextBlock>
-                <TextBlock Text="DEF" />
+                <TextBlock x:Name="gpaTexblock" Text="DEF" />
             </TextBlock>
+        <TextBlock Margin="246,474,297,9.8" TextWrapping="Wrap" FontSize="24"><InlineUIContainer>
+                <TextBlock Text="@Semester  "/>
+            </InlineUIContainer><Run Text=" "/><InlineUIContainer>
+                <TextBlock x:Name="currentSemesterBlock" Text="DEF" />
+            </InlineUIContainer></TextBlock>
     </Grid>
 </Window>

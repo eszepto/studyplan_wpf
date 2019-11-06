@@ -23,7 +23,7 @@ namespace StudyPlan_WPF
     {
         public ChartValues<double> grades = new ChartValues<double>();
         
-        public GraphWindow(ChartValues<double> mainGrade)
+        public GraphWindow(ChartValues<double> mainGrade,double overAllGPA, int currentTerm)
         {
 
             InitializeComponent();
@@ -31,6 +31,9 @@ namespace StudyPlan_WPF
             grades = mainGrade;
             lss.Values = null;
             lss.Values = grades;
+
+            gpaTexblock.Text = string.Format("{0:0.00}", overAllGPA);
+            currentSemesterBlock.Text = string.Format("{0}", currentTerm);
         }
     }
 }
