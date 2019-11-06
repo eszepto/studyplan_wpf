@@ -51,7 +51,7 @@
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Course ID" Width="3*" Binding="{Binding Id}" CanUserSort="False"  />
                     <DataGridTextColumn Header="Course Name" Width="6*" Binding="{Binding Name}" CanUserSort="False"/>
-                    <DataGridTextColumn Header="Credits" Width="*" Binding="{Binding Weight}" CanUserSort="False"/>
+                    <DataGridTextColumn Header="Credits" Width="2*" Binding="{Binding Weight}" CanUserSort="False"/>
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>
