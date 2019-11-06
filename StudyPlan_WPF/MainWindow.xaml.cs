@@ -402,17 +402,75 @@ namespace StudyPlan_WPF
             
             Semesters[tabControl.SelectedIndex].GPA = gpa;
             GPA_label.Content = String.Format("GPA: {0:0.00}", gpa);
-
+            
         }
         void ReloadStatus()
         {
             Semester _Clicked_Semester = Semesters[tabControl.SelectedIndex];
-            Stat_label.Content = String.Format("Status: {0}", _Clicked_Semester.Status);
+            
         }
-        void ReloadMaxCredit()
+        void ReloadCredit()
         {
             Semester _Clicked_Semester = Semesters[tabControl.SelectedIndex];
-            Credit_label.Content = String.Format("Credit: {0}/{1}", _Clicked_Semester.Credit, _Clicked_Semester.MaxCredit);
+            
+            #region CurrentCredit
+            int credit = 0;
+            foreach (Course c in _Clicked_Semester.Courses)
+            {
+                credit += int.Parse(c.Weight);
+            }
+            _Clicked_Semester.Credit = credit;
+            #endregion
+
+            if (_Clicked_Semester.Number == 1)
+            {
+                Credit_label.Content = String.Format("Credits: {0}/{1}", _Clicked_Semester.Credit, _Clicked_Semester.MaxCredit);
+                Stat_label.Content = String.Format("Status: {0}", _Clicked_Semester.Status);
+                return;
+            }
+
+
+            #region MaxCredit
+            int currentTerm = 0;
+            List<int> gradeAddedTerm = new List<int>();
+            foreach (Semester sem in Semesters)
+            {
+                foreach (Course c in sem.Courses)
+                {
+                    if (c.Grade != "") //has least one course Grade != ""
+                    {
+                        currentTerm = sem.Number;
+                    }
+                }
+                gradeAddedTerm.Add(currentTerm);
+                
+            }
+
+            
+            List<double> gpaList = new List<double>();
+            for(int i = 1; i <= _Clicked_Semester.Number -1; i++)
+            {
+                if (gradeAddedTerm.Contains(i))
+                {
+                    gpaList.Add(Semesters[i-1].GPA);
+                    
+                }
+            }
+
+            double gpaListAverage = gpaList.Sum() / gpaList.Count;
+            if (gpaListAverage < 2 && gpaListAverage > 0)
+            {
+                _Clicked_Semester.Status = "Probation";
+                _Clicked_Semester.MaxCredit = 16;
+            }
+            else
+            {
+                _Clicked_Semester.Status = "Normal";
+                _Clicked_Semester.MaxCredit = 22;
+            }
+            #endregion
+            Credit_label.Content = String.Format("Credits: {0}/{1}", _Clicked_Semester.Credit, _Clicked_Semester.MaxCredit);
+            Stat_label.Content = String.Format("Status: {0}", _Clicked_Semester.Status);
         }
         
 
@@ -457,6 +515,7 @@ namespace StudyPlan_WPF
                 Semesters[this.tabControl.SelectedIndex].Courses.Clear();
             }
             ReloadGPA();
+            ReloadCredit();
 
         }
 
@@ -490,12 +549,11 @@ namespace StudyPlan_WPF
                 tabControl.SelectedIndex = Semesters.Count - 1;
             }
             
-            Semester _Clicked_Semester = Semesters[tabControl.SelectedIndex];
+            
 
             ReloadGPA();
-            Credit_label.Content = String.Format("Credits: {0}/{1}", _Clicked_Semester.Credit, _Clicked_Semester.MaxCredit);
-            GPA_label.Content = String.Format("GPA: {0:0.00}", _Clicked_Semester.GPA);
-            Stat_label.Content = String.Format("Status: {0}", _Clicked_Semester.Status);
+            ReloadCredit();
+            
             
         }
         
@@ -519,7 +577,7 @@ namespace StudyPlan_WPF
         private void MainCourseItem_GradeCBChanged(object sender, SelectionChangedEventArgs e,string clickedId)
         {
             ReloadGPA();
-            ReloadStatus();
+            ReloadCredit();
         }
 
         private void CourseMoveBtn_Click(object sender, RoutedEventArgs e)
@@ -671,7 +729,7 @@ namespace StudyPlan_WPF
             
             
 
-            int currentTerm = 1;
+            int currentTerm = 0;
             List<int> gradeAddedTerm = new List<int>();
             foreach (Semester sem in Semesters)
             {
@@ -721,8 +779,6 @@ namespace StudyPlan_WPF
                 }
             }
             
-            
-
 
             GraphWindow GraphWin = new GraphWindow(gpaValues,overallGPA,currentTerm);
             GraphWin.Show();

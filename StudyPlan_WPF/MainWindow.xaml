@@ -66,7 +66,9 @@
                 <Image Source="/Resource/SummaryButton_Pic.png" Height="50"/>
             </StackPanel>
         </Button>
+        
         <Label x:Name="Credit_label" Content="Credits: 19/22"  HorizontalAlignment="Left" Margin="10,20,0,0" VerticalAlignment="Top" Width="100" Grid.Column="3" Grid.Row="1"/>
+        
         <Label x:Name="GPA_label" Content="GPA: 0.00" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Width="100" Grid.Column="3" Grid.Row="1"/>
         <Label x:Name="Stat_label" Content="Status: Normal" HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top" Width="100" RenderTransformOrigin="0.52,1.462" Grid.Column="3" Grid.Row="1"/>
         <Button x:Name="CourseMove_btn" Content="&lt;&lt;&lt;" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Width="40" Height="40" Grid.Column="4" Grid.Row="4" FontSize="18" Click="CourseMoveBtn_Click"/>
